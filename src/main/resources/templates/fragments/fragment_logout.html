@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="fragments/fragment_logout">
+    <div th:if="${!#request.isUserInRole('USER') or #request.isUserInRole('ADMIN')}">
+        <a href="/login" id="loginButton" class="btn float-right"></a>
+    </div>
+    <div th:if="${#request.isUserInRole('USER') or #request.isUserInRole('ADMIN')}">
+        Zalogowany użytkownik:
+        <div th:text="${#request.userPrincipal.name}"></div>
+        <form form-method="post" th:action="@{/logout}">
+            <button class="btn btn-outline-danger" type="submit">WYLOGUJ</button>
+        </form>
+    </div>
+</div>

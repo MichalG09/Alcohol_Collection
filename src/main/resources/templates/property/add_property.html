@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<head th:include="fragments/fragment_head"></head>
+<body>
+<div class="row text-white" id="row">
+    <div class="d-md-none d-lg-block col-lg-2"></div>
+    <div id="mainContainer" class="col-md-12 col-lg-8">
+        <div th:replace="fragments/fragment_top"></div>
+        <div id="content">
+            <form action="#" th:action="@{/admin/property/add}" method="post" class="p-3">
+                <div class="border border-light p-3 m-2" >
+                    <h3>Dodawanie ustawień</h3>
+                    <div class="form-group">
+                        <label for="insertNameProperties">Nazwa ustawień*</label>
+                        <input type="text" th:field="${property.nameProperties}" class="form-control" id="insertNameProperties" placeholder="Nazwa ustawień">
+                        <label class="text-danger" th:if="${#fields.hasErrors('property.nameProperties')}" th:errors="*{property.nameProperties}"></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="insertValueProperties">Wartość ustawień*</label>
+                        <textarea rows="3" th:field="${property.valueProperties}" class="form-control" id="insertValueProperties" placeholder="Wartość ustawień"></textarea>
+                        <label class="text-danger" th:if="${#fields.hasErrors('property.valueProperties')}" th:errors="*{property.valueProperties}"></label>
+                    </div>
+                    <input type="hidden" th:field="${property.id}">
+                </div>
+                <button class="form-control btn btn-info" type="submit">DODAJ</button>
+            </form>
+        </div>
+        <div th:replace="fragments/fragment_bottom"></div>
+    </div>
+    <div class="d-md-none d-lg-block col-lg-2">
+        <div th:replace="fragments/fragment_logout"></div>
+    </div>
+</div>
+</body>
+</html>

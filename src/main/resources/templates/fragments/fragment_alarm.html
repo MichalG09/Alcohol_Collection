@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:if="${message!=null && !message.isEmpty()}" class="alert alert-success alert-dismissible fade show" role="alert">
+    <p th:text="${message}"></p>
+    <button type="button" th:onclick="|closeAlert()|" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div th:if="${messageError!=null && !messageError.isEmpty()}" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <p th:text="${messageError}"></p>
+    <button type="button" th:onclick="|closeAlert()|" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>

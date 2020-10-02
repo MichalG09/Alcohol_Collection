@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<head th:include="fragments/fragment_head"></head>
+<body>
+<div class="row text-white" id="row">
+    <div class="d-md-none d-lg-block col-lg-2"></div>
+    <div id="mainContainer" class="col-md-12 col-lg-8">
+        <div id="content">
+            <div th:replace="fragments/fragment_top"></div>
+            <div th:include="fragments/fragment_alarm"></div>
+            <div class="row">
+                <div class="d-md-none d-lg-block col-lg-1"></div>
+                <div class="p-5 col-md-12 col-lg-10">
+                    <form action="#" th:action="@{/user/alcohol/add}" method="post" class="p-3" enctype="multipart/form-data">
+                        <div th:include="alcohol/fragment_form_alcohol"></div>
+                        <div th:include="manufacturer/fragment_form_manufacturer :: manufacturerForm(${manufacturers})"></div>
+                        <div th:include="alcohol/fragment_form_pictures_alcohol"></div>
+                        <button class="form-control btn btn-info" type="submit">ZAPISZ</button>
+                    </form>
+                </div>
+                <div class="d-md-none d-lg-block col-lg-1"></div>
+            </div>
+        </div>
+        <div th:replace="fragments/fragment_bottom"></div>
+    </div>
+    <div class="d-md-none d-lg-block col-lg-2">
+        <div th:replace="fragments/fragment_logout"></div>
+    </div>
+</div>
+<script>
+         var typesAlcohol = JSON.parse('[[${listTypesOfAlcoholToAutoComplete}]]'.replace(/&quot;/g, '"'));
+         var manufacturers = JSON.parse('[[${allManufacturers}]]'.replace(/&quot;/g, '"'));
+      </script>
+<script th:src="@{/js/add_alcohol.js}"></script>
+</body>
+</html>

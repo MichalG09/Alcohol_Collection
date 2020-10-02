@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+         a {color: #062b67; text-decoration: none; font-weight: bold;}
+    </style>
+</head>
+<body>
+<table width="100%" cellpadding="0" cellspacing="0" bgcolor="CC7C00">
+    <tr>
+        <td height="50" align="center">
+            <p><a href="http://kolekcjaalkoholi.pl">kolekcjaalkoholi.pl</a></p>
+        </td>
+    </tr>
+    <tr bgcolor="F0B65E">
+        <td height="75" align="center">
+            <h1>Dziękujemy za subskrybcję.</h1>
+        </td>
+    </tr>
+    <tr bgcolor="F0B65E">
+        <td height="100" align="center">
+            <h4 th:text="${welcome}"></h4>
+            <h5>
+                Dziękujemy za subskrybcję. Będziesz otrzymywać wiadomości z najważniejszymi wydarzeniami związanymi ze stroną kolekcjaalkoholi.pl.
+            </h5>
+            <br><br><br><br>
+        </td>
+    </tr>
+    <tr>
+        <td height="20" align="center">
+            <h5><a th:href='${linkToUnsubscribe}'>WYPISZ Z NEWSLETTERA</a></h5>
+        </td>
+    </tr>
+    <tr>
+        <td height="50" align="center">
+            <p><a href="http://kolekcjaalkoholi.pl">kolekcjaalkoholi.pl</a></p>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

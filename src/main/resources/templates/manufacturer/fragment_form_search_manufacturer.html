@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<h3 class="mt-5">Wyszukiwanie</h3>
+<form id="searchManufacturerForm" action="#" th:action="@{/user/manufacturer/search}" method="post" class="p-3">
+    <div class="form-group">
+        <label for="manufacturerName">Nazwa producenta</label>
+        <input type="text" th:field="${manufacturer.nameCompany}" class="form-control" id="manufacturerName" placeholder="Nazwa producenta">
+    </div>
+    <div class="form-group">
+        <label for="manufacturerTown">Miejscowość producenta</label>
+        <input type="text" th:field="${manufacturer.town}" class="form-control" id="manufacturerTown" placeholder="Miejscowość producenta">
+    </div>
+    <div class="form-group">
+        <label for="manufacturerCountry">Państwo producenta</label>
+        <input type="text" th:field="${manufacturer.country}" class="form-control" id="manufacturerCountry" placeholder="Państwo producenta">
+    </div>
+    <div class="form-group">
+        <label for="manufacturerComment">Komentarz</label>
+        <input type="text" th:field="${manufacturer.comments}" class="form-control" id="manufacturerComment" placeholder="Komentarz">
+    </div>
+    <button class="form-control btn btn-info m-1" >SZUKAJ</button>
+    <button class="form-control btn btn-secondary m-1" th:onclick="|clearFormSearchManufacturer()|"  role="button">WYCZYŚĆ</button>
+</form>

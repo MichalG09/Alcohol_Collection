@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<head th:include="fragments/fragment_head"></head>
+<body>
+<div class="row text-white" id="row">
+    <div class="d-md-none d-lg-block col-lg-2"></div>
+    <div id="mainContainer" class="col-md-12 col-lg-8">
+        <div th:replace="fragments/fragment_top"></div>
+        <div id="content">
+            <div class="row">
+                <div class="d-md-none d-lg-block col-lg-1"></div>
+                <div class="p-5 col-md-12 col-lg-10">
+                    <div th:include="fragments/fragment_alarm"></div>
+                    <a class="btn btn-info btn-block mt-2" href="/admin/property/add" role="button">DODAJ KONFIGURACJĘ</a>
+                    <a class="btn btn-info btn-block mt-2" href="/admin/property/all" role="button">WSZYSTKIE KONFIGURACJE</a>
+                    <a class="btn btn-info btn-block mt-2" href="/admin/sortType/add" role="button">DODAJ RODZAJ SORTOWANIA</a>
+                    <a class="btn btn-info btn-block mt-2" href="/admin/sortType/all" role="button">POKAŻ WSZYSTKIE RODZAJE SORTOWANIA</a>
+                    <a class="btn btn-info btn-block mt-2" href="/admin/user/add" role="button">DODAJ UŻYTKOWNIKA</a>
+                    <a class="btn btn-info btn-block mt-2" href="/admin/user/all" role="button">POKAŻ WSZYSTKICH UŻYTKOWNIKÓW</a>
+                    <a class="btn btn-info btn-block mt-2" href="/admin/email/test" role="button">WYŚLIJ TESTOWEGO EMAILA</a>
+                </div>
+                <div class="d-md-none d-lg-block col-lg-1"></div>
+            </div>
+        </div>
+        <div th:replace="fragments/fragment_bottom"></div>
+    </div>
+    <div class="d-md-none d-lg-block col-lg-2">
+        <div th:replace="fragments/fragment_logout"></div>
+    </div>
+</div>
+<script th:src="@{/js/my_js_function.js}"></script>
+</body>
+</html>

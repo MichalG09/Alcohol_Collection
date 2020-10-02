@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<head th:include="fragments/fragment_head"></head>
+<body>
+<div class="row text-white" id="row">
+    <div class="d-md-none d-lg-block col-lg-2"></div>
+    <div id="mainContainer" class="col-md-12 col-lg-8">
+        <div th:replace="fragments/fragment_top"></div>
+        <div id="content">
+            <div class="row">
+                <div class="d-md-none d-lg-block col-lg-1"></div>
+                <div class="p-5 col-md-12 col-lg-10">
+                    <div th:include="fragments/fragment_alarm"></div>
+                    <a class="btn btn-info btn-block mt-2" href="/user/alcohol/add" role="button">DODAJ BUTELKĘ ALKOHOLU</a>
+                    <a class="btn btn-info btn-block mt-2" href="/alcohol/all" role="button">EDYTUJ BUTELKĘ ALKOHOLU</a>
+                    <a class="btn btn-info btn-block mt-2" href="/user/manufacturer/add" role="button">DODAJ PRODUCENTA</a>
+                    <a class="btn btn-info btn-block mt-2" href="/user/manufacturer/all" role="button">EDYTUJ PRODUCENTA</a>
+                    <a class="btn btn-info btn-block mt-2" href="/user/gallery/add" role="button">DODAJ ZDJĘCIE DO GALERII</a>
+                    <a class="btn btn-info btn-block mt-2" href="/gallery" role="button">USUŃ ZDJĘCIE Z GALERII</a>
+                    <a class="btn btn-info btn-block mt-2" href="/user/welcomeEdit" role="button">EDYTUJ STRONĘ POWITALNĄ</a>
+                    <a class="btn btn-info btn-block mt-2" href="/user/showAllNewsletter" role="button">POKAŻ WSZYSTKICH Z NEWSLETTER</a>
+                    <a class="btn btn-info btn-block mt-2" href="/user/sendEMailAllNewsletter" role="button">WYŚLIJ EMAIL WSZYSTKIM Z NEWSLETTER</a>
+                </div>
+                <div class="d-md-none d-lg-block col-lg-1"></div>
+            </div>
+        </div>
+        <div th:replace="fragments/fragment_bottom"></div>
+    </div>
+    <div class="d-md-none d-lg-block col-lg-2">
+        <div th:replace="fragments/fragment_logout"></div>
+    </div>
+</div>
+<script th:src="@{/js/my_js_function.js}"></script>
+</body>
+</html>

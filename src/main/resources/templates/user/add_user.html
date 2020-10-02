@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<head th:include="fragments/fragment_head"></head>
+<body>
+<div class="row text-white" id="row">
+    <div class="d-md-none d-lg-block col-lg-2"></div>
+    <div id="mainContainer" class="col-md-12 col-lg-8">
+        <div th:replace="fragments/fragment_top"></div>
+        <div id="content">
+            <form action="#" th:action="@{/admin/user/add}" method="post" class="p-3">
+                <div class="border border-light p-3 m-2" >
+                    <h3>Dodawanie użytkownika</h3>
+                    <div class="form-group">
+                        <label for="insertUserName">Nazwa użytkownika</label>
+                        <input type="text" th:field="${user.username}" class="form-control" id="insertUserName" placeholder="Nazwa użytkownika">
+                        <label class="text-danger" th:if="${#fields.hasErrors('user.username')}" th:errors="*{user.username}"></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="insertUserPassword">Hasło</label>
+                        <input th:field="${user.password}" class="form-control" id="insertUserPassword" placeholder="Hasło"/>
+                        <label class="text-danger" th:if="${#fields.hasErrors('user.password')}" th:errors="*{user.password}"></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="insertUserRoles">Rola użytkownika</label>
+                        <select class="form-control selectpicker" th:field="${user.roles}" id="insertUserRoles" placeholder="Rola użytkownika">
+                            <option value="ROLE_USER">User</option>
+                            <option value="ROLE_ADMIN">Admin</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Aktywny użytkownik</label>
+                        <input type="checkbox" th:field="${user.active}" class="form">
+                    </div>
+                    <input type="hidden" th:field="${user.id}">
+                    <input type="hidden" th:field="${user.roles}">
+                </div>
+                <button class="form-control btn btn-info" type="submit">DODAJ</button>
+            </form>
+        </div>
+        <div th:replace="fragments/fragment_bottom"></div>
+    </div>
+    <div class="d-md-none d-lg-block col-lg-2">
+        <div th:replace="fragments/fragment_logout"></div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="border border-light p-3 m-2">
+    <h3>ZDJĘCIA</h3>
+    <div class="form-group">
+        <div th:if="${alcohol.pictures != null && alcohol.pictures.size() >= 1}">
+            <label>OBECNE ZDJĘCIA</label>
+            <div class="row border border-light p-1">
+            <div class="col-md-4" th:each="picture, custStat : ${alcohol.pictures}">
+                <img th:src="|data:image/png;base64,${picture.getPictureInBase64()}|" width="100" height="120"/>
+                <a th:if="${alcohol.pictures.size() > 1 && !picture.mainPicture}" class="btn btn-secondary mr-1" th:href="@{/user/alcohol/deletePicture/} + ${alcohol.id} + '/' + ${alcohol.pictures[custStat.index].name}" role="button">USUŃ</a>
+                <a th:if="${alcohol.pictures.size() > 1 && !picture.mainPicture}" class="btn btn-secondary mr-1" th:href="@{/user/alcohol/changeMainPicture/} + ${alcohol.id} + '/' + ${alcohol.pictures[custStat.index].id}" role="button">USTAW JAKO ZDJECIE GLÓWNE</a>
+                <div th:if="${picture.mainPicture}" class="alert alert-light" role="alert">
+                    Zdjęcie główne
+                </div>
+            </div>
+            </div>
+        </div>
+        <label for="insertPictures">ZDJĘCIA ALKOHOLU</label>
+        <div class="row">
+            <div class="col-md-6 form-group border border-light p-1">
+                <label>Zdjęcie główne</label>
+                <input class="form-control" type="file" th:field="${file.mainFile}" id="insertMainPictures">
+                <label class="text-danger" th:if="${#fields.hasErrors('file.mainFile')}" th:errors="*{file.mainFile}"></label>
+            </div>
+            <div class="col-md-6 form-group border border-light p-1">
+                <label >Dodatkowe zdjęcia</label>
+                <input class="form-control" type="file" multiple="multiple" th:field="${file.multipartFiles}" id="insertPictures">
+            </div>
+        </div>
+    </div>
+</div>

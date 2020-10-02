@@ -1,0 +1,107 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="fragmentOneAlcoholDetail(alcohol)">
+    <div class="row border border-light p-3 m-2" id="rowOneAlcohol">
+        <div class="col-md-6">
+            <div th:each="picture : ${alcohol.pictures}">
+                <div class="mb-2">
+                    <img th:src="|data:image/png;base64,${picture.getPictureInBase64()}|" width="400" height="500"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="table-striped">
+                <table class="table text-white">
+                    <tr>
+                        <td colspan="2">
+                            <h1 th:text="${alcohol.name}"></h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Rodzaj alkoholu</p>
+                        </td>
+                        <td>
+                            <p th:text="${alcohol.type}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Objętość butelki</p>
+                        </td>
+                        <td>
+                            <p th:text="${alcohol.capacity} + ml"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Zawartość alkoholu</p>
+                        </td>
+                        <td>
+                            <p th:text="${alcohol.amountOfAlcohol} + '%'"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Miejsce zakupu</p>
+                        </td>
+                        <td>
+                            <p th:text="${alcohol.placePurchase}"></p>
+                        </td>
+                    </tr>
+                    <tr th:if="${#request.isUserInRole('USER') or #request.isUserInRole('ADMIN')}">
+                        <td>
+                            <p>Miejsce w kolekcji</p>
+                        </td>
+                        <td>
+                            <p th:text="${alcohol.placeInStorage}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Komentarz</p>
+                        </td>
+                        <td>
+                            <p th:text="${alcohol.comment}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Producent</p>
+                        </td>
+                        <td>
+                            <p th:text="${alcohol.manufacturer.nameCompany}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Producent państwo</p>
+                        </td>
+                        <td>
+                            <p th:text="${alcohol.manufacturer.country}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Producent miasto</p>
+                        </td>
+                        <td>
+                            <p th:text="${alcohol.manufacturer.town}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Producent komentarz</p>
+                        </td>
+                        <td>
+                            <p th:text="${alcohol.manufacturer.comments}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

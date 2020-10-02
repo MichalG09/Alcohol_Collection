@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<head th:include="fragments/fragment_head"></head>
+<body>
+<div class="row text-white" id="row" >
+    <div class="d-md-none d-lg-block col-lg-2"></div>
+    <div id="mainContainer" class="col-md-12 col-lg-8">
+        <div id="content">
+            <div th:replace="fragments/fragment_top"></div>
+            <div class="container containerGallery" th:if="${! #lists.isEmpty(picturesGallery)}">
+                <div th:include="fragments/fragment_alarm"></div>
+                <div class="mySlides" th:each="picture, iterStat : ${picturesGallery}">
+                    <div class="numbertext" th:text="${iterStat.count} + '/' + ${#lists.size(picturesGallery)}"></div>
+                    <a th:if="${#request.isUserInRole('USER') or #request.isUserInRole('ADMIN')}" class="btn btn-info deleteButton" th:href="@{/user/gallery/delete/} + ${picture.id}" role="button">USUŃ TO ZDJĘCIE</a>
+                    <img th:src="|data:image/png;base64,${picture.getPictureInBase64()}|" style="width:100%">
+                </div>
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                <div class="row">
+                    <div class="column" th:each="picture, iterStat : ${picturesGallery}">
+                        <img class="demo cursor" th:src="|data:image/png;base64,${picture.getPictureInBase64()}|" style="width:100%" th:onclick="|currentSlide('${iterStat.count}')|">
+                    </div>
+                </div>
+            </div>
+            <div th:if="${#lists.isEmpty(picturesGallery)}" class="mt-5">
+                <h5>BRAK POZYCJI DO WYŚWIETLENIA</h5>
+            </div>
+        </div>
+        <div th:replace="fragments/fragment_bottom"></div>
+    </div>
+    <div class="d-md-none d-lg-block col-lg-2">
+        <div th:replace="fragments/fragment_logout"></div>
+    </div>
+</div>
+<script th:src="@{/js/gallery.js}"></script>
+</body>
+</html>

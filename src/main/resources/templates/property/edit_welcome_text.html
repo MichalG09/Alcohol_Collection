@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<head th:include="fragments/fragment_head"></head>
+<body>
+<div class="row text-white" id="row">
+    <div class="d-md-none d-lg-block col-lg-2"></div>
+    <div id="mainContainer" class="col-md-12 col-lg-8">
+        <div th:replace="fragments/fragment_top"></div>
+        <div id="content">
+            <p>Instrukcja</p>
+            <ol>
+                <li>Wejdź na stronę: <a href="https://wordtohtml.net/" rel="noopener noreferrer" target="_blank">link</a></li>
+                <li>Z lewej strony wpisz tekst z pełnym formatowaniem, który chcesz umieścić na stronie (podkreślenia, punkty, akapity itd.).
+                    <br>lub wklej na stronie (<a href="https://wordtohtml.net/" rel="noopener noreferrer" target="_blank">link</a>)
+                    w prawej cześci strony tekst znajdujący się w polu poniżej i następnie edytuj po stronie lewej</li>
+                <li>Wygenerowany tekst po prawej stronie skopiuj i wklej tutaj w pole poniżej</li>
+                <li>Zapisz</li>
+            </ol>
+            <form action="#" th:action="@{/user/welcomeEdit}" method="post" class="p-3">
+                <div class="form-group">
+                    <label for="insertValueProperties">Tekst powitalny*</label>
+                    <textarea rows="20" th:field="${welcomeText.valueProperties}" class="form-control" id="insertValueProperties" placeholder="Wartość ustawień"></textarea>
+                    <label class="text-danger" th:if="${#fields.hasErrors('welcomeText.valueProperties')}" th:errors="*{welcomeText.valueProperties}"></label>
+                </div>
+                <input type="hidden" th:field="${welcomeText.id}">
+                <input type="hidden" th:field="${welcomeText.nameProperties}">
+                <button class="form-control btn btn-info" type="submit">ZAPISZ</button>
+            </form>
+        </div>
+        <div th:replace="fragments/fragment_bottom"></div>
+    </div>
+    <div class="d-md-none d-lg-block col-lg-2">
+        <div th:replace="fragments/fragment_logout"></div>
+    </div>
+</div>
+</body>
+</html>

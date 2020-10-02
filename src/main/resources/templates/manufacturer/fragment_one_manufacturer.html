@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<div th:fragment="fragmentOneManufacturer(manufacturer)">
+    <div class="border border-light p-3 m-2" id="boxOneAlcohol">
+        <div class="row " id="rowOneAlcohol" >
+            <div class="col-md-8" style="margin: auto; width: 50%;">
+                <div class="table-striped">
+                    <table class="table text-white">
+                        <tr>
+                            <td colspan="2">
+                                <h1 th:text="${manufacturer.nameCompany}"></h1>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Miasto</p>
+                            </td>
+                            <td>
+                                <p th:text="${manufacturer.town}"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Państwo</p>
+                            </td>
+                            <td>
+                                <p th:text="${manufacturer.country}"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Komentarz</p>
+                            </td>
+                            <td>
+                                <p th:text="${manufacturer.comments}"></p>
+                            </td>
+                        </tr>
+                        <tr th:if="${#request.isUserInRole('USER') or #request.isUserInRole('ADMIN')}">
+                            <td>
+                                <p>Data utworzenia</p>
+                            </td>
+                            <td>
+                                <p th:text="${manufacturer.createdDate}"></p>
+                            </td>
+                        </tr>
+                        <tr th:if="${#request.isUserInRole('USER') or #request.isUserInRole('ADMIN')}">
+                            <td>
+                                <p>Data ostatniej edycji</p>
+                            </td>
+                            <td>
+                                <p th:text="${manufacturer.lastChangeDate}"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Ilość przypisanych alkoholi</p>
+                            </td>
+                            <td>
+                                <p th:text="${manufacturer.alcohols.size()}"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                        </tr>
+                    </table>
+                    <div th:id="'showAll' + ${manufacturer.iD}" style="display: none;">
+                        <table class="table text-white">
+                            <tr th:each="alcohol: ${manufacturer.alcohols}">
+                                <td colspan="2">
+                                    <p th:text="${alcohol.name}"></p>
+                                </td>
+                                <td colspan="2">
+                                    <a class="btn btn-secondary mr-1" th:href="@{/alcohol/detail/} + ${alcohol.id}" role="button">SZCZEGÓŁY</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="2"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row p-1 m-1" th:if="${#request.isUserInRole('USER') or #request.isUserInRole('ADMIN')}">
+            <a class="btn btn-secondary mr-1" th:onclick="|showAndHide('confirmDelete' + '${manufacturer.iD}')|" role="button">USUŃ</a>
+            <a class="btn btn-secondary mr-1" th:href="@{/user/manufacturer/edit/} + ${manufacturer.iD}" role="button">EDYTUJ</a>
+            <a th:if="${manufacturer.alcohols.size() > 0}" class="btn btn-secondary mr-1" th:onclick="|showAndHide('showAll' + '${manufacturer.iD}')|" role="button">POKAŻ PRZYPISANE ALKOHOLE</a>
+        </div>
+        <div th:id="'confirmDelete' + ${manufacturer.iD}" style="display: none;">
+            <pp th:if="${manufacturer.alcohols.size() > 0}" th:text="'Potwierdź usunięcie: ' + ${manufacturer.nameCompany}"></p>
+            <div class="clearfix">
+                <button type="button" th:onclick="|showAndHide('confirmDelete${manufacturer.iD}')|" class="btn btn-success">ANULUJ</button>
+                <a th:if="${manufacturer.alcohols.size() < 1}" class="btn btn-danger" th:href="@{/user/manufacturer/delete/} + ${manufacturer.iD}" role="button">USUŃ</a>
+                <p th:if="${manufacturer.alcohols.size() > 0}" th:text="'Żeby usunąć producenta nie może być do niego przypisany żaden alkohol'"></p>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

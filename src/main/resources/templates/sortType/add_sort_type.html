@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<head th:include="fragments/fragment_head"></head>
+<body>
+<div class="row text-white" id="row">
+    <div class="d-md-none d-lg-block col-lg-2"></div>
+    <div id="mainContainer" class="col-md-12 col-lg-8">
+        <div th:replace="fragments/fragment_top"></div>
+        <div id="content">
+            <form action="#" th:action="@{/admin/sortType/add}" method="post" class="p-3">
+                <div class="border border-light p-3 m-2" >
+                    <h3>Dodawanie ustawień</h3>
+                    <div class="form-group">
+                        <label for="insertNameProperties">Wartość sortowania*</label>
+                        <input type="text" th:field="${sortType.value}" class="form-control" id="insertNameProperties" placeholder="Wartość sortowania">
+                        <label class="text-danger" th:if="${#fields.hasErrors('sortType.value')}" th:errors="*{sortType.value}"></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="insertValueProperties">Tłumaczenie sortowania*</label>
+                        <textarea rows="3" th:field="${sortType.valueTranslate}" class="form-control" id="insertValueProperties" placeholder="Tłumaczenie sortowania"></textarea>
+                        <label class="text-danger" th:if="${#fields.hasErrors('sortType.valueTranslate')}" th:errors="*{sortType.valueTranslate}"></label>
+                    </div>
+                    <input type="hidden" th:field="${sortType.id}">
+                </div>
+                <button class="form-control btn btn-info" type="submit">DODAJ</button>
+            </form>
+        </div>
+        <div th:replace="fragments/fragment_bottom"></div>
+    </div>
+    <div class="d-md-none d-lg-block col-lg-2">
+        <div th:replace="fragments/fragment_logout"></div>
+    </div>
+</div>
+</body>
+</html>

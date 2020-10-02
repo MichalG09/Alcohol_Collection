@@ -1,0 +1,44 @@
+package pl.mgrzech.alcohols_collection.controllers;
+
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.mgrzech.alcohols_collection.picture.PictureService;
+
+@RequestMapping("/user/alcohol")
+@Controller
+@AllArgsConstructor
+public class PictureController {
+
+    private final PictureService pictureService;
+
+    /**
+     * Method deletes chosen picture for edited alcohol.
+     * @param alcoholId id alcohol which the picture is deleted
+     * @param pictureName name picture to delete
+     * @return redirect to edited alcohol after deleted picture
+     */
+    @GetMapping("/deletePicture/{alcoholId}/{pictureName}")
+    public String deletePictureForAlcohol(@PathVariable("alcoholId") int alcoholId,
+                                          @PathVariable("pictureName") String pictureName,
+                                          RedirectAttributes redirectAttributes){
+        pictureService.deletePictureForAlcohol(alcoholId, pictureName, redirectAttributes);
+        return "redirect:/user/alcohol/edit/" + alcoholId;
+    }
+
+    /**
+     * Method changes a main picture for alcohol.
+     * @param alcoholId id alcohol which the picture is changed
+     * @param pictureId picture id to change to main picture
+     * @param redirectAttributes to add message after save change main picture
+     * @return redirect to edited alcohol after changed main picture
+     */
+    @GetMapping("/changeMainPicture/{alcoholId}/{pictureId}")
+    public String getChangeMainPictureForAlcohol(@PathVariable("alcoholId") int alcoholId,
+                                                 @PathVariable("pictureId") int pictureId,
+                                                 RedirectAttributes redirectAttributes){
+        pictureService.changeMainPictureForAlcohol(alcoholId, pictureId, redirectAttributes);
+        return "redirect:/user/alcohol/edit/" + alcoholId;
+    }
+}

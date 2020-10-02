@@ -1,0 +1,209 @@
+html{
+  height: 99%;}
+
+body {
+  text-align: center;
+  font-family: "Calibri Light";
+  font-size: 16px;
+/*  background-image: url(../img/background_image_org.jpg);*/
+
+  background: url(../img/background_image_org.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+  height: 100%;
+  width: 99%;
+  /*
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: fixed;*/
+}
+
+#row{
+  height: 100%;
+  text-align: center;
+}
+
+#row2{
+  height: 100%;
+  text-align: center;
+}
+
+.profile:hover .profile {
+  background-color: blue;
+}
+
+
+
+#rowOneAlcohol{
+  margin: 3 px;
+  padding: 3 px;
+  text-align: center;
+}
+
+#boxOneAlcohol{
+background: rgba(25, 25, 25, .5);
+}
+
+#content{
+  min-height: 65%;
+}
+
+#loginButton{
+    background: url('../icons/user.png')no-repeat;
+    width: 32px;
+    height: 32px;
+    opacity: 10%;
+    background-color: white;
+}
+
+/*autocomplete*/
+
+.autocomplete {
+  position: relative;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+  color: black;
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+  background-color: #e9e9e9;
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+
+#insertManufacturerName{
+color: black;
+}
+
+#linkToMyWebsite{
+text-decoration: none;
+color: white;
+}
+
+#noneDecoration {
+text-decoration: none;
+}
+
+/* gallery */
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+.prev{
+left: 0;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.deleteButton {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 10;
+  right: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Six columns side by side */
+.column {
+  float: left;
+  width: 16.66%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+
+.containerGallery{
+
+  position: relative;
+}
+

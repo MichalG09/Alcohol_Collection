@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="manufacturerForm(manufacturers)">
+    <div class="border border-light p-3 m-2" >
+        <h3>DANE PRODUCENTA ALKOHOLU</h3>
+        <label id="infoNewManufacturer"></label>
+        <div class="autocomplete form-group">
+            <label for="insertManufacturerName">Nazwa producenta*</label>
+            <input id="insertManufacturerName" th:field="${manufacturer.nameCompany}" class="form-control" placeholder="Nazwa producenta"
+                   th:onchange="|nameCompanyChange()|">
+            <label class="text-danger" th:if="${#fields.hasErrors('manufacturer.nameCompany')}" th:errors="*{manufacturer.nameCompany}"></label>
+        </div>
+        <div class="form-group">
+            <label for="insertManufacturerCountry">Państwo w której znajduje się producent</label>
+            <input id="insertManufacturerCountry" type="text" th:field="${manufacturer.country}" class="form-control" placeholder="Państwo">
+            <label class="text-danger" th:if="${#fields.hasErrors('manufacturer.country')}" th:errors="*{manufacturer.country}"></label>
+        </div>
+        <div class="form-group">
+            <label for="insertManufacturerTown">Miasto w której znajduje się producent</label>
+            <input id="insertManufacturerTown" type="text" th:field="${manufacturer.town}" class="form-control" placeholder="Miasto">
+            <label class="text-danger" th:if="${#fields.hasErrors('manufacturer.town')}" th:errors="*{manufacturer.town}"></label>
+        </div>
+        <div class="form-group">
+            <label for="insertManufacturerComment">Komentarz</label>
+            <textarea id="insertManufacturerComment" rows="2" type="text" th:field="${manufacturer.comments}" class="form-control" placeholder="Komentarz"></textarea>
+            <label class="text-danger" th:if="${#fields.hasErrors('manufacturer.comments')}" th:errors="*{manufacturer.comments}"></label>
+            <small class="form-text">Dowolny dodatkowy komentarz</small>
+        </div>
+        <input type="hidden" id="insertManufacturerId" th:field="${manufacturer.iD}">
+        <input type="hidden" th:field="${manufacturer.createdDate}">
+        <input type="hidden" th:field="${manufacturer.lastChangeDate}">
+    </div>
+</div>

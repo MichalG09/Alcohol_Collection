@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<head th:include="fragments/fragment_head"></head>
+<body>
+<div class="row text-white" id="row">
+    <div class="d-md-none d-lg-block col-lg-2"></div>
+    <div id="mainContainer" class="col-md-12 col-lg-8">
+        <div id="content">
+            <div class="col-md-12" th:replace="fragments/fragment_top"></div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div th:include="alcohol/fragment_form_search_alcohol"></div>
+                </div>
+                <div class="col-md-9">
+                    <div class="form-group row m-1" th:if="${! #lists.isEmpty(alcohols.content)}">
+                        <label for="sortTypeSelector" class="col-sm-2 col-form-label">Sortuj według:</label>
+                        <div class="col-sm-4">
+                            <select id="sortTypeSelector" class="form-control selectpicker" th:onchange="|submit('${1}')|">
+                                <option th:each="sortType : ${typesOfSort}" th:value="${{sortType.valueTranslate}}"
+                                        th:text="${sortType.value}" th:selected="${sortType.valueTranslate == sortBy}">
+                                </option>
+                            </select>
+                        </div>
+                        <label for="numberPositionsSelector" class="col-sm-2 col-form-label">Ilość elementów:</label>
+                        <div class="col-sm-4">
+                            <select id="numberPositionsSelector" class="form-control selectpicker" th:onchange="|submit('${1}')|">
+                                <option th:each="number : ${numberAlcoholsInOnePageToSelect}" th:value="${{number}}"
+                                        th:text="${number}" th:selected="${number == numberAlcoholInOnePage}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div th:if="${! #lists.isEmpty(alcohols.content)}">
+                        <div th:include="fragments/fragment_navigate_buttons"></div>
+                        <div th:each="alcohol : ${alcohols}">
+                            <div th:include="alcohol/fragment_one_alcohol :: fragmentOneAlcohol(${alcohol})"></div>
+                        </div>
+                        <div th:include="fragments/fragment_navigate_buttons"></div>
+                    </div>
+                    <div th:if="${#lists.isEmpty(alcohols.content)}" class="mt-5">
+                        <h5>BRAK POZYCJI DO WYŚWIETLENIA</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:replace="fragments/fragment_bottom"></div>
+    </div>
+    <div class="d-md-none d-lg-block col-lg-2">
+        <div th:replace="fragments/fragment_logout"></div>
+    </div>
+</div>
+<script th:src="@{/js/my_js_function.js}"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<head th:include="fragments/fragment_head"></head>
+<body>
+<div class="row text-white" id="row">
+    <div class="d-md-none d-lg-block col-lg-2"></div>
+    <div id="mainContainer" class="col-md-12 col-lg-8">
+        <div id="content">
+            <div th:replace="fragments/fragment_top"></div>
+            <div class="row">
+                <div class="d-md-none d-lg-block col-lg-1"></div>
+                <div class="p-5 col-md-12 col-lg-10">
+                    <div>Zapraszamy do kontaktu: </div>
+                    <h3>kontakt@kolekcjaalkoholi.pl</h3>
+                    <div> lub przez formularz poniżej</div>
+                    <form action="#" id="sendMessageForm" th:action="@{/contact}" method="post" class="p-3">
+                        <div class="form-group">
+                            <label for="insertEmail">Twój email</label>
+                            <input type="text" th:field="${emailMessage.email}" class="form-control" id="insertEmail" placeholder="Email">
+                            <label class="text-danger" th:if="${#fields.hasErrors('emailMessage.email')}" th:errors="*{emailMessage.email}"></label>
+                        </div>
+                        <div class="form-group">
+                            <label for="insertSubject">Temat wiadomości</label>
+                            <input type="text" th:field="${emailMessage.subject}" class="form-control" id="insertSubject" placeholder="Temat wiadomości">
+                            <label class="text-danger" th:if="${#fields.hasErrors('emailMessage.subject')}" th:errors="*{emailMessage.subject}"></label>
+                        </div>
+                        <div class="form-group">
+                            <label for="insertMessage">Treść wiadomości</label>
+                            <textarea rows="10" type="text" th:field="${emailMessage.text}" class="form-control" id="insertMessage" placeholder="Treść wiadomości"></textarea>
+                            <label class="text-danger" th:if="${#fields.hasErrors('emailMessage.text')}" th:errors="*{emailMessage.text}"></label>
+                        </div>
+                        <div class="form-group">
+                            <label for="insertName">Imię</label>
+                            <input type="text" th:field="${emailMessage.name}" class="form-control" id="insertName" placeholder="Twoje imię">
+                            <label class="text-danger" th:if="${#fields.hasErrors('emailMessage.name')}" th:errors="*{emailMessage.name}"></label>
+                        </div>
+                        <div class="form-group">
+                            <label th:text="'Chcę dostać kopię na swojego maila'"></label>
+                            <input type="checkbox" th:field="${emailMessage.copy}" class="form">
+                            <label class="text-danger" th:if="${#fields.hasErrors('emailMessage.copy')}" th:errors="*{emailMessage.copy}"></label>
+                        </div>
+                        <button class="form-control btn btn-info" type="submit">WYŚLIJ</button>
+                    </form>
+                </div>
+                <div class="d-md-none d-lg-block col-lg-1"></div>
+            </div>
+        </div>
+        <div th:replace="fragments/fragment_bottom"></div>
+    </div>
+    <div class="d-md-none d-lg-block col-lg-2">
+        <div th:replace="fragments/fragment_logout"></div>
+    </div>
+</div>
+</body>
+</html>

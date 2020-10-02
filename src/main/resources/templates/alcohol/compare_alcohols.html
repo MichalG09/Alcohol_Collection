@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<head th:include="fragments/fragment_head"></head>
+<body>
+<div class="row text-white" id="row">
+    <div class="d-md-none d-lg-block col-lg-2"></div>
+    <div id="mainContainer" class="col-md-12 col-lg-8">
+        <div id="content">
+            <div th:replace="fragments/fragment_top"></div>
+            <div class="table-striped mt-4">
+                <table class="table text-white">
+                    <tr>
+                        <td>
+                        </td>
+                        <td th:each="alcohol :  ${alcohols}">
+                            <img th:src="|data:image/png;base64,${alcohol.getMainPicturesInBase64List()}|" width="200" height="250"/>
+                        </td>
+                    <tr>
+                    <tr>
+                        <td>
+                            <p>nazwa</p>
+                        </td>
+                        <td th:each="alcohol :  ${alcohols}">
+                            <p th:text="${alcohol.name}" />
+                        </td>
+                    <tr>
+                        <td>
+                            <p>Rodzaj alkoholu</p>
+                        </td>
+                        <td th:each="alcohol :  ${alcohols}">
+                            <p th:text="${alcohol.type}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Zawartość alkoholu</p>
+                        </td>
+                        <td th:each="alcohol :  ${alcohols}">
+                            <p th:text="${alcohol.amountOfAlcohol}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Objętość butelki</p>
+                        </td>
+                        <td th:each="alcohol :  ${alcohols}">
+                            <p th:text="${alcohol.capacity}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>producent</p>
+                        </td>
+                        <td th:each="alcohol :  ${alcohols}">
+                            <p th:text="${alcohol.manufacturer.nameCompany}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td th:each="alcohol :  ${alcohols}">
+                            <a class="btn btn-secondary m-1" th:href="@{/alcohol/detail/} + ${alcohol.id}" role="button">PRZEJDŹ DO SZCZEGÓŁÓW</a>
+                            <a th:if="${alcohols.size() > 1}" class="btn btn-secondary m-1" th:href="@{/alcohol/deleteCompare/} + ${alcohol.id}" role="button">USUŃ Z PORÓWNANIA</a>
+                        </td>
+                    </tr>
+                </table>
+                <div th:replace="fragments/fragment_bottom"></div>
+            </div>
+            <div class="d-md-none d-lg-block col-lg-2">
+                <div th:replace="fragments/fragment_logout"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
