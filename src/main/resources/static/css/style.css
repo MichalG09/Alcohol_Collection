@@ -36,7 +36,9 @@ body {
   background-color: blue;
 }
 
-
+.darkBackground{
+ background: rgba(25, 25, 25, .5);
+ }
 
 #rowOneAlcohol{
   margin: 3 px;
@@ -47,6 +49,8 @@ body {
 #boxOneAlcohol{
 background: rgba(25, 25, 25, .5);
 }
+
+
 
 #content{
   min-height: 65%;
