@@ -11,7 +11,7 @@
                         <a class="btn btn-secondary m-4" th:href="@{/alcohol/detail/} + ${idAlcohol}" role="button">POWRÓT DO ALKHOLU</a>
                     </div>
                     <div>
-                        <img th:src="|data:image/png;base64,${picture.getPictureInBase64()}|" />
+                        <img class="picture" th:src="|data:image/png;base64,${picture.getPictureInBase64()}|"/>
                     </div>
         </div>
         <div class="col-xl-12">

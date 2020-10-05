@@ -118,7 +118,7 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- jboos wildfly
-		for test scope no comment
+		for test  comment all dependency
 		for prod scope have to comment-->
 		<dependency>
 			<groupId>org.jboss</groupId>
