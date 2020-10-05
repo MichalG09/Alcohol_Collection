@@ -1,4 +1,4 @@
-package pl.mgrzech.alcohols_collection.gallery;
+package pl.mgrzech.alcohols_collection.picture;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @Component
 @AllArgsConstructor
-public class FindAllPicturesToGallery {
+public class FindPicture {
 
     private final PicturesRepository picturesRepository;
 
@@ -20,5 +20,14 @@ public class FindAllPicturesToGallery {
      */
     public List<Picture> findALlPicturesToGallery() {
         return picturesRepository.findByGallery(true);
+    }
+
+    /**
+     * Method returns picture by id.
+     * @param id picture id to find
+     * @return found picture
+     */
+    public Picture findById(int id){
+        return picturesRepository.findById(id).orElseGet(Picture::new);
     }
 }
