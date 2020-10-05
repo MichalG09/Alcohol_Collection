@@ -3,13 +3,11 @@ package pl.mgrzech.alcohols_collection.entities;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -62,6 +60,6 @@ public class Picture {
      */
     public String getPictureInBase64(){
         return org.jboss.util.Base64.encodeBytes(this.getFile());//Prod
-//        return Arrays.toString(Base64.encodeBase64(this.getFile())); //Test
+//        return org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(this.getFile()); //Test in Tomcat
     }
 }

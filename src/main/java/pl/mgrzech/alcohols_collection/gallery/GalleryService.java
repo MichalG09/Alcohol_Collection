@@ -1,10 +1,10 @@
 package pl.mgrzech.alcohols_collection.gallery;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mgrzech.alcohols_collection.entities.Picture;
+import pl.mgrzech.alcohols_collection.picture.FindPicture;
 import pl.mgrzech.alcohols_collection.validations.file_validation.FilesValidated;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GalleryService {
 
-    private final FindAllPicturesToGallery findAllPicturesToGallery;
+    private final FindPicture findPicture;
     private final AddNewPictureToGallery addNewPictureToGallery;
     private final DeletePictureFromGallery deletePictureFromGallery;
 
@@ -23,7 +23,7 @@ public class GalleryService {
      * @return pictures to gallery
      */
     public List<Picture> findALlPicturesToGallery() {
-        return findAllPicturesToGallery.findALlPicturesToGallery();
+        return findPicture.findALlPicturesToGallery();
     }
 
     /**

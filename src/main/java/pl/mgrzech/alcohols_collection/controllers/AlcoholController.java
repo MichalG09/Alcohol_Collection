@@ -78,6 +78,23 @@ public class AlcoholController {
     }
 
     /**
+     * Method return picture founded by id.
+     * Picture to show in big size.
+     * @param idAlcohol id Alcohol to back button
+     * @param idPicture picture id to find
+     * @param model model
+     * @return found picture
+     */
+    @GetMapping("/picture/{idAlcohol}/{idPicture}")
+    public String showOnePictureForAlcohol(@PathVariable("idAlcohol") int idAlcohol,
+                                           @PathVariable("idPicture") int idPicture,
+                                           Model model){
+        model.addAttribute("picture", alcoholService.findPicture(idPicture));
+        model.addAttribute("idAlcohol", idAlcohol);
+        return "alcohol/alcohol_big_picture";
+    }
+
+    /**
      * Method returns all types of sort from properties.
      * All types of sort are show in selector.
      * @return list of sort type
