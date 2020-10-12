@@ -57,6 +57,13 @@ max-width: auto;
 max-height: auto;
 }
 
+.pictureCompare {
+width: 50%;
+height: auto;
+max-width: auto;
+max-height: auto;
+}
+
 #content{
   min-height: 65%;
 }
