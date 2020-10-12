@@ -60,7 +60,7 @@ public class UserController {
      * @param model model
      * @return name of the running html file
      */
-    @RequestMapping("/admin/user/all")
+    @GetMapping("/admin/user/all")
     public String allUsers(Model model){
         model.addAttribute("users", userService.findAllUser());
         return "user/all_users";
@@ -87,7 +87,7 @@ public class UserController {
      * @param redirectAttributes to add message after delete user
      * @return redirect to admin view if delete user is done
      */
-    @RequestMapping("/admin/user/delete/{id}")
+    @GetMapping("/admin/user/delete/{id}")
     public String deleteSortType(@PathVariable("id") int id,
                                  RedirectAttributes redirectAttributes){
         userService.deleteUserById(id, redirectAttributes);
@@ -98,7 +98,7 @@ public class UserController {
      * Method shows login page.
      * @return name of the running html file to login
      */
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String login() {
         return "login";
     }
@@ -107,7 +107,7 @@ public class UserController {
      * Method shows admin page.
      * @return name of the running html file for admin
      */
-    @RequestMapping("/admin")
+    @GetMapping("/admin")
     public String admin() {
         return "admin";
     }
@@ -116,7 +116,7 @@ public class UserController {
      * Method shows user page.
      * @return name of the running html file for user
      */
-    @RequestMapping("/user")
+    @GetMapping("/user")
     public String user() {
         return "user";
     }

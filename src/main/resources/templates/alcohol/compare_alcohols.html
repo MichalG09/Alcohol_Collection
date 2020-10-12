@@ -15,12 +15,12 @@
                         <td>
                         </td>
                         <td th:each="alcohol :  ${alcohols}">
-                            <img th:src="|data:image/png;base64,${alcohol.getMainPicturesInBase64List()}|" width="200" height="250"/>
+                            <img class="pictureCompare" th:src="|data:image/png;base64,${alcohol.getMainPicturesInBase64List()}|"/>
                         </td>
                     <tr>
                     <tr>
                         <td>
-                            <p>nazwa</p>
+                            <p>Nazwa</p>
                         </td>
                         <td th:each="alcohol :  ${alcohols}">
                             <p th:text="${alcohol.name}" />
@@ -51,7 +51,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <p>producent</p>
+                            <p>Producent</p>
                         </td>
                         <td th:each="alcohol :  ${alcohols}">
                             <p th:text="${alcohol.manufacturer.nameCompany}" />

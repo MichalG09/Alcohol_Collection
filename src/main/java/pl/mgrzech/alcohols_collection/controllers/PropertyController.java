@@ -54,7 +54,7 @@ public class PropertyController {
      * @param model model
      * @return name of the running html file
      */
-    @RequestMapping("/admin/property/all")
+    @GetMapping("/admin/property/all")
     public String allProperty(Model model){
         model.addAttribute("properties", propertyService.findAllProperties());
         return "property/all_properties";
@@ -81,7 +81,7 @@ public class PropertyController {
      * @param redirectAttributes to add message after correct delete property
      * @return redirect to admin view if delete property is done
      */
-    @RequestMapping("/admin/property/delete/{id}")
+    @GetMapping("/admin/property/delete/{id}")
     public String deleteProperty(@PathVariable("id") int id,
                                  RedirectAttributes redirectAttributes){
         propertyService.deletePropertyById(id, redirectAttributes);
