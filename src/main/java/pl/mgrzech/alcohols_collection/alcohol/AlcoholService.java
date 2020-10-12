@@ -10,8 +10,10 @@ import pl.mgrzech.alcohols_collection.alcohol.model.AlcoholToSearch;
 import pl.mgrzech.alcohols_collection.compareAlcohols.GetListAlcoholsIdToCompare;
 import pl.mgrzech.alcohols_collection.entities.Alcohol;
 import pl.mgrzech.alcohols_collection.entities.Manufacturer;
+import pl.mgrzech.alcohols_collection.entities.Picture;
 import pl.mgrzech.alcohols_collection.entities.SortType;
 import pl.mgrzech.alcohols_collection.manufacturer.FindAllManufacturersInJSON;
+import pl.mgrzech.alcohols_collection.picture.FindPicture;
 import pl.mgrzech.alcohols_collection.property.FindProperty;
 import pl.mgrzech.alcohols_collection.sortType.FindSortType;
 import pl.mgrzech.alcohols_collection.validations.file_validation.FilesValidated;
@@ -32,6 +34,7 @@ public class AlcoholService {
     private final FindListTypesAlcoholToAutoCompleted findListTypesAlcoholToAutoCompleted;
     private final AddAlcohol addAlcohol;
     private final DeleteAlcoholById deleteAlcoholById;
+    private final FindPicture findPicture;
 
     /**
      * Method returns all alcohols for first page collection.
@@ -148,6 +151,15 @@ public class AlcoholService {
      */
     public List<String> findPlacesInStorageInProperty() {
         return findProperty.findByName("placeInStorage");
+    }
+
+    /**
+     * Method returns picture by id.
+     * @param idPicture picture id to find
+     * @return found picture
+     */
+    public Picture findPicture(int idPicture) {
+        return findPicture.findById(idPicture);
     }
 }
 

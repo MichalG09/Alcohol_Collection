@@ -1,15 +1,11 @@
 package pl.mgrzech.alcohols_collection.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.mgrzech.alcohols_collection.gallery.AddNewPictureToGallery;
-import pl.mgrzech.alcohols_collection.gallery.DeletePictureFromGallery;
-import pl.mgrzech.alcohols_collection.gallery.FindAllPicturesToGallery;
 import pl.mgrzech.alcohols_collection.gallery.GalleryService;
 import pl.mgrzech.alcohols_collection.validations.file_validation.FilesValidated;
 

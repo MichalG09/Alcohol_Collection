@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>pl.kolekcjaalkoholi</groupId>
 	<artifactId>alcohols_collection</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>alcohols_collection</name>
 	<description>Website about small bottles alcohols collection</description>
 	<packaging>war</packaging>
@@ -118,7 +118,7 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- jboos wildfly
-		for test scope no comment
+		for test  comment all dependency
 		for prod scope have to comment-->
 		<dependency>
 			<groupId>org.jboss</groupId>
@@ -129,6 +129,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>alcohols_collection</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
