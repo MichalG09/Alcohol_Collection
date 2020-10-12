@@ -84,7 +84,7 @@ public class NewsletterController {
      * @param id id newsletter to delete
      * @return redirect to start view if save newsletter is done
      */
-    @PostMapping("/delete/newsletter/{id}")
+    @GetMapping("/delete/newsletter/{id}")
     public String deleteNewsletterMethodPost(@PathVariable("id") int id,
                                              RedirectAttributes redirectAttributes) {
         newsletterService.deleteNewsletterById(id, redirectAttributes);

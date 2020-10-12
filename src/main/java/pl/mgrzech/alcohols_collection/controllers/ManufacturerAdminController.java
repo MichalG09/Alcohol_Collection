@@ -24,7 +24,7 @@ public class ManufacturerAdminController {
      * @return name of the running html file for add manufacturer
      */
     @GetMapping("add")
-    public String adNewManufacturerMethodGet(@ModelAttribute("manufacturer") Manufacturer manufacturer){
+    public String addNewManufacturerMethodGet(@ModelAttribute("manufacturer") Manufacturer manufacturer){
         return "manufacturer/add_manufacturer";
     }
 
@@ -36,7 +36,7 @@ public class ManufacturerAdminController {
      * @return name of the running html file if validate is not correct, redirect to user view if save manufacturer is done
      */
     @PostMapping("add")
-    public String postAddNewManufacturer(@Valid @ModelAttribute("manufacturer") Manufacturer manufacturer,
+    public String addNewManufacturer(@Valid @ModelAttribute("manufacturer") Manufacturer manufacturer,
                                          BindingResult resultManufacturer,
                                          RedirectAttributes redirectAttributes){
         if(resultManufacturer.hasErrors()){
@@ -54,7 +54,7 @@ public class ManufacturerAdminController {
      * @return name of the running html file for edit manufacturer
      */
     @GetMapping("edit/{id}")
-    public String getEditManufacturer(@PathVariable("id") int id,
+    public String editManufacturer(@PathVariable("id") int id,
                                       @ModelAttribute("manufacturer") Manufacturer manufacturer,
                                       Model model){
         model.addAttribute("manufacturer", manufacturerService.findManufacturerById(id));
@@ -93,7 +93,7 @@ public class ManufacturerAdminController {
      * @return redirect to user view if delete manufacturer is done
      */
     @GetMapping("delete/{id}")
-    public String getDeleteManufacturer(@PathVariable("id") int id,
+    public String deleteManufacturer(@PathVariable("id") int id,
                                         RedirectAttributes redirectAttributes){
         manufacturerService.deleteManufacturerById(id, redirectAttributes);
         return "redirect:/user";

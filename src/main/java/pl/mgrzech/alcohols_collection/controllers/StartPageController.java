@@ -3,6 +3,7 @@ package pl.mgrzech.alcohols_collection.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.mgrzech.alcohols_collection.entities.Newsletter;
@@ -20,7 +21,7 @@ public class StartPageController {
      * @param model model
      * @return name of the running html file to start page
      */
-    @RequestMapping(value = {"", "/", "/start"})
+    @GetMapping(value = {"", "/", "/start"})
     public String start(@ModelAttribute Newsletter newsletter,
                         Model model) {
         model.addAttribute("welcomeText", findProperty.findWelcomeTextFromProperty());

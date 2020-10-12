@@ -17,13 +17,14 @@ public class GalleryController {
 
     @Value("${message.error.gallery.picture.add}")
     private String messageErrorValidateFormAddPicture;
+
     /**
      * Method returns all pictures to gallery.
      * @param model model
      * @param message optional message after delete or add picture from/to gallery.
      * @return name of the running html file
      */
-    @RequestMapping("/gallery")
+    @GetMapping("/gallery")
     public String showGallery(@ModelAttribute("message") String message,
                               Model model) {
         model.addAttribute("picturesGallery", galleryService.findALlPicturesToGallery());
@@ -66,7 +67,7 @@ public class GalleryController {
      * @param redirectAttributes to add message after correct delete picture
      * @return redirect to gallery view if delete picture is done
      */
-    @RequestMapping ("/user/gallery/delete/{id}")
+    @GetMapping("/user/gallery/delete/{id}")
     public String deletePictureFromGallery(@PathVariable("id") int id,
                                            RedirectAttributes redirectAttributes) {
         galleryService.deletePictureFromGallery(id, redirectAttributes);

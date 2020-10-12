@@ -22,10 +22,6 @@ import javax.validation.Valid;
 @AllArgsConstructor
 public class SortTypeController {
 
-    private final AddSortType addSortType;
-    private final FindSortType findSortType;
-    private final DeleteSortType deleteSortType;
-
     private final SortTypeService sortTypeService;
 
     /**
@@ -61,7 +57,7 @@ public class SortTypeController {
      * @param model model
      * @return name of the running html file
      */
-    @RequestMapping("/sortType/all")
+    @GetMapping("/sortType/all")
     public String allSortType(Model model){
         model.addAttribute("sortTypes", sortTypeService.findAllSortType());
         return "sortType/all_sort_type";
@@ -88,7 +84,7 @@ public class SortTypeController {
      * @param redirectAttributes to add message after correct delete sort type
      * @return redirect to admin view if delete sort type is done
      */
-    @RequestMapping("/sortType/delete/{id}")
+    @GetMapping("/sortType/delete/{id}")
     public String deleteSortType(@PathVariable("id") int id,
                                  RedirectAttributes redirectAttributes){
         sortTypeService.deleteSortTypeById(id, redirectAttributes);

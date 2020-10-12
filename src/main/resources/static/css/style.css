@@ -1,11 +1,10 @@
 html{
-  height: 99%;}
+  height: 100%;}
 
 body {
   text-align: center;
   font-family: "Calibri Light";
   font-size: 16px;
-/*  background-image: url(../img/background_image_org.jpg);*/
 
   background: url(../img/background_image_org.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -15,11 +14,6 @@ body {
 
   height: 100%;
   width: 99%;
-  /*
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: fixed;*/
 }
 
 #row{
@@ -65,7 +59,7 @@ max-height: auto;
 }
 
 #content{
-  min-height: 65%;
+  min-height: 63%;
 }
 
 #loginButton{
