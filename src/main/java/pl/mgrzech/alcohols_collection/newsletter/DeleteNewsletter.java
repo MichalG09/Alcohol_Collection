@@ -30,6 +30,7 @@ public class DeleteNewsletter {
             redirectAttributes.addFlashAttribute("message", messageCorrectDeleteNewsletter);
         } catch (Exception e){
             redirectAttributes.addFlashAttribute("messageError", messageFailDeleteNewsletter);
+            e.printStackTrace();
         }
     }
 }

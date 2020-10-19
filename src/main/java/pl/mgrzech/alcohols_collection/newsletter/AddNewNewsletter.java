@@ -43,6 +43,7 @@ public class AddNewNewsletter {
             sendEmailAfterSubscribedNewsletter.sendEmailAfterSubscribedNewsletter(newsletter);
         } catch (Exception e){
             redirectAttributes.addFlashAttribute("messageError", messageFailAddNewsletter);
+            e.printStackTrace();
         }
     }
 }

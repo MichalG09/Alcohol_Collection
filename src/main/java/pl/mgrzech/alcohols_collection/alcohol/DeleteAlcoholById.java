@@ -31,6 +31,7 @@ public class DeleteAlcoholById {
             }
         } catch (Exception e){
             redirectAttributes.addFlashAttribute("messageError", messageFailDeleteAlcohol);
+            e.printStackTrace();
         }
     }
 }

@@ -30,6 +30,7 @@ public class DeleteManufacturerById {
             redirectAttributes.addFlashAttribute("message", messageCorrectDeletedManufacturer);
         } catch (Exception e){
             redirectAttributes.addFlashAttribute("messageError", messageFailDeletedManufacturer);
+            e.printStackTrace();
         }
     }
 }
