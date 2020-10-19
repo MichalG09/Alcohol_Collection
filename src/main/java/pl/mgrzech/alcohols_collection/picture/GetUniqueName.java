@@ -24,8 +24,8 @@ public class GetUniqueName {
         Random rand = new Random();
         String uniqueNumberToName;
         do{
-            uniqueNumberToName = String.valueOf(rand.nextInt(100000));
-        } while (!picturesRepository.findByNameIsContaining(uniqueNumberToName).isPresent());
+            uniqueNumberToName = String.valueOf(rand.nextInt(999998) + 1000001);
+        } while (picturesRepository.findByNameIsContaining(uniqueNumberToName).isPresent());
         return prefixName + "_" + uniqueNumberToName;
     }
 }
