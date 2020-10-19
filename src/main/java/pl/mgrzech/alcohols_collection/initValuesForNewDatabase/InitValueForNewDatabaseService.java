@@ -32,6 +32,7 @@ public class InitValueForNewDatabaseService {
             redirectAttributes.addFlashAttribute("message", messageCorrectInitDatabase);
         } catch (Exception e){
             redirectAttributes.addFlashAttribute("messageError", messageCorrectInitDatabase);
+            e.printStackTrace();
         }
     }
 }

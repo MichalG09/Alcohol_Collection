@@ -72,6 +72,7 @@ public class AddAlcohol{
             redirectAttributes.addFlashAttribute("message", isNew ? messageCorrectAddAlcohol : messageCorrectEditAlcohol);
         } catch (Exception e){
             redirectAttributes.addFlashAttribute("messageError", isNew ? messageFailAddAlcohol : messageFailEditAlcohol);
+            e.printStackTrace();
         }
     }
 }

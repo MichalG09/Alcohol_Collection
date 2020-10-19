@@ -29,6 +29,7 @@ public class DeleteSortType {
             redirectAttributes.addFlashAttribute("message", messageCorrectDeleteSortType);
         } catch (Exception e){
             redirectAttributes.addFlashAttribute("messageError", messageFailDeleteSortType);
+            e.printStackTrace();
         }
     }
 }

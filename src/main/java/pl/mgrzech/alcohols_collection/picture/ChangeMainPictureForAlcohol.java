@@ -42,6 +42,7 @@ public class ChangeMainPictureForAlcohol {
             redirectAttributes.addFlashAttribute("message", messageCorrectChangeMainPicture);
         } catch (Exception e){
             redirectAttributes.addFlashAttribute("messageError", messageFailChangeMainPicture);
+            e.printStackTrace();
         }
     }
 }
