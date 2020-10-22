@@ -44,7 +44,7 @@ public class Alcohol {
      * Capacity alcohol bottle [ml]
      */
     @Min(value = 1, message = "{message.error.alcohol.capacity.min}")
-    @Max(value = 700, message = "{message.error.alcohol.capacity.min}}")
+    @Max(value = 700, message = "{message.error.alcohol.capacity.min}")
     private int capacity;
 
     /**
