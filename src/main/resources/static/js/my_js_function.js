@@ -27,6 +27,17 @@ function adminSearch() {
     }
 }
 
+function submitInsertPage(maxPage){
+    var selectedPage = document.getElementById('insertPageToShow').value
+    if(selectedPage < 1){
+        selectedPage = 1;
+    }
+    else if (selectedPage > maxPage){
+        selectedPage = maxPage;
+    }
+    submit(selectedPage);
+}
+
 function submit(page) {
     var form = document.getElementById('searchAlcoholForm');
     var numberPage = document.getElementById('sortTypeSelector').value;

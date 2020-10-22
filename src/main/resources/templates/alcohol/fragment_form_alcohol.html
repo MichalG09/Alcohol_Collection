@@ -14,7 +14,7 @@
     <div class="form-group">
         <label for="insertAlcoholCapacity">Objętość butelki*</label>
         <div class="input-group-append">
-            <input type="text" th:field="${alcohol.capacity}" class="form-control" id="insertAlcoholCapacity" placeholder="Pojemność butelki">
+            <input type="number" th:field="${alcohol.capacity}" class="form-control" id="insertAlcoholCapacity" placeholder="Pojemność butelki">
             <span class="input-group-text">ml</span>
         </div>
         <label class="text-danger" th:if="${#fields.hasErrors('alcohol.capacity')}" th:errors="*{alcohol.capacity}"></label>
@@ -22,7 +22,7 @@
     <div class="form-group">
         <label for="insertAlcoholAmount">Zawartość alkoholu*</label>
         <div class="input-group-append">
-            <input type="text" th:field="${alcohol.amountOfAlcohol}" class="form-control" id="insertAlcoholAmount" placeholder="Zawartość alkoholu">
+            <input type="number" th:field="${alcohol.amountOfAlcohol}" class="form-control" id="insertAlcoholAmount" placeholder="Zawartość alkoholu">
             <span class="input-group-text">%</span>
         </div>
         <label class="text-danger" th:if="${#fields.hasErrors('alcohol.amountOfAlcohol')}" th:errors="*{alcohol.amountOfAlcohol}"></label>
