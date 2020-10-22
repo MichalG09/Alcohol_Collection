@@ -90,7 +90,7 @@
             <a th:if="${manufacturer.alcohols.size() > 0}" class="btn btn-secondary mr-1" th:onclick="|showAndHide('showAll' + '${manufacturer.iD}')|" role="button">POKAŻ PRZYPISANE ALKOHOLE</a>
         </div>
         <div th:id="'confirmDelete' + ${manufacturer.iD}" style="display: none;">
-            <pp th:if="${manufacturer.alcohols.size() > 0}" th:text="'Potwierdź usunięcie: ' + ${manufacturer.nameCompany}"></p>
+            <p th:if="${manufacturer.alcohols.size() > 0}" th:text="'Potwierdź usunięcie: ' + ${manufacturer.nameCompany}"></p>
             <div class="clearfix">
                 <button type="button" th:onclick="|showAndHide('confirmDelete${manufacturer.iD}')|" class="btn btn-success">ANULUJ</button>
                 <a th:if="${manufacturer.alcohols.size() < 1}" class="btn btn-danger" th:href="@{/user/manufacturer/delete/} + ${manufacturer.iD}" role="button">USUŃ</a>
