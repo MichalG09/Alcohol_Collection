@@ -47,6 +47,7 @@ public class AddManufacturer {
             manufacturerRepository.save(manufacturer);
         } catch (Exception e){
             redirectAttributes.addFlashAttribute("messageError", isNew ? messageFailAddedManufacturer : messageFailEditedManufacturer);
+            e.printStackTrace();
         }
     }
 

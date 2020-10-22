@@ -1,5 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <nav aria-label="Pagination" th:if="${alcohols.totalPages gt 0}">
+    <div class="row">
+    <div class="col-lg-7">
     <ul class="pagination justify-content-center font-weight-bold">
         <li class="page-item" th:classappend="${alcohols.number eq 0} ? 'disabled'">
             <button class="page-link" th:onclick="|submit('${alcohols.number lt 2 ? 1 : alcohols.number}')|"
@@ -9,7 +11,7 @@
         </li>
         <li class="page-item" th:classappend="${i eq alcohols.number + 1} ? 'active'"
             th:each="i : ${#numbers.sequence( (alcohols.number-1) < 1 ? 1 : alcohols.number-1,
-            (alcohols.number+3) >= alcohols.totalPages ? alcohols.totalPages : alcohols.number+3 , 1)}">
+            (alcohols.number+10) >= alcohols.totalPages ? alcohols.totalPages : alcohols.number+10 , 1)}">
             <button class="page-link" th:text="${i}" th:onclick="|submit('${i}')|"
                     th:title="${'Strona '+ i}" data-toggle="tooltip"></button>
         </li>
@@ -20,5 +22,13 @@
             </button>
         </li>
     </ul>
+    </div>
+        <div class="col-lg-3">
+            <input id="insertPageToShow" type="number" min="1" max="${alcohols.totalPages}" class="form-control" placeholder="Przejdź do strony">
+        </div>
+        <div class="col-lg-2">
+            <button id="buttonSelectPageToShow" class="form-control btn btn-info" th:onclick="|submitInsertPage(${alcohols.totalPages})|">Przejdź</button>
+        </div>
+    </div>
 </nav>
 <p th:text="${'strona: ' + (alcohols.number + 1) + '/' + alcohols.totalPages}"></p>

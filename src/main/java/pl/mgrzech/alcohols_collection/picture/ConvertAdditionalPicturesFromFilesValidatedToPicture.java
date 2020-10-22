@@ -31,9 +31,8 @@ public class ConvertAdditionalPicturesFromFilesValidatedToPicture {
                     try {
                         listPicturesForAlcohol.add(
                                 savePicture.save(pic.getBytes(),
-                                getUniqueName.get(alcohol.getName()),
-                                false,
-                                false)
+                                    getUniqueName.get(alcohol.getName()),
+                                    false, false)
                         );
                     } catch (IOException e) {
                         e.printStackTrace();

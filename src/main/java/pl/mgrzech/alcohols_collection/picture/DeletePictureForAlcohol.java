@@ -53,6 +53,7 @@ public class DeletePictureForAlcohol {
             redirectAttributes.addFlashAttribute("message", messageCorrectDeletedPicture);
         } catch (Exception e){
             redirectAttributes.addFlashAttribute("messageError", messageFailDeletedPicture);
+            e.printStackTrace();
         }
     }
 }

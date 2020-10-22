@@ -30,6 +30,7 @@ public class DeleteProperty {
             redirectAttributes.addFlashAttribute("message", messageCorrectDeleteProperty);
         } catch (Exception e){
             redirectAttributes.addFlashAttribute("messageError", messageFailDeleteProperty);
+            e.printStackTrace();
         }
     }
 }

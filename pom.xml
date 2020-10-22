@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>pl.kolekcjaalkoholi</groupId>
 	<artifactId>alcohols_collection</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<name>alcohols_collection</name>
 	<description>Website about small bottles alcohols collection</description>
 	<packaging>war</packaging>
@@ -119,12 +119,11 @@
 		</dependency>
 		<!-- jboos wildfly
 		for test  comment all dependency
-		for prod scope have to comment-->
+		for prod no comment dependency-->
 		<dependency>
 			<groupId>org.jboss</groupId>
 			<artifactId>jboss-common-core</artifactId>
 			<version>2.5.0.Final</version>
-<!--			<scope>provided</scope>-->
 		</dependency>
 	</dependencies>
 

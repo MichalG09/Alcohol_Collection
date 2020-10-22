@@ -34,6 +34,7 @@ public class AddUser {
             redirectAttributes.addFlashAttribute("message", messageCorrectAddUser);
         } catch (Exception e){
             redirectAttributes.addFlashAttribute("messageError", messageCorrectAddUser);
+            e.printStackTrace();
         }
     }
 }

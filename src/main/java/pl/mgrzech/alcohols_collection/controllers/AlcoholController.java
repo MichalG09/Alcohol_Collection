@@ -10,6 +10,7 @@ import pl.mgrzech.alcohols_collection.alcohol.model.AlcoholToSearch;
 import pl.mgrzech.alcohols_collection.entities.SortType;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller

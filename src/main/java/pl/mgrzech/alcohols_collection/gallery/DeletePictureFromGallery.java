@@ -30,6 +30,7 @@ public class DeletePictureFromGallery {
             redirectAttributes.addFlashAttribute("message", messageCorrectDeletePicture);
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("messageError", messageFailDeletePicture);
+            e.printStackTrace();
         }
     }
 }
