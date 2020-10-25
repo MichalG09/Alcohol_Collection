@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<head th:include="fragments/fragment_head"></head>
+<body>
+<div class="row text-white" id="row">
+    <div class="d-md-none d-lg-block col-lg-2"></div>
+    <div id="mainContainer" class="col-md-12 col-lg-8">
+        <div th:replace="fragments/fragment_top"></div>
+        <div id="content">
+            <div class="row">
+                <div class="d-md-none d-lg-block col-lg-1"></div>
+                <div class="p-5 col-md-12 col-lg-10">
+                    <table class="table text-white">
+                        <tr>
+                            <td>Miejsce w kolekcji</td>
+                            <td>Ilość buteleczek</td>
+                            <td>Funkcje</td>
+                        </tr>
+                        <tr th:each="statisticForPlace : ${statisticsForPlacesInStorage}">
+                            <td th:text="${statisticForPlace.key}"></td>
+                            <td th:text="${statisticsForPlacesInStorage.get(statisticForPlace.key)}"></td>
+                            <td>
+                                <a class="btn btn-secondary mr-1 mt-1" th:href="@{/user/statistic/InOnePlace/} + ${statisticForPlace.key}" role="button">POKAŻ WSZYSTKIE</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="d-md-none d-lg-block col-lg-1"></div>
+            </div>
+        </div>
+        <div th:replace="fragments/fragment_bottom"></div>
+    </div>
+    <div class="d-md-none d-lg-block col-lg-2">
+        <div th:replace="fragments/fragment_logout"></div>
+    </div>
+</div>
+<script th:src="@{/js/my_js_function.js}"></script>
+</body>
+</html>

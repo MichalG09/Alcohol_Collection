@@ -38,7 +38,7 @@ public class FindAlcohol {
     public Page<Alcohol> findAllAlcoholsForFirstPage() {
         return alcoholRepository.findAll(
                 PageRequest.of(0,
-                        Integer.parseInt(findProperty.findByName("startNumberAlcoholsInOnePage").get(0)),
+                        findProperty.findBasicNumberAlcoholsInOnePage(),
                         Sort.by("name").ascending()));
     }
 

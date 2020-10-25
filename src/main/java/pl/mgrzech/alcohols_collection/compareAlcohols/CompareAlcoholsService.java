@@ -2,6 +2,9 @@ package pl.mgrzech.alcohols_collection.compareAlcohols;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import pl.mgrzech.alcohols_collection.alcohol.AlcoholService;
+import pl.mgrzech.alcohols_collection.alcohol.model.AlcoholToSearch;
 import pl.mgrzech.alcohols_collection.entities.Alcohol;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +18,7 @@ public class CompareAlcoholsService {
     private final GetAlcoholsToCompareFromCookie getAlcoholsToCompareFromCookie;
     private final DeleteAlcoholFromCompareList deleteAlcoholFromCompareList;
     private final AddAlcoholToCompareList addAlcoholToCompareList;
+    private final AlcoholService alcoholService;
 
     /**
      * Methods prepares alcohol chosen to prepare (saved in cookie).
@@ -43,9 +47,9 @@ public class CompareAlcoholsService {
      * @param id id alcohol add to compare
      * @param request request
      * @param response response
-     * @return list all alcohol id selected to compare from new cookie
      */
-    public List<String> addAlcoholToCompareList(int id, HttpServletRequest request, HttpServletResponse response) {
-        return addAlcoholToCompareList.add(id, request, response);
+    public void addAlcoholToCompareList(Model model, int id, HttpServletRequest request, HttpServletResponse response, AlcoholToSearch alcoholToSearch, int page, String sortBy, int numberAlcoholInOnePage) {
+        model.addAttribute("listAlcoholsToCompare", addAlcoholToCompareList.add(id, request, response));
+        alcoholService.prepareInformationAfterSearchAlcohol(model, alcoholToSearch, page, sortBy, numberAlcoholInOnePage);
     }
 }

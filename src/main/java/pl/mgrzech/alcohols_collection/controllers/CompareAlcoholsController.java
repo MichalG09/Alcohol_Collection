@@ -80,15 +80,15 @@ public class CompareAlcoholsController {
                                       Model model,
                                       HttpServletRequest request,
                                       HttpServletResponse response){
-        model.addAttribute("alcoholToSearch", alcoholToSearch);
-        model.addAttribute("alcohols", alcoholService.findSearchingAlcohols(
+        compareAlcoholsService.addAlcoholToCompareList(
+                model,
+                id,
+                request,
+                response,
                 alcoholToSearch,
                 page + 1,
                 sortBy,
-                Integer.parseInt(numberAlcoholInOnePage.trim())));
-        model.addAttribute("sortBy", sortBy);
-        model.addAttribute("numberAlcoholInOnePage", numberAlcoholInOnePage);
-        model.addAttribute("listAlcoholsToCompare", compareAlcoholsService.addAlcoholToCompareList(id, request, response));
+                Integer.parseInt(numberAlcoholInOnePage.trim()));
         return "alcohol/all_alcohols";
     }
 
