@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.json.JSONArray;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mgrzech.alcohols_collection.acceptedCookie.CheckAcceptedCookie;
 import pl.mgrzech.alcohols_collection.alcohol.model.AlcoholToSearch;
@@ -68,10 +69,29 @@ public class AlcoholService {
      * @param page number page to show
      * @param sortBy sort result list by
      * @param numberAlcoholInOnePage parameter number alcohol in one page
-     * @return list alcohols meet the conditions
      */
-    public Page<Alcohol> findSearchingAlcohols(AlcoholToSearch alcoholToSearch, int page, String sortBy, int numberAlcoholInOnePage) {
-        return findAlcohol.getSearchingAlcohols(alcoholToSearch, page, sortBy, numberAlcoholInOnePage);
+    public void findSearchingAlcohols(Model model, HttpServletRequest request,
+                                      AlcoholToSearch alcoholToSearch, int page,
+                                      String sortBy, int numberAlcoholInOnePage) {
+        prepareInformationAfterSearchAlcohol(model, alcoholToSearch, page, sortBy, numberAlcoholInOnePage);
+        model.addAttribute("listAlcoholsToCompare", getListAlcoholsToCompare(request));
+    }
+
+    /**
+     * Method prepares model to show information after search alcohols.
+     * @param model model
+     * @param alcoholToSearch alcohol with parameters to search
+     * @param page page
+     * @param sortBy type sort
+     * @param numberAlcoholInOnePage number alcohol in one page
+     */
+    public void prepareInformationAfterSearchAlcohol(Model model, AlcoholToSearch alcoholToSearch,
+                                                     int page, String sortBy, int numberAlcoholInOnePage ){
+        model.addAttribute("alcoholToSearch", alcoholToSearch);
+        model.addAttribute("alcohols", findAlcohol.getSearchingAlcohols(alcoholToSearch, page,
+                sortBy, numberAlcoholInOnePage));
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("numberAlcoholInOnePage", numberAlcoholInOnePage);
     }
 
     /**

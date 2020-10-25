@@ -6,9 +6,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class AlcoholsCollectionApplication
-		extends SpringBootServletInitializer
-{
+public class AlcoholsCollectionApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AlcoholsCollectionApplication.class, args);

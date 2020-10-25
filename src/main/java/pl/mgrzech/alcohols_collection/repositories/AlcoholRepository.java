@@ -5,8 +5,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import pl.mgrzech.alcohols_collection.entities.Alcohol;
+import pl.mgrzech.alcohols_collection.entities.Newsletter;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AlcoholRepository extends PagingAndSortingRepository<Alcohol, Integer> {
 
@@ -36,4 +38,6 @@ public interface AlcoholRepository extends PagingAndSortingRepository<Alcohol, I
     Page<Alcohol> searchAlcoholsOrderByManufacturer(String name, String type, int amountOfAlcoholMin,
                                                     int amountOfAlcoholMax, int capacityMin, int capacityMax, String placeInStorage,
                                                     String nameCompany, String sortBy, String sortType,PageRequest pageRequest);
+
+    int countByPlaceInStorage(String placeInStorage);
 }

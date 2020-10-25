@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.mgrzech.alcohols_collection.alcohol.*;
+import pl.mgrzech.alcohols_collection.compareAlcohols.GetListAlcoholsIdToCompare;
 import pl.mgrzech.alcohols_collection.entities.Alcohol;
 import pl.mgrzech.alcohols_collection.alcohol.model.AlcoholToSearch;
 import pl.mgrzech.alcohols_collection.entities.SortType;
@@ -19,6 +20,7 @@ import java.util.List;
 public class AlcoholController {
 
     private final AlcoholService alcoholService;
+    private final GetListAlcoholsIdToCompare getListAlcoholsIdToCompare;
 
     /**
      * Method loads first page of all alcohol.
@@ -66,15 +68,13 @@ public class AlcoholController {
                                 @ModelAttribute("alcoholToSearch") AlcoholToSearch alcoholToSearch,
                                 Model model,
                                 HttpServletRequest request){
-        model.addAttribute("alcoholToSearch", alcoholToSearch);
-        model.addAttribute("alcohols", alcoholService.findSearchingAlcohols(
+        alcoholService.findSearchingAlcohols(
+                model,
+                request,
                 alcoholToSearch,
                 page,
                 sortBy,
-                Integer.parseInt(numberAlcoholInOnePage.trim())));
-        model.addAttribute("sortBy", sortBy);
-        model.addAttribute("numberAlcoholInOnePage", numberAlcoholInOnePage);
-        model.addAttribute("listAlcoholsToCompare", alcoholService.getListAlcoholsToCompare(request));
+                Integer.parseInt(numberAlcoholInOnePage.trim()));
         return "alcohol/all_alcohols";
     }
 

@@ -8,12 +8,18 @@
         <div th:replace="fragments/fragment_top"></div>
         <div id="content">
             <div class="row">
-                <div class="d-md-none d-lg-block col-lg-2"></div>
-                <div class="border border-light p-5 col-md-12 col-lg-8 darkBackground">
+                <div class="d-md-none d-lg-block col-lg-1"></div>
+                <div class="col-md-12 col-lg-9 darkBackground">
                     <div th:include="fragments/fragment_alarm"></div>
                     <p th:utext="${welcomeText.valueProperties}"></p>
                 </div>
-                <div class="d-md-none d-lg-block col-lg-2"></div>
+                <div class="pt-3 d-md-none d-lg-block col-lg-2 darkBackground border-left border-light">
+                    <h4>Statystyki</h4>
+                    <p>Ilość buteleczek w kolekcji</p>
+                    <h4 th:utext="${numberAllAlcohols}"></h4>
+                    <p>Ilość producentów</p>
+                    <h4 th:utext="${numberAllManufacturers}"></h4>
+                </div>
             </div>
         </div>
         <div class="col-xl-12">

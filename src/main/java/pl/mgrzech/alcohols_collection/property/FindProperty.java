@@ -59,4 +59,12 @@ public class FindProperty {
                     .collect(Collectors.toList()))
                 .orElseGet(ArrayList::new);
     }
+
+    /**
+     * Method return basic (default) number alcohols in one page.
+     * @return number alcohols in one page.
+     */
+    public Integer findBasicNumberAlcoholsInOnePage() {
+        return Integer.parseInt(findByName("startNumberAlcoholsInOnePage").get(0));
+    }
 }
