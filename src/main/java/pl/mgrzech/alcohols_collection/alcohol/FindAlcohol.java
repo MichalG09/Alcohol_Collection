@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 import pl.mgrzech.alcohols_collection.entities.Alcohol;
 import pl.mgrzech.alcohols_collection.alcohol.model.AlcoholToSearch;
 import pl.mgrzech.alcohols_collection.repositories.AlcoholRepository;

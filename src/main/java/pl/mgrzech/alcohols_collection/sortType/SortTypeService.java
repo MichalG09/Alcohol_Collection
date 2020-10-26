@@ -6,8 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mgrzech.alcohols_collection.entities.SortType;
 
-import java.util.List;
-
 @Service
 @AllArgsConstructor
 public class SortTypeService {

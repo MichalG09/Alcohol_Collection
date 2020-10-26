@@ -1,13 +1,9 @@
 package pl.mgrzech.alcohols_collection.newsletter;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 import pl.mgrzech.alcohols_collection.entities.Newsletter;
 import pl.mgrzech.alcohols_collection.repositories.NewsletterRepository;
-
-import java.util.Optional;
 
 @Component
 @AllArgsConstructor

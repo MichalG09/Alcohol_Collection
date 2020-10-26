@@ -5,11 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import pl.mgrzech.alcohols_collection.alcohol.AlcoholService;
 import pl.mgrzech.alcohols_collection.alcohol.model.AlcoholToSearch;
-import pl.mgrzech.alcohols_collection.entities.Alcohol;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @Service
 @AllArgsConstructor

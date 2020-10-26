@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
-import pl.mgrzech.alcohols_collection.validations.file_validation.FilesConstraint;
 
 import java.util.List;
 

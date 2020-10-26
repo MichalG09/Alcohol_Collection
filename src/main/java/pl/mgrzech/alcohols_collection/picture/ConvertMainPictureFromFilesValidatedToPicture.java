@@ -8,7 +8,6 @@ import pl.mgrzech.alcohols_collection.repositories.PicturesRepository;
 import pl.mgrzech.alcohols_collection.validations.file_validation.FilesValidated;
 
 import java.io.IOException;
-import java.util.Optional;
 
 @Component("ConvertMainPictureFromFilesValidatedToPictureImpl")
 @AllArgsConstructor
