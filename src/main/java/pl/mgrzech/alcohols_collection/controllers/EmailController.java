@@ -1,12 +1,9 @@
 package pl.mgrzech.alcohols_collection.controllers;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import pl.mgrzech.alcohols_collection.email.EmailService;
-import pl.mgrzech.alcohols_collection.email.SendTestEmail;
 
 @Controller
 @AllArgsConstructor

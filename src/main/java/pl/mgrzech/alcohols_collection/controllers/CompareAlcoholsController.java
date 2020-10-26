@@ -4,17 +4,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.mgrzech.alcohols_collection.acceptedCookie.CheckAcceptedCookie;
 import pl.mgrzech.alcohols_collection.alcohol.AlcoholService;
-import pl.mgrzech.alcohols_collection.alcohol.FindAlcohol;
 import pl.mgrzech.alcohols_collection.alcohol.model.AlcoholToSearch;
-import pl.mgrzech.alcohols_collection.compareAlcohols.AddAlcoholToCompareList;
 import pl.mgrzech.alcohols_collection.compareAlcohols.CompareAlcoholsService;
-import pl.mgrzech.alcohols_collection.compareAlcohols.DeleteAlcoholFromCompareList;
-import pl.mgrzech.alcohols_collection.compareAlcohols.GetAlcoholsToCompareFromCookie;
 import pl.mgrzech.alcohols_collection.entities.SortType;
-import pl.mgrzech.alcohols_collection.property.FindProperty;
-import pl.mgrzech.alcohols_collection.sortType.FindSortType;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +29,7 @@ public class CompareAlcoholsController {
     @GetMapping("/compare")
     public String showAlcoholsInCompare(HttpServletRequest request,
                                         Model model){
-        model.addAttribute("alcohols", compareAlcoholsService.getAlcoholsToCompareFromCookie(request));
+        compareAlcoholsService.getAlcoholsToCompareFromCookie(model, request);
         return "alcohol/compare_alcohols";
     }
 
@@ -53,7 +46,7 @@ public class CompareAlcoholsController {
                                            Model model,
                                            HttpServletRequest request,
                                            HttpServletResponse response){
-        model.addAttribute("alcohols", compareAlcoholsService.deleteAlcoholFromCompare(id, request, response));
+        compareAlcoholsService.deleteAlcoholFromCompare(model, id, request, response);
         return "redirect:/alcohol/compare";
     }
 

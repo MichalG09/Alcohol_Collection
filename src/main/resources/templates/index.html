@@ -9,7 +9,7 @@
         <div id="content">
             <div class="row">
                 <div class="d-md-none d-lg-block col-lg-1"></div>
-                <div class="col-md-12 col-lg-9 darkBackground">
+                <div class="col-md-12 col-lg-8 darkBackground">
                     <div th:include="fragments/fragment_alarm"></div>
                     <p th:utext="${welcomeText.valueProperties}"></p>
                 </div>
@@ -20,6 +20,7 @@
                     <p>Ilość producentów</p>
                     <h4 th:utext="${numberAllManufacturers}"></h4>
                 </div>
+                <div class="d-md-none d-lg-block col-lg-1"></div>
             </div>
         </div>
         <div class="col-xl-12">

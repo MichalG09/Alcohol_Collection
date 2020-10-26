@@ -2,6 +2,7 @@ package pl.mgrzech.alcohols_collection.property;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mgrzech.alcohols_collection.entities.Property;
 
@@ -28,19 +29,17 @@ public class PropertyService {
 
     /**
      * Method returns all properties.
-     * @return all properties
      */
-    public Iterable<Property> findAllProperties() {
-        return findProperty.findAll();
+    public void findAllProperties(Model model) {
+        model.addAttribute("properties", findProperty.findAll());
     }
 
     /**
      * Method returns property by Id.
      * @param id id property to find
-     * @return found property
      */
-    public Property findPropertyById(int id) {
-        return findProperty.findById(id);
+    public void findPropertyById(Model model, int id) {
+        model.addAttribute("property", findProperty.findById(id));
     }
 
     /**
@@ -54,9 +53,8 @@ public class PropertyService {
 
     /**
      * Method returns welcome text from property.
-     * @return property with welcome text
      */
-    public Property getPropertyWithWelcomeText() {
-        return findProperty.findWelcomeTextFromProperty();
+    public void getPropertyWithWelcomeText(Model model) {
+        model.addAttribute("welcomeText", findProperty.findWelcomeTextFromProperty());
     }
 }

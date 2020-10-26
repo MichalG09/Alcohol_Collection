@@ -6,17 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import pl.mgrzech.alcohols_collection.entities.Newsletter;
-import pl.mgrzech.alcohols_collection.property.FindProperty;
-import pl.mgrzech.alcohols_collection.statistics.StatisticAlcohol;
-import pl.mgrzech.alcohols_collection.statistics.StatisticsManufacturer;
+import pl.mgrzech.alcohols_collection.startPage.StartPageService;
 
 @Controller
 @AllArgsConstructor
 public class StartPageController {
 
-    private final FindProperty findProperty;
-    private final StatisticAlcohol statisticAlcohol;
-    private final StatisticsManufacturer statisticsManufacturer;
+    private final StartPageService startPageService;
 
     /**
      * Method shows start page. Start page shows welcome text, and visitor can save to newsletter
@@ -27,9 +23,7 @@ public class StartPageController {
     @GetMapping(value = {"", "/", "/start"})
     public String start(@ModelAttribute Newsletter newsletter,
                         Model model) {
-        model.addAttribute("welcomeText", findProperty.findWelcomeTextFromProperty());
-        model.addAttribute("numberAllAlcohols", statisticAlcohol.getStatisticForNumbersAlcoholsInCollection());
-        model.addAttribute("numberAllManufacturers", statisticsManufacturer.getStatisticForNumbersManufacturersInCollection());
+        startPageService.startPage(model);
         return "index";
     }
 }
