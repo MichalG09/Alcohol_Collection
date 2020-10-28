@@ -45,7 +45,7 @@ public class NewsletterController {
      */
     @GetMapping("/user/showAllNewsletter")
     public String showAllPositionsInNewsletter(Model model){
-        model.addAttribute("newsletters", newsletterService.findAllNewsletters());
+        newsletterService.findAllNewsletters(model);
         return "newsletter/all_newsletter";
     }
 
@@ -73,9 +73,7 @@ public class NewsletterController {
     @GetMapping("/delete/newsletter/{code}")
     public String deleteNewsletterMethodGet(@PathVariable("code") int code,
                                             Model model) {
-        Newsletter newsletter = newsletterService.findNewsletterToDeleteByUniqueCode(code);
-        model.addAttribute("idNewsletter", newsletter.getId());
-        model.addAttribute("nameNewsletter", newsletter.getName());
+        newsletterService.findNewsletterToDeleteByUniqueCode(model, code);
         return "newsletter/confirm_delete_newsletter";
     }
 

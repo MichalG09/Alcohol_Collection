@@ -5,12 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.mgrzech.alcohols_collection.alcohol.*;
-import pl.mgrzech.alcohols_collection.entities.Alcohol;
 import pl.mgrzech.alcohols_collection.alcohol.model.AlcoholToSearch;
 import pl.mgrzech.alcohols_collection.entities.SortType;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -28,11 +26,7 @@ public class AlcoholController {
      */
     @GetMapping("/all")
     public String allAlcohols(Model model, HttpServletRequest request){
-        model.addAttribute("alcoholToSearch", new AlcoholToSearch());
-        model.addAttribute("alcohols", alcoholService.findAllAlcoholsForFirstPage());
-        model.addAttribute("sortBy", "");
-        model.addAttribute("numberAlcoholInOnePage", "");
-        model.addAttribute("listAlcoholsToCompare", alcoholService.getListAlcoholsToCompare(request));
+        alcoholService.findAllAlcoholsForFirstPage(model, request);
         return "alcohol/all_alcohols";
     }
 
@@ -45,12 +39,12 @@ public class AlcoholController {
     @GetMapping("/detail/{id}")
     public String detailOneAlcohol(@PathVariable("id") int id,
                                    Model model){
-        model.addAttribute("alcohol", alcoholService.findAlcoholById(id));
+        alcoholService.findAlcoholByIdToShowAllDetail(model, id);
         return "alcohol/detail_one_alcohol";
     }
 
     /**
-     * Method load all alcohol filtered and sorted by parameters from form.
+     * Method loads all alcohol filtered and sorted by parameters from form.
      * @param page number page to show
      * @param numberAlcoholInOnePage number alcohol to shoe in one page
      * @param sortBy type sort of results
@@ -66,15 +60,13 @@ public class AlcoholController {
                                 @ModelAttribute("alcoholToSearch") AlcoholToSearch alcoholToSearch,
                                 Model model,
                                 HttpServletRequest request){
-        model.addAttribute("alcoholToSearch", alcoholToSearch);
-        model.addAttribute("alcohols", alcoholService.findSearchingAlcohols(
+        alcoholService.findSearchingAlcohols(
+                model,
+                request,
                 alcoholToSearch,
                 page,
                 sortBy,
-                Integer.parseInt(numberAlcoholInOnePage.trim())));
-        model.addAttribute("sortBy", sortBy);
-        model.addAttribute("numberAlcoholInOnePage", numberAlcoholInOnePage);
-        model.addAttribute("listAlcoholsToCompare", alcoholService.getListAlcoholsToCompare(request));
+                Integer.parseInt(numberAlcoholInOnePage.trim()));
         return "alcohol/all_alcohols";
     }
 
@@ -90,8 +82,7 @@ public class AlcoholController {
     public String showOnePictureForAlcohol(@PathVariable("idAlcohol") int idAlcohol,
                                            @PathVariable("idPicture") int idPicture,
                                            Model model){
-        model.addAttribute("picture", alcoholService.findPicture(idPicture));
-        model.addAttribute("idAlcohol", idAlcohol);
+        alcoholService.findPicture(model, idPicture, idAlcohol);
         return "alcohol/alcohol_big_picture";
     }
 

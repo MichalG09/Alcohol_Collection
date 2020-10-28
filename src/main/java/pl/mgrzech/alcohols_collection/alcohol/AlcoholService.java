@@ -2,15 +2,14 @@ package pl.mgrzech.alcohols_collection.alcohol;
 
 import lombok.AllArgsConstructor;
 import org.json.JSONArray;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mgrzech.alcohols_collection.acceptedCookie.CheckAcceptedCookie;
 import pl.mgrzech.alcohols_collection.alcohol.model.AlcoholToSearch;
 import pl.mgrzech.alcohols_collection.compareAlcohols.GetListAlcoholsIdToCompare;
 import pl.mgrzech.alcohols_collection.entities.Alcohol;
 import pl.mgrzech.alcohols_collection.entities.Manufacturer;
-import pl.mgrzech.alcohols_collection.entities.Picture;
 import pl.mgrzech.alcohols_collection.entities.SortType;
 import pl.mgrzech.alcohols_collection.manufacturer.FindAllManufacturersInJSON;
 import pl.mgrzech.alcohols_collection.picture.FindPicture;
@@ -38,10 +37,13 @@ public class AlcoholService {
 
     /**
      * Method returns all alcohols for first page collection.
-     * @return list of all alcohols for first page collection
      */
-    public Page<Alcohol> findAllAlcoholsForFirstPage(){
-        return findAlcohol.findAllAlcoholsForFirstPage();
+    public void findAllAlcoholsForFirstPage(Model model, HttpServletRequest request){
+        model.addAttribute("alcoholToSearch", new AlcoholToSearch());
+        model.addAttribute("alcohols", findAlcohol.findAllAlcoholsForFirstPage());
+        model.addAttribute("sortBy", "");
+        model.addAttribute("numberAlcoholInOnePage", "");
+        model.addAttribute("listAlcoholsToCompare", getListAlcoholsToCompare(request));
     }
 
     /**
@@ -56,10 +58,21 @@ public class AlcoholService {
     /**
      * Method returns alcohol by id
      * @param id alcohol id to find
-     * @return found alcohol
      */
-    public Alcohol findAlcoholById(int id){
-        return findAlcohol.findById(id);
+    public void findAlcoholByIdToShowAllDetail(Model model, int id){
+        Alcohol alcohol = findAlcoholById(model, id);
+        model.addAttribute("manufacturer", alcohol.getManufacturer());
+        model.addAttribute("file", new FilesValidated());
+    }
+
+    /**
+     * Method returns alcohol by id
+     * @param id alcohol id to find
+     */
+    public Alcohol findAlcoholById(Model model, int id){
+        Alcohol alcohol = findAlcohol.findById(id);
+        model.addAttribute("alcohol", alcohol);
+        return alcohol;
     }
 
     /**
@@ -68,10 +81,29 @@ public class AlcoholService {
      * @param page number page to show
      * @param sortBy sort result list by
      * @param numberAlcoholInOnePage parameter number alcohol in one page
-     * @return list alcohols meet the conditions
      */
-    public Page<Alcohol> findSearchingAlcohols(AlcoholToSearch alcoholToSearch, int page, String sortBy, int numberAlcoholInOnePage) {
-        return findAlcohol.getSearchingAlcohols(alcoholToSearch, page, sortBy, numberAlcoholInOnePage);
+    public void findSearchingAlcohols(Model model, HttpServletRequest request,
+                                      AlcoholToSearch alcoholToSearch, int page,
+                                      String sortBy, int numberAlcoholInOnePage) {
+        prepareInformationAfterSearchAlcohol(model, alcoholToSearch, page, sortBy, numberAlcoholInOnePage);
+        model.addAttribute("listAlcoholsToCompare", getListAlcoholsToCompare(request));
+    }
+
+    /**
+     * Method prepares model to show information after search alcohols.
+     * @param model model
+     * @param alcoholToSearch alcohol with parameters to search
+     * @param page page
+     * @param sortBy type sort
+     * @param numberAlcoholInOnePage number alcohol in one page
+     */
+    public void prepareInformationAfterSearchAlcohol(Model model, AlcoholToSearch alcoholToSearch,
+                                                     int page, String sortBy, int numberAlcoholInOnePage ){
+        model.addAttribute("alcoholToSearch", alcoholToSearch);
+        model.addAttribute("alcohols", findAlcohol.getSearchingAlcohols(alcoholToSearch, page,
+                sortBy, numberAlcoholInOnePage));
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("numberAlcoholInOnePage", numberAlcoholInOnePage);
     }
 
     /**
@@ -156,10 +188,10 @@ public class AlcoholService {
     /**
      * Method returns picture by id.
      * @param idPicture picture id to find
-     * @return found picture
      */
-    public Picture findPicture(int idPicture) {
-        return findPicture.findById(idPicture);
+    public void findPicture(Model model, int idPicture, int idAlcohol) {
+        model.addAttribute("picture", findPicture.findById(idPicture));
+        model.addAttribute("idAlcohol", idAlcohol);
     }
 }
 

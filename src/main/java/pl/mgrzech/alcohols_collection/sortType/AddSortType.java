@@ -28,7 +28,7 @@ public class AddSortType {
         try{
             sortTypeRepository.save(sortType);
             redirectAttributes.addFlashAttribute("message", messageCorrectAddSortType);
-        }catch (Exception e){
+        } catch (Exception e){
             redirectAttributes.addFlashAttribute("messageError", messageFailAddSortType);
         }
     }

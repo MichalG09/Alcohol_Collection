@@ -6,10 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.mgrzech.alcohols_collection.user.AddUser;
-import pl.mgrzech.alcohols_collection.user.DeleteUser;
 import pl.mgrzech.alcohols_collection.entities.User;
-import pl.mgrzech.alcohols_collection.user.FindUser;
 import pl.mgrzech.alcohols_collection.user.UserService;
 
 import javax.validation.Valid;
@@ -20,10 +17,6 @@ import javax.validation.Valid;
 @Controller
 @AllArgsConstructor
 public class UserController {
-
-    private final AddUser addUser;
-    private final FindUser findUser;
-    private final DeleteUser deleteUser;
 
     private final UserService userService;
 
@@ -62,7 +55,7 @@ public class UserController {
      */
     @GetMapping("/admin/user/all")
     public String allUsers(Model model){
-        model.addAttribute("users", userService.findAllUser());
+        userService.findAllUser(model);
         return "user/all_users";
     }
 
@@ -77,7 +70,7 @@ public class UserController {
     public String editSortTypeMethodGet(@PathVariable("id") int id,
                                         @ModelAttribute("user") User user,
                                         Model model){
-        model.addAttribute("user", userService.findUserById(id));
+        userService.findUserById(model, id);
         return "user/add_user";
     }
 

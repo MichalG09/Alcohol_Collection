@@ -115,16 +115,16 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
+<!--			<scope>provided</scope>-->
 		</dependency>
 		<!-- jboos wildfly
 		for test  comment all dependency
-		for prod no comment dependency-->
+		for prod no comment dependency
 		<dependency>
 			<groupId>org.jboss</groupId>
 			<artifactId>jboss-common-core</artifactId>
 			<version>2.5.0.Final</version>
-		</dependency>
+		</dependency>-->
 	</dependencies>
 
 	<build>

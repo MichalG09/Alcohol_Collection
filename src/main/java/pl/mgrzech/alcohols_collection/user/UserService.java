@@ -2,6 +2,7 @@ package pl.mgrzech.alcohols_collection.user;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mgrzech.alcohols_collection.entities.User;
 
@@ -24,19 +25,17 @@ public class UserService {
 
     /**
      * Method returns all users.
-     * @return list all users
      */
-    public Iterable<User> findAllUser() {
-        return findUser.findAll();
+    public void findAllUser(Model model) {
+        model.addAttribute("users", findUser.findAll());
     }
 
     /**
      * Method returns user by Id.
      * @param id id user to find
-     * @return found user
      */
-    public User findUserById(int id) {
-        return findUser.findById(id);
+    public void findUserById(Model model, int id) {
+        model.addAttribute("user", findUser.findById(id));
     }
 
     /**

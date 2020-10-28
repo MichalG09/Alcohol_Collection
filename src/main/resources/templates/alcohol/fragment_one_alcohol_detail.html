@@ -6,7 +6,6 @@
                 <div class="mb-2">
                     <a th:href="@{/alcohol/picture/} + ${alcohol.id} + @{/} + ${picture.id}"  style="text-decoration: none;">
                         <img class="picture" th:src="|data:image/png;base64,${picture.getPictureInBase64()}|"/>
-<!--                        width="400" height="500"-->
                     </a>
                 </div>
             </div>

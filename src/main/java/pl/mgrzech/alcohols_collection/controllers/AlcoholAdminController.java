@@ -2,18 +2,14 @@ package pl.mgrzech.alcohols_collection.controllers;
 
 import lombok.AllArgsConstructor;
 import org.json.JSONArray;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.mgrzech.alcohols_collection.alcohol.*;
 import pl.mgrzech.alcohols_collection.entities.Alcohol;
-import pl.mgrzech.alcohols_collection.manufacturer.FindAllManufacturersInJSON;
 import pl.mgrzech.alcohols_collection.entities.Manufacturer;
-import pl.mgrzech.alcohols_collection.property.FindProperty;
 import pl.mgrzech.alcohols_collection.validations.file_validation.FilesValidated;
 
 import javax.validation.Valid;
@@ -45,6 +41,7 @@ public class AlcoholAdminController {
 
     /**
      * Method saves a edited or new alcohol.
+     * Method validates inserted values. If not validated returns to view add alcohol.
      * @param alcohol edited or new alcohol
      * @param resultAlcohol validations alcohol
      * @param manufacturer manufacturer for edited or new alcohol
@@ -66,17 +63,15 @@ public class AlcoholAdminController {
                 (resultFileValidated.hasErrors() && (alcohol.getPictures() == null || alcohol.getPictures().isEmpty()))) {
             return "alcohol/add_alcohol";
         }
-        alcoholService.editOrAddNewAlcoholWithManufacturer(alcohol,
-                alcohol.getManufacturer(),
-                manufacturer,
-                filesValidated,
-                redirectAttributes);
+        alcoholService.editOrAddNewAlcoholWithManufacturer(alcohol, alcohol.getManufacturer(),
+                manufacturer, filesValidated, redirectAttributes);
         return "redirect:/user";
     }
 
     /**
      * Method deletes alcohol by Id.
      * @param id id alcohol to delete
+     * @param redirectAttributes redirect attributes
      * @return redirect to user view if delete alcohol is done
      */
     @GetMapping("/delete/{id}")
@@ -89,20 +84,13 @@ public class AlcoholAdminController {
     /**
      * Method prepares chosen alcohol to edit.
      * @param id id alcohol to edit
-     * @param alcohol alcohol to edit, loaded from database
-     * @param manufacturer manufacturer for edited alcohol
      * @param model model
      * @return name of the running html file for edit alcohol
      */
     @GetMapping("/edit/{id}")
     public String editAlcoholMethodPost(@PathVariable("id") int id,
-                                        @ModelAttribute Alcohol alcohol,
-                                        @ModelAttribute Manufacturer manufacturer,
                                         Model model){
-        alcohol = alcoholService.findAlcoholById(id);
-        model.addAttribute("alcohol", alcohol);
-        model.addAttribute("manufacturer", alcohol.getManufacturer());
-        model.addAttribute("file", new FilesValidated());
+        alcoholService.findAlcoholById(model, id);
         return "alcohol/add_alcohol";
     }
 

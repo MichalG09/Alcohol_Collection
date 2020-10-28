@@ -7,9 +7,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mgrzech.alcohols_collection.entities.SortType;
-import pl.mgrzech.alcohols_collection.sortType.AddSortType;
-import pl.mgrzech.alcohols_collection.sortType.DeleteSortType;
-import pl.mgrzech.alcohols_collection.sortType.FindSortType;
 import pl.mgrzech.alcohols_collection.sortType.SortTypeService;
 
 import javax.validation.Valid;
@@ -59,7 +56,7 @@ public class SortTypeController {
      */
     @GetMapping("/sortType/all")
     public String allSortType(Model model){
-        model.addAttribute("sortTypes", sortTypeService.findAllSortType());
+        sortTypeService.findAllSortType(model);
         return "sortType/all_sort_type";
     }
 
@@ -74,7 +71,7 @@ public class SortTypeController {
     public String editSortTypeMethodGet(@PathVariable("id") int id,
                                         @ModelAttribute("sortType") SortType sortType,
                                         Model model){
-        model.addAttribute("sortType", sortTypeService.findSortTypeById(id));
+        sortTypeService.findSortTypeById(model, id);
         return "sortType/add_sort_type";
     }
 

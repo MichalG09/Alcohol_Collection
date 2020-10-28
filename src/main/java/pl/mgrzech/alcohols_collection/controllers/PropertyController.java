@@ -56,7 +56,7 @@ public class PropertyController {
      */
     @GetMapping("/admin/property/all")
     public String allProperty(Model model){
-        model.addAttribute("properties", propertyService.findAllProperties());
+        propertyService.findAllProperties(model);
         return "property/all_properties";
     }
 
@@ -71,7 +71,7 @@ public class PropertyController {
     public String editPropertyMethodGet(@PathVariable("id") int id,
                                         @ModelAttribute("property") Property property,
                                         Model model){
-        model.addAttribute("property", propertyService.findPropertyById(id));
+        propertyService.findPropertyById(model, id);
         return "property/add_property";
     }
 
@@ -95,7 +95,7 @@ public class PropertyController {
      */
     @GetMapping("/user/welcomeEdit")
     public String editWelcomeTextMethodGet(Model model){
-        model.addAttribute("welcomeText", propertyService.getPropertyWithWelcomeText());
+        propertyService.getPropertyWithWelcomeText(model);
         return "property/edit_welcome_text";
     }
 

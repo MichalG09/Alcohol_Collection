@@ -3,7 +3,6 @@ package pl.mgrzech.alcohols_collection.newsletter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mgrzech.alcohols_collection.email.SendEmailAfterSubscribedNewsletter;
 import pl.mgrzech.alcohols_collection.email.SendEmailToAdminWithNewNewsletter;
@@ -16,7 +15,6 @@ import pl.mgrzech.alcohols_collection.property.FindProperty;
 public class AddNewNewsletter {
 
     private final NewsletterRepository newsletterRepository;
-    private final FindProperty findProperty;
     private final SendEmailToAdminWithNewNewsletter sendEmailToAdminWithNewNewsletter;
     private final SendEmailAfterSubscribedNewsletter sendEmailAfterSubscribedNewsletter;
     private final GenerateUniqueUnsubscribeCode generateUniqueUnsubscribeCode;

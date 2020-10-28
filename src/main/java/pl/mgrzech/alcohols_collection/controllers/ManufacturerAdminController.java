@@ -57,7 +57,7 @@ public class ManufacturerAdminController {
     public String editManufacturer(@PathVariable("id") int id,
                                       @ModelAttribute("manufacturer") Manufacturer manufacturer,
                                       Model model){
-        model.addAttribute("manufacturer", manufacturerService.findManufacturerById(id));
+        manufacturerService.findManufacturerById(model, id);
         return "manufacturer/add_manufacturer";
     }
 
@@ -69,7 +69,7 @@ public class ManufacturerAdminController {
     @GetMapping("all")
     public String allManufacturers(@ModelAttribute("manufacturer") Manufacturer manufacturer,
                                    Model model){
-        model.addAttribute("manufacturers", manufacturerService.findAllManufacturers());
+        manufacturerService.findAllManufacturers(model);
         return "manufacturer/all_manufacturers";
     }
 
