@@ -7,7 +7,6 @@ import pl.mgrzech.alcohols_collection.alcohol.AlcoholService;
 import pl.mgrzech.alcohols_collection.property.FindProperty;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 

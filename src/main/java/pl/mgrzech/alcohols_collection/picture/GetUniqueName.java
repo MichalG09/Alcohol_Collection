@@ -1,7 +1,6 @@
 package pl.mgrzech.alcohols_collection.picture;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.mgrzech.alcohols_collection.repositories.PicturesRepository;
 

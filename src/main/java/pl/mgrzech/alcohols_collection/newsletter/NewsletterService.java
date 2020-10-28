@@ -2,6 +2,7 @@ package pl.mgrzech.alcohols_collection.newsletter;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mgrzech.alcohols_collection.email.SendEmailToAllNewsletters;
 import pl.mgrzech.alcohols_collection.entities.Newsletter;
@@ -36,12 +37,12 @@ public class NewsletterService {
     public void saveNewNewsletter(Newsletter newsletter, RedirectAttributes redirectAttributes) {
         addNewNewsletter.save(newsletter, redirectAttributes);
     }
+
     /**
      * Method returns all newsletters.
-     * @return list all newsletter
      */
-    public Iterable<Newsletter> findAllNewsletters() {
-        return findNewsletters.findAll();
+    public void findAllNewsletters(Model model) {
+        model.addAttribute("newsletters", findNewsletters.findAll());
     }
 
     /**
@@ -59,8 +60,10 @@ public class NewsletterService {
      * @param uniqueCode unique code to find newsletter to delete
      * @return found newsletter
      */
-    public Newsletter findNewsletterToDeleteByUniqueCode(int uniqueCode) {
-        return findNewsletters.findNewsletterToDeleteByUniqueCode(uniqueCode);
+    public void findNewsletterToDeleteByUniqueCode(Model model, int uniqueCode) {
+        Newsletter newsletter =  findNewsletters.findNewsletterToDeleteByUniqueCode(uniqueCode);
+        model.addAttribute("idNewsletter", newsletter.getId());
+        model.addAttribute("nameNewsletter", newsletter.getName());
     }
 
     /**

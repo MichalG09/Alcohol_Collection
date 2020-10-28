@@ -2,12 +2,10 @@ package pl.mgrzech.alcohols_collection.gallery;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.mgrzech.alcohols_collection.entities.Picture;
 import pl.mgrzech.alcohols_collection.picture.FindPicture;
 import pl.mgrzech.alcohols_collection.validations.file_validation.FilesValidated;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -22,8 +20,8 @@ public class GalleryService {
      * Picture to gallery has specially parameter (isGallery set true).
      * @return pictures to gallery
      */
-    public List<Picture> findALlPicturesToGallery() {
-        return findPicture.findALlPicturesToGallery();
+    public void findALlPicturesToGallery(Model model) {
+        model.addAttribute("picturesGallery", findPicture.findALlPicturesToGallery());
     }
 
     /**

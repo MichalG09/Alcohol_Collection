@@ -2,6 +2,7 @@ package pl.mgrzech.alcohols_collection.manufacturer;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mgrzech.alcohols_collection.entities.Manufacturer;
 
@@ -27,18 +28,16 @@ public class ManufacturerService {
     /**
      * Method finds manufacturer by Id.
      * @param id id manufacturer to search
-     * @return found manufacturer
      */
-    public Manufacturer findManufacturerById(int id) {
-        return findManufacturer.findById(id);
+    public void findManufacturerById(Model model, int id) {
+        model.addAttribute("manufacturer", findManufacturer.findById(id));
     }
 
     /**
      * Method returns all manufacturers.
-     * @return all manufacturers
      */
-    public Iterable<Manufacturer> findAllManufacturers() {
-        return findManufacturer.findAll();
+    public void findAllManufacturers(Model model) {
+        model.addAttribute("manufacturers", findManufacturer.findAll());
     }
 
     /**

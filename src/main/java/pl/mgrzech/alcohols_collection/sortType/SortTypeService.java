@@ -2,10 +2,9 @@ package pl.mgrzech.alcohols_collection.sortType;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mgrzech.alcohols_collection.entities.SortType;
-
-import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -26,19 +25,17 @@ public class SortTypeService {
 
     /**
      * Method returns all sort type.
-     * @return list all sort type
      */
-    public List<SortType> findAllSortType() {
-        return findSortType.allTypesSort();
+    public void findAllSortType(Model model) {
+        model.addAttribute("sortTypes", findSortType.allTypesSort());
     }
 
     /**
      * Method returns sort type by Id.
      * @param id sort type id to find
-     * @return found sort type
      */
-    public SortType findSortTypeById(int id) {
-        return findSortType.findById(id);
+    public void findSortTypeById(Model model, int id) {
+        model.addAttribute("sortType", findSortType.findById(id));
     }
 
     /**

@@ -5,11 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import pl.mgrzech.alcohols_collection.alcohol.AlcoholService;
 import pl.mgrzech.alcohols_collection.alcohol.model.AlcoholToSearch;
-import pl.mgrzech.alcohols_collection.entities.Alcohol;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -23,10 +21,9 @@ public class CompareAlcoholsService {
     /**
      * Methods prepares alcohol chosen to prepare (saved in cookie).
      * @param request request
-     * @return list alcohol to compare
      */
-    public List<Alcohol> getAlcoholsToCompareFromCookie(HttpServletRequest request) {
-        return getAlcoholsToCompareFromCookie.get(request);
+    public void getAlcoholsToCompareFromCookie(Model model, HttpServletRequest request) {
+        model.addAttribute("alcohols", getAlcoholsToCompareFromCookie.get(request));
     }
 
     /**
@@ -35,10 +32,9 @@ public class CompareAlcoholsService {
      * @param id id alcohol to delete from compare list
      * @param request request
      * @param response response
-     * @return list alcohols to compare (without deleted position).
      */
-    public List<Alcohol> deleteAlcoholFromCompare(int id, HttpServletRequest request, HttpServletResponse response) {
-        return deleteAlcoholFromCompareList.delete(id, request, response);
+    public void deleteAlcoholFromCompare(Model model, int id, HttpServletRequest request, HttpServletResponse response) {
+        model.addAttribute("alcohols", deleteAlcoholFromCompareList.delete(id, request, response));
     }
 
     /**
@@ -48,7 +44,9 @@ public class CompareAlcoholsService {
      * @param request request
      * @param response response
      */
-    public void addAlcoholToCompareList(Model model, int id, HttpServletRequest request, HttpServletResponse response, AlcoholToSearch alcoholToSearch, int page, String sortBy, int numberAlcoholInOnePage) {
+    public void addAlcoholToCompareList(Model model, int id, HttpServletRequest request,
+                                        HttpServletResponse response, AlcoholToSearch alcoholToSearch,
+                                        int page, String sortBy, int numberAlcoholInOnePage) {
         model.addAttribute("listAlcoholsToCompare", addAlcoholToCompareList.add(id, request, response));
         alcoholService.prepareInformationAfterSearchAlcohol(model, alcoholToSearch, page, sortBy, numberAlcoholInOnePage);
     }
