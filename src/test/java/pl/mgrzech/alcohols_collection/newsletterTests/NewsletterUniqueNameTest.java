@@ -36,5 +36,4 @@ public class NewsletterUniqueNameTest {
         
         assertEquals(2, generateUniqueUnsubscribeCodeForNewsletter.generate());
     }
-
 }

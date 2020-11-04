@@ -12,7 +12,7 @@ import pl.mgrzech.alcohols_collection.entities.Manufacturer;
 import pl.mgrzech.alcohols_collection.entities.Picture;
 import pl.mgrzech.alcohols_collection.repositories.AlcoholRepository;
 import pl.mgrzech.alcohols_collection.repositories.ManufacturerRepository;
-import pl.mgrzech.alcohols_collection.repositories.PicturesRepository;
+import pl.mgrzech.alcohols_collection.repositories.PictureRepository;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,7 +28,7 @@ public class StatisticsAlcoholTest {
     @Autowired
     private AlcoholRepository alcoholRepository;
     @Autowired
-    private PicturesRepository picturesRepository;
+    private PictureRepository pictureRepository;
     @Autowired
     private ManufacturerRepository manufacturerRepository;
 
@@ -68,10 +68,9 @@ public class StatisticsAlcoholTest {
         Manufacturer manufacturer = new Manufacturer(null, "name"+nextId, "", "", null, "", now, now);
         manufacturerRepository.save(manufacturer);
         Picture picture = new Picture(null, "test"+nextId, new byte[10], now, false, false);
-        picturesRepository.save(picture);
+        pictureRepository.save(picture);
         List<Picture> listPictures = new ArrayList<>();
         listPictures.add(picture);
         alcoholRepository.save(new Alcohol(null, "name1"+nextId, "type1", 50, 40, now, now, "", manufacturer, "", placeInStorage, listPictures));
-
     }
 }

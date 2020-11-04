@@ -3,7 +3,7 @@ package pl.mgrzech.alcohols_collection.picture;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.mgrzech.alcohols_collection.entities.Picture;
-import pl.mgrzech.alcohols_collection.repositories.PicturesRepository;
+import pl.mgrzech.alcohols_collection.repositories.PictureRepository;
 
 import java.util.Date;
 
@@ -11,7 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class SavePicture {
 
-    private final PicturesRepository picturesRepository;
+    private final PictureRepository pictureRepository;
 
     /**
      * Method converts validated file to picture.
@@ -28,7 +28,7 @@ public class SavePicture {
         picture.setCreatedDate(new Date());
         picture.setMainPicture(isMain);
         picture.setGallery(isGallery);
-        picturesRepository.save(picture);
+        pictureRepository.save(picture);
         return picture;
     }
 }

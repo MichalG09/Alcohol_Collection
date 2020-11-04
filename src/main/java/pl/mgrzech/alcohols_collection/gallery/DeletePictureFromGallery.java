@@ -4,13 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.mgrzech.alcohols_collection.repositories.PicturesRepository;
+import pl.mgrzech.alcohols_collection.repositories.PictureRepository;
 
 @Component
 @RequiredArgsConstructor
 public class DeletePictureFromGallery {
 
-    private final PicturesRepository picturesRepository;
+    private final PictureRepository pictureRepository;
 
     @Value("${message.correct.gallery.picture.delete}")
     private String messageCorrectDeletePicture;
@@ -25,7 +25,7 @@ public class DeletePictureFromGallery {
      */
     public void deleteById(int id, RedirectAttributes redirectAttributes) {
         try {
-            picturesRepository.deleteById(id);
+            pictureRepository.deleteById(id);
             redirectAttributes.addFlashAttribute("message", messageCorrectDeletePicture);
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("messageError", messageFailDeletePicture);

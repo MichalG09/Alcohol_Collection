@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.mgrzech.alcohols_collection.picture.GetUniqueName;
+import pl.mgrzech.alcohols_collection.picture.GetUniqueNameForPicture;
 import pl.mgrzech.alcohols_collection.picture.SavePicture;
 import pl.mgrzech.alcohols_collection.validations.file_validation.FilesValidated;
 
@@ -15,7 +15,7 @@ import java.io.IOException;
 public class AddNewPictureToGallery {
 
     private final SavePicture savePicture;
-    private final GetUniqueName getUniqueName;
+    private final GetUniqueNameForPicture getUniqueNameForPicture;
 
     @Value("${message.correct.gallery.picture.add}")
     private String messageCorrectAddPicture;
@@ -39,7 +39,7 @@ public class AddNewPictureToGallery {
                     try {
                         savePicture.save(
                                 pic.getBytes(),
-                                getUniqueName.get("gallery"),
+                                getUniqueNameForPicture.get("gallery"),
                                 false,
                                 true);
                         redirectAttributes.addFlashAttribute("message", messageCorrectAddPicture);
