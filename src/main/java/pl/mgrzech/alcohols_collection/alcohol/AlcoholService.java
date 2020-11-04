@@ -112,7 +112,7 @@ public class AlcoholService {
      * @return all sort type in list
      */
     public Iterable<SortType> allTypesSort() {
-        return findSortType.allTypesSort();
+        return findSortType.allSortedByValueTypesSort();
     }
 
     /**
@@ -121,11 +121,11 @@ public class AlcoholService {
      * @return values number alcohol in one page
      */
     public List<String> allNumbersAlcoholsInOnePage() {
-        return findProperty.findByName("valuesNumberAlcoholInOnePage");
+        return findProperty.findByNameAndGetValuesInList("valuesNumberAlcoholInOnePage");
     }
 
     /**
-     * method checks if the user has accepted cookies.
+     * Method checks if the user has accepted cookies.
      * Cookies are necessary to save id alcohols to compare.
      * @param request request
      * @return true if user accepted cookie, false if not.
@@ -182,7 +182,7 @@ public class AlcoholService {
      * @return list all places in storage.
      */
     public List<String> findPlacesInStorageInProperty() {
-        return findProperty.findByName("placeInStorage");
+        return findProperty.findByNameAndGetValuesInList("placeInStorage");
     }
 
     /**

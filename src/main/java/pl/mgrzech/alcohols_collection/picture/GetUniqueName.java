@@ -11,6 +11,7 @@ import java.util.Random;
 public class GetUniqueName {
 
     private final PicturesRepository picturesRepository;
+    private final int scopeToRandomNumber = 999998;
 
     /**
      * Method returns unique picture name.
@@ -23,7 +24,7 @@ public class GetUniqueName {
         Random rand = new Random();
         String uniqueNumberToName;
         do{
-            uniqueNumberToName = String.valueOf(rand.nextInt(999998) + 1000001);
+            uniqueNumberToName = String.valueOf(rand.nextInt(scopeToRandomNumber) + 1000001);
         } while (picturesRepository.findByNameIsContaining(uniqueNumberToName).isPresent());
         return prefixName + "_" + uniqueNumberToName;
     }

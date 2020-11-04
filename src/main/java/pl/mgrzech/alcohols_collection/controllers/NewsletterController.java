@@ -45,7 +45,7 @@ public class NewsletterController {
      */
     @GetMapping("/user/showAllNewsletter")
     public String showAllPositionsInNewsletter(Model model){
-        newsletterService.findAllNewsletters(model);
+        model.addAttribute("newsletters",  newsletterService.findAllNewsletters());
         return "newsletter/all_newsletter";
     }
 
@@ -72,17 +72,19 @@ public class NewsletterController {
      */
     @GetMapping("/delete/newsletter/{code}")
     public String deleteNewsletterMethodGet(@PathVariable("code") int code,
+                                            @ModelAttribute("newsletter") Newsletter newsletter,
                                             Model model) {
-        newsletterService.findNewsletterToDeleteByUniqueCode(model, code);
+        newsletter = newsletterService.findNewsletterToDeleteByUniqueCode(code);
+        model.addAttribute("newsletter", newsletter);
         return "newsletter/confirm_delete_newsletter";
     }
 
     /**
-     * Method delete newsletter by id after verified by unique code.
+     * Method deletes newsletter by id after verified by unique code.
      * @param id id newsletter to delete
      * @return redirect to start view if save newsletter is done
      */
-    @GetMapping("/delete/newsletter/{id}")
+    @PostMapping("/delete/confirmed/newsletter/{id}")
     public String deleteNewsletterMethodPost(@PathVariable("id") int id,
                                              RedirectAttributes redirectAttributes) {
         newsletterService.deleteNewsletterById(id, redirectAttributes);

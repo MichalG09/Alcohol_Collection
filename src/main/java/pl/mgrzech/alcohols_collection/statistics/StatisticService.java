@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import pl.mgrzech.alcohols_collection.alcohol.AlcoholService;
+import pl.mgrzech.alcohols_collection.entities.SortType;
 import pl.mgrzech.alcohols_collection.property.FindProperty;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -14,22 +16,22 @@ import java.util.TreeMap;
 @AllArgsConstructor
 public class StatisticService {
 
+    private final AlcoholService alcoholService;
     private final FindProperty findProperty;
     private final FindStatisticsAllAlcoholInOnePlaceInStorage findStatisticsAllAlcoholInOnePlaceInStorage;
-    private final AlcoholService alcoholService;
     private final PrepareAlcoholToSearchForStatisticInPlaceStorage prepareAlcoholToSearchForStatisticInPlaceStorage;
 
     /**
      * Method show number alcohols in one place in storage.
-     * @param model model
+     * @return map with all alcohols in each place in storage
      */
-    public void showAllStatistics(Model model){
+    public Map<String, Integer> showAllStatistics(){
         Map<String, Integer> resultMapWithStatisticPlaceInStorage = new TreeMap<>();
-        findProperty.findByName("placeInStorage")
+        findProperty.findByNameAndGetValuesInList("placeInStorage")
                 .forEach(place -> {
                     resultMapWithStatisticPlaceInStorage.put(place, findStatisticsAllAlcoholInOnePlaceInStorage.find(place));
                 });
-        model.addAttribute("statisticsForPlacesInStorage", resultMapWithStatisticPlaceInStorage);
+        return resultMapWithStatisticPlaceInStorage;
     }
 
     /**
@@ -44,5 +46,32 @@ public class StatisticService {
         alcoholService.findSearchingAlcohols(model, request,
                 prepareAlcoholToSearchForStatisticInPlaceStorage.prepare(placeInStorage),
                 1, "nameA-Z", findProperty.findBasicNumberAlcoholsInOnePage());
+    }
+
+    /**
+     * Method checks if the user has accepted cookies.
+     * @param request request
+     * @return true if user accepted cookie, false if not.
+     */
+    public boolean checkAcceptedCookieInWebsite(HttpServletRequest request) {
+        return alcoholService.checkAcceptedCookieInWebsite(request);
+    }
+
+    /**
+     * Method returns all sort type sorted in list by value.
+     * List is necessary to select type sort in form.
+     * @return all sort type in list
+     */
+    public Iterable<SortType> allTypesSort() {
+        return alcoholService.allTypesSort();
+    }
+
+    /**
+     * Method returns values of number alcohol in one page from properties.
+     * All values are show in selector in form.
+     * @return values number alcohol in one page
+     */
+    public List<String> allNumbersAlcoholsInOnePage() {
+        return alcoholService.allNumbersAlcoholsInOnePage();
     }
 }

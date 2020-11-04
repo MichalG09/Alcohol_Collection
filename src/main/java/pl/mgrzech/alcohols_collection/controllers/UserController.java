@@ -55,7 +55,7 @@ public class UserController {
      */
     @GetMapping("/admin/user/all")
     public String allUsers(Model model){
-        userService.findAllUser(model);
+        model.addAttribute("users", userService.findAllUser());
         return "user/all_users";
     }
 
@@ -70,7 +70,7 @@ public class UserController {
     public String editSortTypeMethodGet(@PathVariable("id") int id,
                                         @ModelAttribute("user") User user,
                                         Model model){
-        userService.findUserById(model, id);
+        model.addAttribute("user", userService.findUserById(id));
         return "user/add_user";
     }
 

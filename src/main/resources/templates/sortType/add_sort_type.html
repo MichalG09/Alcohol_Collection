@@ -13,13 +13,13 @@
                 <div class="border border-light p-3 m-2" >
                     <h3>Dodawanie ustawień</h3>
                     <div class="form-group">
-                        <label for="insertNameProperties">Wartość sortowania*</label>
-                        <input type="text" th:field="${sortType.value}" class="form-control" id="insertNameProperties" placeholder="Wartość sortowania">
+                        <label for="insertSortTypeValue">Wartość sortowania*</label>
+                        <input type="text" th:field="${sortType.value}" class="form-control" id="insertSortTypeValue" placeholder="Wartość sortowania">
                         <label class="text-danger" th:if="${#fields.hasErrors('sortType.value')}" th:errors="*{sortType.value}"></label>
                     </div>
                     <div class="form-group">
-                        <label for="insertValueProperties">Tłumaczenie sortowania*</label>
-                        <textarea rows="3" th:field="${sortType.valueTranslate}" class="form-control" id="insertValueProperties" placeholder="Tłumaczenie sortowania"></textarea>
+                        <label for="insertSortTypeValueTranslate">Tłumaczenie sortowania*</label>
+                        <textarea rows="3" th:field="${sortType.valueTranslate}" class="form-control" id="insertSortTypeValueTranslate" placeholder="Tłumaczenie sortowania"></textarea>
                         <label class="text-danger" th:if="${#fields.hasErrors('sortType.valueTranslate')}" th:errors="*{sortType.valueTranslate}"></label>
                     </div>
                     <input type="hidden" th:field="${sortType.id}">

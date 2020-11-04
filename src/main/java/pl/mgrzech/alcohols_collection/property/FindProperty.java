@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import pl.mgrzech.alcohols_collection.entities.Property;
 import pl.mgrzech.alcohols_collection.repositories.PropertyRepository;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +18,7 @@ public class FindProperty {
 
     @Value("${separator.property}")
     private String separatorForProperties;
+
 
     /**
      * Method returns all properties.
@@ -34,7 +34,8 @@ public class FindProperty {
      * @return found property
      */
     public Property findById(int id) {
-        return propertyRepository.findById(id).orElseGet(Property::new);
+        return propertyRepository.findById(id)
+                .orElseGet(Property::new);
     }
 
     /**
@@ -42,7 +43,7 @@ public class FindProperty {
      * @return property with welcome text
      */
     public Property findWelcomeTextFromProperty() {
-        return propertyRepository.findByNameProperties("welcomeText").orElseGet(Property::new);
+        return findByName("welcomeText");
     }
 
     /**
@@ -50,14 +51,21 @@ public class FindProperty {
      * @param propertyName name property to find
      * @return found property
      */
-    public List<String> findByName(String propertyName) {
-        return propertyRepository
-                .findByNameProperties(propertyName)
-                    .map(property -> Arrays.stream(property
-                            .getValueProperties()
-                            .split(separatorForProperties))
-                    .collect(Collectors.toList()))
-                .orElseGet(ArrayList::new);
+    public Property findByName(String propertyName) {
+        return propertyRepository.findByNameProperty(propertyName)
+                .orElseGet(Property::new);
+    }
+
+    /**
+     * Method convert value property found by id to list.
+     * Method splits value property by dedicated separator (',').
+     * @param propertyName name property to find
+     * @return value property convert to list
+     */
+    public List<String> findByNameAndGetValuesInList(String propertyName) {
+        return Arrays.stream(findByName(propertyName)
+                .getValueProperty().split(separatorForProperties))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -65,6 +73,6 @@ public class FindProperty {
      * @return number alcohols in one page.
      */
     public Integer findBasicNumberAlcoholsInOnePage() {
-        return Integer.parseInt(findByName("startNumberAlcoholsInOnePage").get(0));
+        return Integer.parseInt(findByNameAndGetValuesInList("startNumberAlcoholsInOnePage").get(0));
     }
 }

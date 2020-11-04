@@ -56,7 +56,7 @@ public class PropertyController {
      */
     @GetMapping("/admin/property/all")
     public String allProperty(Model model){
-        propertyService.findAllProperties(model);
+        model.addAttribute("properties", propertyService.findAllProperties());
         return "property/all_properties";
     }
 
@@ -71,7 +71,7 @@ public class PropertyController {
     public String editPropertyMethodGet(@PathVariable("id") int id,
                                         @ModelAttribute("property") Property property,
                                         Model model){
-        propertyService.findPropertyById(model, id);
+        model.addAttribute("property", propertyService.findPropertyById(id));
         return "property/add_property";
     }
 

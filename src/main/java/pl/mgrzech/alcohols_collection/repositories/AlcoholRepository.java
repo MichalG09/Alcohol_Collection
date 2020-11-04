@@ -2,6 +2,7 @@ package pl.mgrzech.alcohols_collection.repositories;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import pl.mgrzech.alcohols_collection.entities.Alcohol;
@@ -10,7 +11,8 @@ import pl.mgrzech.alcohols_collection.entities.Newsletter;
 import java.util.List;
 import java.util.Optional;
 
-public interface AlcoholRepository extends PagingAndSortingRepository<Alcohol, Integer> {
+public interface AlcoholRepository extends JpaRepository<Alcohol, Integer> {
+//public interface AlcoholRepository extends PagingAndSortingRepository<Alcohol, Integer> {
 
     @Query("SELECT DISTINCT a.type FROM Alcohol a")
     List<String> findDistinctTypes();

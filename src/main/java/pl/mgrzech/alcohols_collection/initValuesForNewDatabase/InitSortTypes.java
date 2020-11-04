@@ -3,13 +3,15 @@ package pl.mgrzech.alcohols_collection.initValuesForNewDatabase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.mgrzech.alcohols_collection.entities.SortType;
-import pl.mgrzech.alcohols_collection.repositories.SortTypeRepository;
+import pl.mgrzech.alcohols_collection.sortType.AddSortType;
+import pl.mgrzech.alcohols_collection.sortType.FindSortType;
 
 @Component
 @AllArgsConstructor
 public class InitSortTypes {
 
-    private final SortTypeRepository sortTypeRepository;
+    private final FindSortType findSortType;
+    private final AddSortType addSortType;
 
     /**
      * Method initializes all necessary sort types for start project.
@@ -34,11 +36,11 @@ public class InitSortTypes {
      * @param nameEngSortType value sort type in english (to create SQl)
      */
     private void initSortType(String nameSortType, String nameEngSortType){
-        if(!sortTypeRepository.findByValue(nameSortType).isPresent()){
+        if(!findSortType.findSortTypeByName(nameSortType).isPresent()){
             SortType sortType = new SortType();
             sortType.setValue(nameSortType);
             sortType.setValueTranslate(nameEngSortType);
-            sortTypeRepository.save(sortType);
+            addSortType.save(sortType);
         }
     }
 }
