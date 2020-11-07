@@ -12,8 +12,6 @@ import pl.mgrzech.alcohols_collection.repositories.NewsletterRepository;
 public class AddNewNewsletter {
 
     private final NewsletterRepository newsletterRepository;
-    private final SendEmailToAdminWithNewNewsletter sendEmailToAdminWithNewNewsletter;
-    private final SendEmailAfterSubscribedNewsletter sendEmailAfterSubscribedNewsletter;
     private final GenerateUniqueUnsubscribeCodeForNewsletter generateUniqueUnsubscribeCodeForNewsletter;
 
     /**
@@ -25,7 +23,5 @@ public class AddNewNewsletter {
     public void save(Newsletter newsletter) {
             newsletter.setCodeToVerifyDelete(generateUniqueUnsubscribeCodeForNewsletter.generate());
             newsletterRepository.save(newsletter);
-            sendEmailToAdminWithNewNewsletter.sendEmailToAdminWithNewNewsletter(newsletter);
-            sendEmailAfterSubscribedNewsletter.sendEmailAfterSubscribedNewsletter(newsletter);
     }
 }

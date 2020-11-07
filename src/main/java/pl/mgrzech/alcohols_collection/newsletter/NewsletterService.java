@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.mgrzech.alcohols_collection.email.SendEmailToAllNewsletters;
+import pl.mgrzech.alcohols_collection.email.EmailService;
 import pl.mgrzech.alcohols_collection.entities.Newsletter;
 import pl.mgrzech.alcohols_collection.entities.Property;
 import pl.mgrzech.alcohols_collection.property.FindProperty;
@@ -17,7 +17,7 @@ public class NewsletterService {
     private final AddNewNewsletter addNewNewsletter;
     private final DeleteNewsletter deleteNewsletter;
     private final FindNewsletters findNewsletters;
-    private final SendEmailToAllNewsletters sendEmailToAllNewsletters;
+    private final EmailService emailService;
 
     @Value("${message.correct.newsletter.add}")
     private String messageCorrectAddNewsletter;
@@ -49,10 +49,11 @@ public class NewsletterService {
     public void saveNewNewsletter(Newsletter newsletter, RedirectAttributes redirectAttributes) {
         try{
             addNewNewsletter.save(newsletter);
+            emailService.sendEmailAfterAddNewNewsletter(newsletter);
             redirectAttributes.addFlashAttribute("message", messageCorrectAddNewsletter);
-        } catch (Exception e){
+        } catch (Exception ex){
             redirectAttributes.addFlashAttribute("messageError", messageFailAddNewsletter);
-            e.printStackTrace();
+            ex.printStackTrace();
         }
     }
 
@@ -62,16 +63,6 @@ public class NewsletterService {
      */
     public Iterable<Newsletter> findAllNewsletters() {
         return findNewsletters.findAll();
-    }
-
-    /**
-     * Method sends e-mail to all user saved to list newsletter.
-     * @param subject subject email
-     * @param textMessage text email
-     * @param redirectAttributes redirectAttributes
-     */
-    public void sendEmailToAllNewsletters(String subject, String textMessage, RedirectAttributes redirectAttributes) {
-        sendEmailToAllNewsletters.sendMessageToAllPersonInNewsletter(subject, textMessage, redirectAttributes);
     }
 
     /**

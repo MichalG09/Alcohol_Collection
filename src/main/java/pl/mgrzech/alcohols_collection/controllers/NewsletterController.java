@@ -4,7 +4,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mgrzech.alcohols_collection.entities.Newsletter;
 import pl.mgrzech.alcohols_collection.newsletter.NewsletterService;
@@ -47,21 +50,6 @@ public class NewsletterController {
     public String showAllPositionsInNewsletter(Model model){
         model.addAttribute("newsletters",  newsletterService.findAllNewsletters());
         return "newsletter/all_newsletter";
-    }
-
-    /**
-     * Method send message to all newsletter.
-     * @param subject subject message
-     * @param message text message
-     * @param redirectAttributes redirect attributes
-     * @return redirect to user view if message to newsletters is sent
-     */
-    @PostMapping("/user/sendEMailAllNewsletter")
-    public String sendEmailToAllNewsletterMethodPost(@RequestParam String subject,
-                                                     @RequestParam String message,
-                                                     RedirectAttributes redirectAttributes){
-        newsletterService.sendEmailToAllNewsletters(subject, message, redirectAttributes);
-        return "redirect:/user";
     }
 
     /**

@@ -5,17 +5,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.thymeleaf.context.Context;
+import pl.mgrzech.alcohols_collection.entities.Newsletter;
 import pl.mgrzech.alcohols_collection.repositories.NewsletterRepository;
+
+import javax.mail.MessagingException;
 
 @Component
 @RequiredArgsConstructor
 public class SendEmailToAllNewsletters {
-
-    @Value("${message.correct.email.toAllNewsletters}")
-    private String messageCorrectSentEmailToAllNewsletter;
-
-    @Value("${message.fail.email.toAllNewsletters}")
-    private String messageFailSentEmailToAllNewsletter;
 
     @Value("${admin.mail}")
     private String adminMail;
@@ -25,13 +22,13 @@ public class SendEmailToAllNewsletters {
 
     /**
      * Method sends e-mail to all user saved to list newsletter.
-     * @param subject subject email
-     * @param textMessage text email
-     * @param redirectAttributes redirectAttributes
+     * @param subject            subject email
+     * @param textMessage        text email
      */
-    public void sendMessageToAllPersonInNewsletter(String subject, String textMessage, RedirectAttributes redirectAttributes) {
-        newsletterRepository.findAll().forEach(newsletter -> {
-            Context context = new Context();
+    public void sendMessageToAllPersonInNewsletter(String subject, String textMessage) throws MessagingException {
+        Context context;
+        for(Newsletter newsletter : newsletterRepository.findAll()){
+            context = new Context();
             context.setVariable("linkToUnsubscribe", "http://kolekcjaalkoholi.pl/delete/newsletter/" + newsletter.getCodeToVerifyDelete());
             context.setVariable("welcome", "Witaj " + newsletter.getName());
             context.setVariable("text", textMessage);
@@ -39,10 +36,7 @@ public class SendEmailToAllNewsletters {
                     subject,
                     adminMail,
                     context,
-                    "emailTemplate/toAllNewsletters",
-                    redirectAttributes,
-                    messageCorrectSentEmailToAllNewsletter,
-                    messageFailSentEmailToAllNewsletter);
-        });
+                    "emailTemplate/toAllNewsletters");
+        }
     }
 }
