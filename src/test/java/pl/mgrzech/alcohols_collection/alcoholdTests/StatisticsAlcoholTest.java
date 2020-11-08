@@ -1,4 +1,4 @@
-package pl.mgrzech.alcohols_collection.alcoholdTest;
+package pl.mgrzech.alcohols_collection.alcoholdTests;
 
 import org.junit.Before;
 import org.junit.Test;

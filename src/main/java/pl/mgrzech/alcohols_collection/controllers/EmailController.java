@@ -24,16 +24,6 @@ public class EmailController {
     }
 
     /**
-     * Method send test email to admin.
-     * @return redirect to admin view if send email is done
-     */
-    @GetMapping("/admin/email/test")
-    public String editAlcoholMethodPost(RedirectAttributes redirectAttributes){
-        emailService.sendTestEmailWithHTML(redirectAttributes);
-        return "redirect:/admin";
-    }
-
-    /**
      * Method send message to all newsletter.
      * @param subject subject message
      * @param message text message
@@ -46,5 +36,15 @@ public class EmailController {
                                                      RedirectAttributes redirectAttributes){
         emailService.sendEmailToAllNewsletters(subject, message, redirectAttributes);
         return "redirect:/user";
+    }
+
+    /**
+     * Method send test email to admin.
+     * @return redirect to admin view if send email is done
+     */
+    @GetMapping("/admin/email/test")
+    public String sendTestEmailWithHTMLMethodPost(RedirectAttributes redirectAttributes){
+        emailService.sendTestEmailWithHTML(redirectAttributes);
+        return "redirect:/admin";
     }
 }
