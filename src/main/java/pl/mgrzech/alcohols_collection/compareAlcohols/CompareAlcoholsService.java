@@ -48,6 +48,11 @@ public class CompareAlcoholsService {
                                         HttpServletResponse response, AlcoholToSearch alcoholToSearch,
                                         int page, String sortBy, int numberAlcoholInOnePage) {
         model.addAttribute("listAlcoholsToCompare", addAlcoholToCompareList.add(id, request, response));
-        alcoholService.prepareInformationAfterSearchAlcohol(model, alcoholToSearch, page, sortBy, numberAlcoholInOnePage);
+//        alcoholService.prepareInformationAfterSearchAlcohol(model, alcoholToSearch, page, sortBy, numberAlcoholInOnePage);
+        model.addAttribute("alcohols", alcoholService.getSearchingAlcohols(
+                alcoholToSearch, page, sortBy, numberAlcoholInOnePage));
+        model.addAttribute("alcoholToSearch", alcoholToSearch);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("numberAlcoholInOnePage", numberAlcoholInOnePage);
     }
 }

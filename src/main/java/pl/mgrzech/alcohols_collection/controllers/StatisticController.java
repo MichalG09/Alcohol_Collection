@@ -18,6 +18,7 @@ import java.util.List;
 public class StatisticController {
 
     private final StatisticService statisticService;
+    private final AlcoholService alcoholService;
 
     @GetMapping("/user/statistic")
     public String showAllStatistic(Model model){
@@ -29,7 +30,11 @@ public class StatisticController {
     public String showAllAlcoholsInOnePlaceStorage(@PathVariable("place") String placeInStorage,
                                                    Model model,
                                                    HttpServletRequest request){
-        statisticService.showAllAlcoholsInOnePlaceStorage(model, placeInStorage, request);
+        model.addAttribute("listAlcoholsToCompare", alcoholService.getListAlcoholsToCompare(request));
+        model.addAttribute("alcoholToSearch", statisticService.generateAlcoholToSearchForPlaceInStorage(placeInStorage));
+        model.addAttribute("alcohols", statisticService.showAllAlcoholsInOnePlaceStorage(placeInStorage));
+        model.addAttribute("sortBy", "");
+        model.addAttribute("numberAlcoholInOnePage", "");
         return "alcohol/all_alcohols";
     }
 

@@ -90,7 +90,7 @@ public class AlcoholAdminController {
     @GetMapping("/edit/{id}")
     public String editAlcoholMethodPost(@PathVariable("id") int id,
                                         Model model){
-        alcoholService.findAlcoholById(model, id);
+        model.addAttribute("alcohol", alcoholService.findAlcoholById(id));
         return "alcohol/add_alcohol";
     }
 

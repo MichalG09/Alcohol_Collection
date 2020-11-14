@@ -12,18 +12,19 @@ import pl.mgrzech.alcohols_collection.repositories.PictureRepository;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class ChangeMainPictureTest {
 
     @InjectMocks
     private ChangeMainPictureForAlcohol changeMainPictureForAlcohol;
 
-    private Picture newMainPicture;
-    private Picture oldMainPicture;
-
     @Mock
     private PictureRepository pictureRepository;
+
+    private Picture newMainPicture;
+    private Picture oldMainPicture;
 
     @Before
     public void init() {

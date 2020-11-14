@@ -19,5 +19,5 @@ public interface PictureRepository extends JpaRepository<Picture, Integer> {
     @Query(value = "SELECT * FROM picture p INNER JOIN alcohol_pictures a " +
             "ON p.id = a.pictures_id WHERE a.alcohol_id = ?1 and p.main_picture = 1",
             nativeQuery = true)
-    Optional<Picture> findMainPictureForAlcohol(int idAlcohol);
+    Optional<Picture> findMainPictureForAlcohol(long idAlcohol);
 }

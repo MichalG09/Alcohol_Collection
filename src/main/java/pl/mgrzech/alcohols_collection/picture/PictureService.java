@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.mgrzech.alcohols_collection.entities.Picture;
 
 @Service
 @RequiredArgsConstructor
@@ -11,6 +12,7 @@ public class PictureService {
 
     private final DeletePictureForAlcohol deletePictureForAlcohol;
     private final ChangeMainPictureForAlcohol changeMainPictureForAlcohol;
+    private final FindPicture findPicture;
 
     @Value("${message.correct.picture.delete}")
     private String messageCorrectDeletedPicture;
@@ -53,5 +55,14 @@ public class PictureService {
             redirectAttributes.addFlashAttribute("messageError", messageFailChangeMainPicture);
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Method returns picture by id.
+     * @param idPicture picture id to find
+     * @return found picture
+     */
+    public Picture findPicture(int idPicture, int idAlcohol) {
+        return findPicture.findById(idPicture);
     }
 }

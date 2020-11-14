@@ -28,7 +28,7 @@ public class Alcohol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * Name bottle

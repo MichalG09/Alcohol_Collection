@@ -1,5 +1,6 @@
 package pl.mgrzech.alcohols_collection.pictureTests;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,23 +30,36 @@ public class PictureRepositoryTest {
     @Autowired
     private ManufacturerRepository manufacturerRepository;
 
-    private final Picture additionalPicture1 = new Picture(null, "test1", new byte[10], new Date(), false, false);
-    private final Picture pictureToGallery = new Picture(null, "test2", new byte[10], new Date(), true, false);
-    private final Picture mainPicture = new Picture(null, "test3", new byte[10], new Date(), false, true);
-    private final Picture additionalPicture2 = new Picture(null, "test11", new byte[10], new Date(), false, false);
+    private Picture additionalPicture2;
+    private Picture mainPicture;
+    private Picture pictureToGallery;
+    private Picture additionalPicture1;
 
     private final Date now = new Date();
 
+    @Before
+    public void init(){
+        additionalPicture1 = new Picture(null, "test1", new byte[10], new Date(), false, false);
+        pictureToGallery = new Picture(null, "test2", new byte[10], new Date(), true, false);
+        mainPicture = new Picture(null, "test3", new byte[10], new Date(), false, true);
+        additionalPicture2 = new Picture(null, "test11", new byte[10], new Date(), false, false);
+
+        pictureRepository.save(additionalPicture1);
+        pictureRepository.save(additionalPicture2);
+        pictureRepository.save(pictureToGallery);
+        pictureRepository.save(mainPicture);
+    }
+
     @Test
     public void shouldCorrectSavePicture(){
-        pictureRepository.save(additionalPicture1);
         assertNotNull(additionalPicture1.getId());
+        assertNotNull(additionalPicture2.getId());
+        assertNotNull(pictureToGallery.getId());
+        assertNotNull(mainPicture.getId());
     }
 
     @Test
     public void shouldReturnPictureByName(){
-        pictureRepository.save(additionalPicture1);
-        pictureRepository.save(pictureToGallery);
         Optional<Picture> picture = pictureRepository.findByName(additionalPicture1.getName());
         assertTrue(picture.isPresent());
         assertEquals(additionalPicture1.getName(), picture.get().getName());
@@ -53,9 +67,6 @@ public class PictureRepositoryTest {
 
     @Test
     public void shouldReturnPictureToGallery(){
-        pictureRepository.save(additionalPicture1);
-        pictureRepository.save(pictureToGallery);
-        pictureRepository.save(mainPicture);
         List<Picture> pictures = pictureRepository.findByGallery(true);
         assertFalse(pictures.isEmpty());
         assertEquals(1, pictures.size());
@@ -64,10 +75,6 @@ public class PictureRepositoryTest {
 
     @Test
     public void shouldReturnPictureToGalleryContainingString(){
-        pictureRepository.save(additionalPicture1);
-        pictureRepository.save(pictureToGallery);
-        pictureRepository.save(mainPicture);
-        pictureRepository.save(additionalPicture2);
         List<Picture> pictures = pictureRepository.findByNameIsContaining("1");
         assertFalse(pictures.isEmpty());
         assertEquals(2, pictures.size());
@@ -75,9 +82,6 @@ public class PictureRepositoryTest {
 
     @Test
     public void shouldReturnMainPicture(){
-        pictureRepository.save(additionalPicture1);
-        pictureRepository.save(mainPicture);
-        pictureRepository.save(additionalPicture2);
         List<Picture> listPictures = new ArrayList<>(Arrays.asList(additionalPicture1, pictureToGallery, mainPicture, additionalPicture2));
         Manufacturer manufacturer = new Manufacturer(null, "name", "", "", null, "", now, now);
         manufacturerRepository.save(manufacturer);

@@ -1,9 +1,11 @@
 package pl.mgrzech.alcohols_collection.statistics;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import pl.mgrzech.alcohols_collection.alcohol.AlcoholService;
+import pl.mgrzech.alcohols_collection.alcohol.model.AlcoholToSearch;
+import pl.mgrzech.alcohols_collection.entities.Alcohol;
 import pl.mgrzech.alcohols_collection.entities.SortType;
 import pl.mgrzech.alcohols_collection.property.FindProperty;
 
@@ -36,16 +38,22 @@ public class StatisticService {
 
     /**
      * Method shows all alcohol for one place in storage.
-     * @param model model
      * @param placeInStorage place in storage to show all alcohols
-     * @param request request
+     * @return all alcohols for one place in storage
      */
-    public void showAllAlcoholsInOnePlaceStorage(Model model,
-                                                 String placeInStorage,
-                                                 HttpServletRequest request) {
-        alcoholService.findSearchingAlcohols(model, request,
-                prepareAlcoholToSearchForStatisticInPlaceStorage.prepare(placeInStorage),
+    public Page<Alcohol> showAllAlcoholsInOnePlaceStorage(String placeInStorage) {
+        return alcoholService.getSearchingAlcohols(
+                generateAlcoholToSearchForPlaceInStorage(placeInStorage),
                 1, "nameA-Z", findProperty.findBasicNumberAlcoholsInOnePage());
+    }
+
+    /**
+     * Method prepares parameter for alcohol to search by place in storage.
+     * @param placeInStorage place in storage to find all alcohols
+     * @return alcohol to search with parameters to find alcohols
+     */
+    public AlcoholToSearch generateAlcoholToSearchForPlaceInStorage(String placeInStorage){
+        return prepareAlcoholToSearchForStatisticInPlaceStorage.prepare(placeInStorage);
     }
 
     /**

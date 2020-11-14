@@ -19,8 +19,8 @@ public class NewsletterValidationTest {
 
     private Validator validator;
     private Newsletter emptyNewsletter;
-    private Newsletter newsletterWithName;
-    private Newsletter newsletterWithEmail;
+    private Newsletter newsletterWithoutEmail;
+    private Newsletter newsletterWithoutName;
     private Newsletter newsletterWithIncorrectEmail;
     private Newsletter correctNewsletter;
 
@@ -30,8 +30,8 @@ public class NewsletterValidationTest {
         validator = factory.getValidator();
 
         emptyNewsletter = new Newsletter();
-        newsletterWithName = new Newsletter(null, "test", null,111);
-        newsletterWithEmail = new Newsletter(null, null, "testMail@test.com",111);
+        newsletterWithoutEmail = new Newsletter(null, "test", null,111);
+        newsletterWithoutName = new Newsletter(null, null, "testMail@test.com",111);
         newsletterWithIncorrectEmail = new Newsletter(null, "test", "testMail",111);
         correctNewsletter = new Newsletter(null, "test", "testMail@test.com",111);
     }
@@ -50,13 +50,13 @@ public class NewsletterValidationTest {
 
     @Test
     public void shouldReturnIncorrectValidationNewsletterWithoutName() {
-        Set<ConstraintViolation<Newsletter>> violations = validator.validate(newsletterWithEmail);
+        Set<ConstraintViolation<Newsletter>> violations = validator.validate(newsletterWithoutName);
         assertFalse(violations.isEmpty());
     }
 
     @Test
     public void shouldReturnIncorrectValidationNewsletterWithoutEmail() {
-        Set<ConstraintViolation<Newsletter>> violations = validator.validate(newsletterWithName);
+        Set<ConstraintViolation<Newsletter>> violations = validator.validate(newsletterWithoutEmail);
         assertFalse(violations.isEmpty());
     }
 

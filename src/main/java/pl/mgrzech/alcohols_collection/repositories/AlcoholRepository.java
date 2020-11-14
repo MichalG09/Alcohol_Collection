@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AlcoholRepository extends JpaRepository<Alcohol, Integer> {
-//public interface AlcoholRepository extends PagingAndSortingRepository<Alcohol, Integer> {
 
     @Query("SELECT DISTINCT a.type FROM Alcohol a")
     List<String> findDistinctTypes();
@@ -39,7 +38,7 @@ public interface AlcoholRepository extends JpaRepository<Alcohol, Integer> {
             nativeQuery = true)
     Page<Alcohol> searchAlcoholsOrderByManufacturer(String name, String type, int amountOfAlcoholMin,
                                                     int amountOfAlcoholMax, int capacityMin, int capacityMax, String placeInStorage,
-                                                    String nameCompany, String sortBy, String sortType,PageRequest pageRequest);
+                                                    String nameCompany, String sortBy, String sortType, PageRequest pageRequest);
 
     int countByPlaceInStorage(String placeInStorage);
 }

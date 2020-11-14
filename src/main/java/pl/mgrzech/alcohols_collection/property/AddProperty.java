@@ -1,9 +1,11 @@
 package pl.mgrzech.alcohols_collection.property;
 
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 import pl.mgrzech.alcohols_collection.entities.Property;
 import pl.mgrzech.alcohols_collection.repositories.PropertyRepository;
 
+@Component
 @AllArgsConstructor
 public class AddProperty {
 

@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.mgrzech.alcohols_collection.alcohol.*;
+import pl.mgrzech.alcohols_collection.alcohol.AlcoholService;
 import pl.mgrzech.alcohols_collection.alcohol.model.AlcoholToSearch;
+import pl.mgrzech.alcohols_collection.entities.Alcohol;
 import pl.mgrzech.alcohols_collection.entities.SortType;
+import pl.mgrzech.alcohols_collection.validations.file_validation.FilesValidated;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -26,20 +28,25 @@ public class AlcoholController {
      */
     @GetMapping("/all")
     public String allAlcohols(Model model, HttpServletRequest request){
-        alcoholService.findAllAlcoholsForFirstPage(model, request);
+        model.addAttribute("alcohols", alcoholService.findAllAlcoholsForFirstPage());
+        prepareModelWithParametersToView(model, new AlcoholToSearch(), request, "", "");
         return "alcohol/all_alcohols";
     }
 
     /**
      * Method prepares to show all detail of alcohol.
      * @param id id alcohol to show detail
+     *
      * @param model model
      * @return name of the running html file for show alcohol detail
      */
     @GetMapping("/detail/{id}")
     public String detailOneAlcohol(@PathVariable("id") int id,
                                    Model model){
-        alcoholService.findAlcoholByIdToShowAllDetail(model, id);
+        Alcohol alcohol = alcoholService.findAlcoholById(id);
+        model.addAttribute("alcohol", alcohol);
+        model.addAttribute("manufacturer", alcohol.getManufacturer());
+        model.addAttribute("file", new FilesValidated());
         return "alcohol/detail_one_alcohol";
     }
 
@@ -60,30 +67,10 @@ public class AlcoholController {
                                 @ModelAttribute("alcoholToSearch") AlcoholToSearch alcoholToSearch,
                                 Model model,
                                 HttpServletRequest request){
-        alcoholService.findSearchingAlcohols(
-                model,
-                request,
-                alcoholToSearch,
-                page,
-                sortBy,
-                Integer.parseInt(numberAlcoholInOnePage.trim()));
+        model.addAttribute("alcohols", alcoholService.getSearchingAlcohols(
+                alcoholToSearch, page, sortBy, Integer.parseInt(numberAlcoholInOnePage)));
+        prepareModelWithParametersToView(model, alcoholToSearch, request, sortBy, numberAlcoholInOnePage);
         return "alcohol/all_alcohols";
-    }
-
-    /**
-     * Method return picture founded by id.
-     * Picture to show in big size.
-     * @param idAlcohol id Alcohol to back button
-     * @param idPicture picture id to find
-     * @param model model
-     * @return found picture
-     */
-    @GetMapping("/picture/{idAlcohol}/{idPicture}")
-    public String showOnePictureForAlcohol(@PathVariable("idAlcohol") int idAlcohol,
-                                           @PathVariable("idPicture") int idPicture,
-                                           Model model){
-        alcoholService.findPicture(model, idPicture, idAlcohol);
-        return "alcohol/alcohol_big_picture";
     }
 
     /**
@@ -107,7 +94,7 @@ public class AlcoholController {
     }
 
     /**
-     * Method check acceptance to use cookie.
+     * Method checks acceptance to use cookie.
      * Cookies are necessary to compare alcohols.
      * @param request request
      * @return acceptance to use cookie
@@ -115,5 +102,22 @@ public class AlcoholController {
     @ModelAttribute("acceptCookie")
     public boolean acceptedCookieInWebsite(HttpServletRequest request) {
         return alcoholService.checkAcceptedCookieInWebsite(request);
+    }
+
+    /**
+     * Method prepares model with parameters to show in view with alcohols view
+     * @param model model
+     * @param alcoholToSearch alcohol with parameters to search
+     * @param request request
+     * @param sortBy sort by
+     * @param numberAlcoholInOnePage number alcohol in one page
+     */
+    private void prepareModelWithParametersToView(Model model, AlcoholToSearch alcoholToSearch,
+                                                  HttpServletRequest request, String sortBy,
+                                                  String numberAlcoholInOnePage){
+        model.addAttribute("listAlcoholsToCompare", alcoholService.getListAlcoholsToCompare(request));
+        model.addAttribute("alcoholToSearch", alcoholToSearch);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("numberAlcoholInOnePage", numberAlcoholInOnePage);
     }
 }
