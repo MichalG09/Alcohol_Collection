@@ -4,7 +4,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mgrzech.alcohols_collection.entities.Newsletter;
 import pl.mgrzech.alcohols_collection.newsletter.NewsletterService;
@@ -45,23 +48,8 @@ public class NewsletterController {
      */
     @GetMapping("/user/showAllNewsletter")
     public String showAllPositionsInNewsletter(Model model){
-        newsletterService.findAllNewsletters(model);
+        model.addAttribute("newsletters",  newsletterService.findAllNewsletters());
         return "newsletter/all_newsletter";
-    }
-
-    /**
-     * Method send message to all newsletter.
-     * @param subject subject message
-     * @param message text message
-     * @param redirectAttributes redirect attributes
-     * @return redirect to user view if message to newsletters is sent
-     */
-    @PostMapping("/user/sendEMailAllNewsletter")
-    public String sendEmailToAllNewsletterMethodPost(@RequestParam String subject,
-                                                     @RequestParam String message,
-                                                     RedirectAttributes redirectAttributes){
-        newsletterService.sendEmailToAllNewsletters(subject, message, redirectAttributes);
-        return "redirect:/user";
     }
 
     /**
@@ -72,17 +60,19 @@ public class NewsletterController {
      */
     @GetMapping("/delete/newsletter/{code}")
     public String deleteNewsletterMethodGet(@PathVariable("code") int code,
+                                            @ModelAttribute("newsletter") Newsletter newsletter,
                                             Model model) {
-        newsletterService.findNewsletterToDeleteByUniqueCode(model, code);
+        newsletter = newsletterService.findNewsletterToDeleteByUniqueCode(code);
+        model.addAttribute("newsletter", newsletter);
         return "newsletter/confirm_delete_newsletter";
     }
 
     /**
-     * Method delete newsletter by id after verified by unique code.
+     * Method deletes newsletter by id after verified by unique code.
      * @param id id newsletter to delete
      * @return redirect to start view if save newsletter is done
      */
-    @GetMapping("/delete/newsletter/{id}")
+    @PostMapping("/delete/confirmed/newsletter/{id}")
     public String deleteNewsletterMethodPost(@PathVariable("id") int id,
                                              RedirectAttributes redirectAttributes) {
         newsletterService.deleteNewsletterById(id, redirectAttributes);

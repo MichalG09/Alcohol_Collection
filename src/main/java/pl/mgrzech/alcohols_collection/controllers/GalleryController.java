@@ -27,7 +27,7 @@ public class GalleryController {
     @GetMapping("/gallery")
     public String showGallery(@ModelAttribute("message") String message,
                               Model model) {
-        galleryService.findALlPicturesToGallery(model);
+        model.addAttribute("picturesGallery", galleryService.findALlPicturesToGallery());
         return "gallery/gallery";
     }
 

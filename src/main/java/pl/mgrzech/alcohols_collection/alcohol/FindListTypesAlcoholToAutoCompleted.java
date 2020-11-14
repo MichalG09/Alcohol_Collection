@@ -25,7 +25,7 @@ public class FindListTypesAlcoholToAutoCompleted {
         JSONArray resultJSON = new JSONArray();
         List<String> uniqueTypesFromDatabase = alcoholRepository.findDistinctTypes();
 
-        findProperty.findByName("basicTypesAlcohol").forEach(type -> {
+        findProperty.findByNameAndGetValuesInList("basicTypesAlcohol").forEach(type -> {
             if(!uniqueTypesFromDatabase.contains(type)){
                 uniqueTypesFromDatabase.add(type);
             }

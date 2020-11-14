@@ -3,7 +3,7 @@ package pl.mgrzech.alcohols_collection.picture;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.mgrzech.alcohols_collection.entities.Picture;
-import pl.mgrzech.alcohols_collection.repositories.PicturesRepository;
+import pl.mgrzech.alcohols_collection.repositories.PictureRepository;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class FindPicture {
 
-    private final PicturesRepository picturesRepository;
+    private final PictureRepository pictureRepository;
 
     /**
      * Method returns all pictures for gallery.
@@ -19,7 +19,7 @@ public class FindPicture {
      * @return pictures to gallery
      */
     public List<Picture> findALlPicturesToGallery() {
-        return picturesRepository.findByGallery(true);
+        return pictureRepository.findByGallery(true);
     }
 
     /**
@@ -28,6 +28,6 @@ public class FindPicture {
      * @return found picture
      */
     public Picture findById(int id){
-        return picturesRepository.findById(id).orElseGet(Picture::new);
+        return pictureRepository.findById(id).orElseGet(Picture::new);
     }
 }

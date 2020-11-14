@@ -1,5 +1,6 @@
 package pl.mgrzech.alcohols_collection.email.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
 public class EmailMessage {
 
     /**

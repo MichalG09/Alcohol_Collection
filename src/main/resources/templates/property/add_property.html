@@ -13,14 +13,14 @@
                 <div class="border border-light p-3 m-2" >
                     <h3>Dodawanie ustawień</h3>
                     <div class="form-group">
-                        <label for="insertNameProperties">Nazwa ustawień*</label>
-                        <input type="text" th:field="${property.nameProperties}" class="form-control" id="insertNameProperties" placeholder="Nazwa ustawień">
-                        <label class="text-danger" th:if="${#fields.hasErrors('property.nameProperties')}" th:errors="*{property.nameProperties}"></label>
+                        <label for="insertNameProperty">Nazwa ustawień*</label>
+                        <input type="text" th:field="${property.nameProperty}" class="form-control" id="insertNameProperty" placeholder="Nazwa ustawień">
+                        <label class="text-danger" th:if="${#fields.hasErrors('property.nameProperty')}" th:errors="*{property.nameProperty}"></label>
                     </div>
                     <div class="form-group">
-                        <label for="insertValueProperties">Wartość ustawień*</label>
-                        <textarea rows="3" th:field="${property.valueProperties}" class="form-control" id="insertValueProperties" placeholder="Wartość ustawień"></textarea>
-                        <label class="text-danger" th:if="${#fields.hasErrors('property.valueProperties')}" th:errors="*{property.valueProperties}"></label>
+                        <label for="insertValueProperty">Wartość ustawień*</label>
+                        <textarea rows="3" th:field="${property.valueProperty}" class="form-control" id="insertValueProperty" placeholder="Wartość ustawień"></textarea>
+                        <label class="text-danger" th:if="${#fields.hasErrors('property.valueProperty')}" th:errors="*{property.valueProperty}"></label>
                     </div>
                     <input type="hidden" th:field="${property.id}">
                 </div>

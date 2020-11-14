@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.context.Context;
 
+import javax.mail.MessagingException;
+
 @Component
 @RequiredArgsConstructor
 public class SendTestEmail {
@@ -14,7 +16,7 @@ public class SendTestEmail {
     @Value("${admin.mail}")
     private String adminMail;
 
-    public void sendTestEmailWithHTML(String to, String title, String content) {
+    public void sendTestEmailWithHTML(String to, String title, String content) throws MessagingException {
         Context context = new Context();
         context.setVariable("header", "Nowy artykuł na CodeCouple");
         context.setVariable("title", "#8 Spring Boot – email - szablon i wysyłanie");

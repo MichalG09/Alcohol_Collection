@@ -1,5 +1,6 @@
 package pl.mgrzech.alcohols_collection.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,11 +23,12 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
+@AllArgsConstructor
 public class Alcohol {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     /**
      * Name bottle
@@ -69,6 +71,7 @@ public class Alcohol {
     /**
      * Additional comment for bottle alcohol
      */
+    @Column(name="comment",columnDefinition="LONGTEXT")
     private String comment;
 
     /**

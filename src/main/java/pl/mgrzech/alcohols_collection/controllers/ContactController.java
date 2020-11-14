@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.mgrzech.alcohols_collection.email.SendEmailToAdminFromContactPage;
+import pl.mgrzech.alcohols_collection.email.EmailService;
 import pl.mgrzech.alcohols_collection.email.model.EmailMessage;
 
 import javax.validation.Valid;
@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @AllArgsConstructor
 public class ContactController {
 
-    private final SendEmailToAdminFromContactPage sendEmailToAdminFromContactPage;
+    private final EmailService emailService;
 
     /**
      * Method shows view with form to send message to admin.
@@ -44,7 +44,7 @@ public class ContactController {
         if (resultEmail.hasErrors()) {
             return "contact";
         }
-        sendEmailToAdminFromContactPage.send(email, redirectAttributes);
+        emailService.sendMessageToAdminFromContactPage(email, redirectAttributes);
         return "redirect:/";
     }
 }

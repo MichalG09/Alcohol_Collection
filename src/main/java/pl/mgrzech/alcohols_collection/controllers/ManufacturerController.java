@@ -14,7 +14,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/user/manufacturer/")
 @AllArgsConstructor
-public class ManufacturerAdminController {
+public class ManufacturerController {
 
     private final ManufacturerService manufacturerService;
 
@@ -55,9 +55,9 @@ public class ManufacturerAdminController {
      */
     @GetMapping("edit/{id}")
     public String editManufacturer(@PathVariable("id") int id,
-                                      @ModelAttribute("manufacturer") Manufacturer manufacturer,
-                                      Model model){
-        manufacturerService.findManufacturerById(model, id);
+                                   @ModelAttribute("manufacturer") Manufacturer manufacturer,
+                                   Model model){
+        model.addAttribute("manufacturer", manufacturerService.findManufacturerById(id));
         return "manufacturer/add_manufacturer";
     }
 
@@ -69,7 +69,7 @@ public class ManufacturerAdminController {
     @GetMapping("all")
     public String allManufacturers(@ModelAttribute("manufacturer") Manufacturer manufacturer,
                                    Model model){
-        manufacturerService.findAllManufacturers(model);
+        model.addAttribute("manufacturers", manufacturerService.findAllManufacturers());
         return "manufacturer/all_manufacturers";
     }
 

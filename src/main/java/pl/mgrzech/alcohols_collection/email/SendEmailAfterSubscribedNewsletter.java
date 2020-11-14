@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import org.thymeleaf.context.Context;
 import pl.mgrzech.alcohols_collection.entities.Newsletter;
 
+import javax.mail.MessagingException;
+
 @Component
 @RequiredArgsConstructor
 public class SendEmailAfterSubscribedNewsletter {
@@ -19,7 +21,7 @@ public class SendEmailAfterSubscribedNewsletter {
      * Method sands email to new newsletter after added to list newsletter.
      * @param newsletter new newsletter
      */
-    public void sendEmailAfterSubscribedNewsletter(Newsletter newsletter) {
+    public void sendEmailAfterSubscribedNewsletter(Newsletter newsletter) throws MessagingException {
         Context context = new Context();
         context.setVariable("linkToUnsubscribe", "http://kolekcjaalkoholi.pl/delete/newsletter/" + newsletter.getCodeToVerifyDelete());
         context.setVariable("welcome", "Witaj " + newsletter.getName());

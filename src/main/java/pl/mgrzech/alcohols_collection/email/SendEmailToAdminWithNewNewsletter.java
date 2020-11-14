@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import org.thymeleaf.context.Context;
 import pl.mgrzech.alcohols_collection.entities.Newsletter;
 
+import javax.mail.MessagingException;
+
 @Component
 @RequiredArgsConstructor
 public class SendEmailToAdminWithNewNewsletter {
@@ -19,7 +21,7 @@ public class SendEmailToAdminWithNewNewsletter {
      * Method sends email to admin with message about new newsletter.
      * @param newsletter new newsletter
      */
-    public void sendEmailToAdminWithNewNewsletter(Newsletter newsletter) {
+    public void sendEmailToAdminWithNewNewsletter(Newsletter newsletter) throws MessagingException {
         Context context = new Context();
         context.setVariable("nameNewsletter", newsletter.getName());
         context.setVariable("emailNewsletter", newsletter.getEmail());

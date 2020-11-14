@@ -20,12 +20,12 @@
             </ol>
             <form action="#" th:action="@{/user/welcomeEdit}" method="post" class="p-3">
                 <div class="form-group">
-                    <label for="insertValueProperties">Tekst powitalny*</label>
-                    <textarea rows="20" th:field="${welcomeText.valueProperties}" class="form-control" id="insertValueProperties" placeholder="Wartość ustawień"></textarea>
-                    <label class="text-danger" th:if="${#fields.hasErrors('welcomeText.valueProperties')}" th:errors="*{welcomeText.valueProperties}"></label>
+                    <label for="insertValueProperty">Tekst powitalny*</label>
+                    <textarea rows="20" th:field="${welcomeText.valueProperty}" class="form-control" id="insertValueProperty" placeholder="Wartość ustawień"></textarea>
+                    <label class="text-danger" th:if="${#fields.hasErrors('welcomeText.valueProperty')}" th:errors="*{welcomeText.valueProperty}"></label>
                 </div>
                 <input type="hidden" th:field="${welcomeText.id}">
-                <input type="hidden" th:field="${welcomeText.nameProperties}">
+                <input type="hidden" th:field="${welcomeText.nameProperty}">
                 <button class="form-control btn btn-info" type="submit">ZAPISZ</button>
             </form>
         </div>

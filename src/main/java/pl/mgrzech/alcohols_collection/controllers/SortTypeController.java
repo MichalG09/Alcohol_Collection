@@ -41,7 +41,8 @@ public class SortTypeController {
      */
     @PostMapping("/sortType/add")
     public String saveSortTypeMethodPost(@Valid @ModelAttribute("sortType") SortType sortType,
-                                         BindingResult result, RedirectAttributes redirectAttributes){
+                                         BindingResult result,
+                                         RedirectAttributes redirectAttributes){
         if(result.hasErrors()){
             return "sortType/add_sort_type";
         }
@@ -56,22 +57,20 @@ public class SortTypeController {
      */
     @GetMapping("/sortType/all")
     public String allSortType(Model model){
-        sortTypeService.findAllSortType(model);
+        model.addAttribute("sortTypes", sortTypeService.findAllSortType());
         return "sortType/all_sort_type";
     }
 
     /**
      * Method prepares sort type to edit.
      * @param id property id to edit
-     * @param sortType sort type to edit
      * @param model model
      * @return name of the running html file
      */
     @GetMapping("/sortType/edit/{id}")
     public String editSortTypeMethodGet(@PathVariable("id") int id,
-                                        @ModelAttribute("sortType") SortType sortType,
                                         Model model){
-        sortTypeService.findSortTypeById(model, id);
+        model.addAttribute("sortType", sortTypeService.findSortTypeById(id));
         return "sortType/add_sort_type";
     }
 

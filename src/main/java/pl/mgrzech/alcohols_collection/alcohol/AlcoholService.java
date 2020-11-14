@@ -1,7 +1,10 @@
 package pl.mgrzech.alcohols_collection.alcohol;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -10,6 +13,7 @@ import pl.mgrzech.alcohols_collection.alcohol.model.AlcoholToSearch;
 import pl.mgrzech.alcohols_collection.compareAlcohols.GetListAlcoholsIdToCompare;
 import pl.mgrzech.alcohols_collection.entities.Alcohol;
 import pl.mgrzech.alcohols_collection.entities.Manufacturer;
+import pl.mgrzech.alcohols_collection.entities.Picture;
 import pl.mgrzech.alcohols_collection.entities.SortType;
 import pl.mgrzech.alcohols_collection.manufacturer.FindAllManufacturersInJSON;
 import pl.mgrzech.alcohols_collection.picture.FindPicture;
@@ -21,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AlcoholService {
 
     private final FindSortType findSortType;
@@ -33,17 +37,31 @@ public class AlcoholService {
     private final FindListTypesAlcoholToAutoCompleted findListTypesAlcoholToAutoCompleted;
     private final AddAlcohol addAlcohol;
     private final DeleteAlcoholById deleteAlcoholById;
-    private final FindPicture findPicture;
+
+    @Value("${message.correct.alcohol.edit}")
+    private String messageCorrectEditAlcohol;
+
+    @Value("${message.correct.alcohol.add}")
+    private String messageCorrectAddAlcohol;
+
+    @Value("${message.fail.alcohol.edit}")
+    private String messageFailEditAlcohol;
+
+    @Value("${message.fail.alcohol.add}")
+    private String messageFailAddAlcohol;
+
+    @Value("${message.correct.alcohol.delete}")
+    private String messageCorrectDeleteAlcohol;
+
+    @Value("${message.fail.alcohol.delete}")
+    private String messageFailDeleteAlcohol;
 
     /**
      * Method returns all alcohols for first page collection.
+     * @return list alcohols for first page
      */
-    public void findAllAlcoholsForFirstPage(Model model, HttpServletRequest request){
-        model.addAttribute("alcoholToSearch", new AlcoholToSearch());
-        model.addAttribute("alcohols", findAlcohol.findAllAlcoholsForFirstPage());
-        model.addAttribute("sortBy", "");
-        model.addAttribute("numberAlcoholInOnePage", "");
-        model.addAttribute("listAlcoholsToCompare", getListAlcoholsToCompare(request));
+    public Page<Alcohol> findAllAlcoholsForFirstPage(){
+        return findAlcohol.findAllAlcoholsForFirstPage();
     }
 
     /**
@@ -56,54 +74,24 @@ public class AlcoholService {
     }
 
     /**
-     * Method returns alcohol by id
-     * @param id alcohol id to find
-     */
-    public void findAlcoholByIdToShowAllDetail(Model model, int id){
-        Alcohol alcohol = findAlcoholById(model, id);
-        model.addAttribute("manufacturer", alcohol.getManufacturer());
-        model.addAttribute("file", new FilesValidated());
-    }
-
-    /**
-     * Method returns alcohol by id
-     * @param id alcohol id to find
-     */
-    public Alcohol findAlcoholById(Model model, int id){
-        Alcohol alcohol = findAlcohol.findById(id);
-        model.addAttribute("alcohol", alcohol);
-        return alcohol;
-    }
-
-    /**
      * Method returns page with found alcohols with parameter from form.
      * @param alcoholToSearch alcohol with parameters to search
-     * @param page number page to show
-     * @param sortBy sort result list by
-     * @param numberAlcoholInOnePage parameter number alcohol in one page
+     * @param page page
+     * @param sortBy sort by
+     * @param numberAlcoholInOnePage number alcohol in one page
+     * @return list found alcohols
      */
-    public void findSearchingAlcohols(Model model, HttpServletRequest request,
-                                      AlcoholToSearch alcoholToSearch, int page,
-                                      String sortBy, int numberAlcoholInOnePage) {
-        prepareInformationAfterSearchAlcohol(model, alcoholToSearch, page, sortBy, numberAlcoholInOnePage);
-        model.addAttribute("listAlcoholsToCompare", getListAlcoholsToCompare(request));
+    public Page<Alcohol> getSearchingAlcohols(AlcoholToSearch alcoholToSearch,
+                                              int page, String sortBy, int numberAlcoholInOnePage){
+        return findAlcohol.getSearchingAlcohols(alcoholToSearch, page, sortBy, numberAlcoholInOnePage);
     }
 
     /**
-     * Method prepares model to show information after search alcohols.
-     * @param model model
-     * @param alcoholToSearch alcohol with parameters to search
-     * @param page page
-     * @param sortBy type sort
-     * @param numberAlcoholInOnePage number alcohol in one page
+     * Method returns alcohol by id
+     * @param id alcohol id to find
      */
-    public void prepareInformationAfterSearchAlcohol(Model model, AlcoholToSearch alcoholToSearch,
-                                                     int page, String sortBy, int numberAlcoholInOnePage ){
-        model.addAttribute("alcoholToSearch", alcoholToSearch);
-        model.addAttribute("alcohols", findAlcohol.getSearchingAlcohols(alcoholToSearch, page,
-                sortBy, numberAlcoholInOnePage));
-        model.addAttribute("sortBy", sortBy);
-        model.addAttribute("numberAlcoholInOnePage", numberAlcoholInOnePage);
+    public Alcohol findAlcoholById(int id){
+        return findAlcohol.findById(id);
     }
 
     /**
@@ -112,7 +100,7 @@ public class AlcoholService {
      * @return all sort type in list
      */
     public Iterable<SortType> allTypesSort() {
-        return findSortType.allTypesSort();
+        return findSortType.allSortedByValueTypesSort();
     }
 
     /**
@@ -121,11 +109,11 @@ public class AlcoholService {
      * @return values number alcohol in one page
      */
     public List<String> allNumbersAlcoholsInOnePage() {
-        return findProperty.findByName("valuesNumberAlcoholInOnePage");
+        return findProperty.findByNameAndGetValuesInList("valuesNumberAlcoholInOnePage");
     }
 
     /**
-     * method checks if the user has accepted cookies.
+     * Method checks if the user has accepted cookies.
      * Cookies are necessary to save id alcohols to compare.
      * @param request request
      * @return true if user accepted cookie, false if not.
@@ -148,7 +136,14 @@ public class AlcoholService {
                                                     Manufacturer oldManufacturer,
                                                     FilesValidated filesValidated,
                                                     RedirectAttributes redirectAttributes) {
-        addAlcohol.editOrAddNewAlcoholWithManufacturer(alcohol, newManufacturer, oldManufacturer, filesValidated, redirectAttributes);
+        boolean isNew = alcohol.getId() == null;
+        try{
+            addAlcohol.editOrAddNewAlcoholWithManufacturer(alcohol, newManufacturer, oldManufacturer, filesValidated);
+            redirectAttributes.addFlashAttribute("message", isNew ? messageCorrectAddAlcohol : messageCorrectEditAlcohol);
+        } catch (Exception e){
+            redirectAttributes.addFlashAttribute("messageError", isNew ? messageFailAddAlcohol : messageFailEditAlcohol);
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -157,7 +152,13 @@ public class AlcoholService {
      * @param redirectAttributes redirectAttributes
      */
     public void deleteAlcoholById(int id, RedirectAttributes redirectAttributes) {
-        deleteAlcoholById.deleteById(id, redirectAttributes);
+        try{
+            deleteAlcoholById.deleteById(id);
+            redirectAttributes.addFlashAttribute("message", messageCorrectDeleteAlcohol);
+        } catch (Exception e){
+            redirectAttributes.addFlashAttribute("messageError", messageFailDeleteAlcohol);
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -182,16 +183,9 @@ public class AlcoholService {
      * @return list all places in storage.
      */
     public List<String> findPlacesInStorageInProperty() {
-        return findProperty.findByName("placeInStorage");
+        return findProperty.findByNameAndGetValuesInList("placeInStorage");
     }
 
-    /**
-     * Method returns picture by id.
-     * @param idPicture picture id to find
-     */
-    public void findPicture(Model model, int idPicture, int idAlcohol) {
-        model.addAttribute("picture", findPicture.findById(idPicture));
-        model.addAttribute("idAlcohol", idAlcohol);
-    }
+
 }
 

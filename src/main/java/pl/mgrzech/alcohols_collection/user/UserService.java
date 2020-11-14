@@ -1,18 +1,24 @@
 package pl.mgrzech.alcohols_collection.user;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mgrzech.alcohols_collection.entities.User;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserService {
 
     private final AddUser addUser;
     private final FindUser findUser;
     private final DeleteUser deleteUser;
+
+    @Value("${message.correct.user.add}")
+    private String messageCorrectAddUser;
+
+    @Value("${message.fail.user.add}")
+    private String messageFailAddUser;
 
     /**
      * Method saves user.
@@ -20,22 +26,30 @@ public class UserService {
      * @param redirectAttributes redirectAttributes
      */
     public void addUser(User user, RedirectAttributes redirectAttributes) {
-        addUser.save(user, redirectAttributes);
+        try{
+            addUser.save(user);
+            redirectAttributes.addFlashAttribute("message", messageCorrectAddUser);
+        } catch (Exception e){
+            redirectAttributes.addFlashAttribute("messageError", messageCorrectAddUser);
+            e.printStackTrace();
+        }
     }
 
     /**
      * Method returns all users.
+     * @return list all users
      */
-    public void findAllUser(Model model) {
-        model.addAttribute("users", findUser.findAll());
+    public Iterable<User> findAllUser() {
+        return findUser.findAll();
     }
 
     /**
      * Method returns user by Id.
      * @param id id user to find
+     * @return found user by id
      */
-    public void findUserById(Model model, int id) {
-        model.addAttribute("user", findUser.findById(id));
+    public User findUserById(int id) {
+        return findUser.findById(id);
     }
 
     /**

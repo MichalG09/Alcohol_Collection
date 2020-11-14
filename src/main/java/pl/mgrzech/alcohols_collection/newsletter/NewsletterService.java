@@ -1,23 +1,35 @@
 package pl.mgrzech.alcohols_collection.newsletter;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.mgrzech.alcohols_collection.email.SendEmailToAllNewsletters;
+import pl.mgrzech.alcohols_collection.email.EmailService;
 import pl.mgrzech.alcohols_collection.entities.Newsletter;
 import pl.mgrzech.alcohols_collection.entities.Property;
 import pl.mgrzech.alcohols_collection.property.FindProperty;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class NewsletterService {
 
     private final FindProperty findProperty;
     private final AddNewNewsletter addNewNewsletter;
     private final DeleteNewsletter deleteNewsletter;
     private final FindNewsletters findNewsletters;
-    private final SendEmailToAllNewsletters sendEmailToAllNewsletters;
+    private final EmailService emailService;
+
+    @Value("${message.correct.newsletter.add}")
+    private String messageCorrectAddNewsletter;
+
+    @Value("${message.fail.newsletter.add}")
+    private String messageFailAddNewsletter;
+
+    @Value("${message.correct.newsletter.delete}")
+    private String messageCorrectDeleteNewsletter;
+
+    @Value("${message.fail.newsletter.delete}")
+    private String messageFailDeleteNewsletter;
 
     /**
      * Method returns welcome text from property.
@@ -35,24 +47,22 @@ public class NewsletterService {
      * @param redirectAttributes redirectAttributes
      */
     public void saveNewNewsletter(Newsletter newsletter, RedirectAttributes redirectAttributes) {
-        addNewNewsletter.save(newsletter, redirectAttributes);
+        try{
+            addNewNewsletter.save(newsletter);
+            emailService.sendEmailAfterAddNewNewsletter(newsletter);
+            redirectAttributes.addFlashAttribute("message", messageCorrectAddNewsletter);
+        } catch (Exception ex){
+            redirectAttributes.addFlashAttribute("messageError", messageFailAddNewsletter);
+            ex.printStackTrace();
+        }
     }
 
     /**
      * Method returns all newsletters.
+     * @return all newsletters
      */
-    public void findAllNewsletters(Model model) {
-        model.addAttribute("newsletters", findNewsletters.findAll());
-    }
-
-    /**
-     * Method sends e-mail to all user saved to list newsletter.
-     * @param subject subject email
-     * @param textMessage text email
-     * @param redirectAttributes redirectAttributes
-     */
-    public void sendEmailToAllNewsletters(String subject, String textMessage, RedirectAttributes redirectAttributes) {
-        sendEmailToAllNewsletters.sendMessageToAllPersonInNewsletter(subject, textMessage, redirectAttributes);
+    public Iterable<Newsletter> findAllNewsletters() {
+        return findNewsletters.findAll();
     }
 
     /**
@@ -60,10 +70,8 @@ public class NewsletterService {
      * @param uniqueCode unique code to find newsletter to delete
      * @return found newsletter
      */
-    public void findNewsletterToDeleteByUniqueCode(Model model, int uniqueCode) {
-        Newsletter newsletter =  findNewsletters.findNewsletterToDeleteByUniqueCode(uniqueCode);
-        model.addAttribute("idNewsletter", newsletter.getId());
-        model.addAttribute("nameNewsletter", newsletter.getName());
+    public Newsletter findNewsletterToDeleteByUniqueCode(int uniqueCode) {
+        return findNewsletters.findNewsletterToDeleteByUniqueCode(uniqueCode);
     }
 
     /**
@@ -72,6 +80,12 @@ public class NewsletterService {
      * @param redirectAttributes redirectAttributes
      */
     public void deleteNewsletterById(int id, RedirectAttributes redirectAttributes) {
-        deleteNewsletter.deleteById(id, redirectAttributes);
+        try {
+            deleteNewsletter.deleteById(id);
+            redirectAttributes.addFlashAttribute("message", messageCorrectDeleteNewsletter);
+        } catch (Exception e){
+            redirectAttributes.addFlashAttribute("messageError", messageFailDeleteNewsletter);
+            e.printStackTrace();
+        }
     }
 }
