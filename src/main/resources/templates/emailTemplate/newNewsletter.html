@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <style type="text/css">
@@ -22,6 +22,7 @@
         <td><br></td>
         <td align="center" height="100" style="background-color: rgb(255, 255, 255);">
             <h1>Dziękujemy za subskrybcję.</h1>
+            <h3 th:text="${welcome}"></h3>
             <h3><br></h3>
             <h4>Dziękujemy za subskrybcję.<br>Będziesz otrzymywać wiadomości z najważniejszymi wydarzeniami związanymi ze stroną kolekcjaalkoholi.pl.</h4>
         </td>
@@ -36,7 +37,7 @@
     </tr>
     <tr>
         <td align="center" colspan="3" height="50">
-            <h5><a>WYPISZ Z NEWSLETTERA</a></h5>
+            <h5><a th:href='${linkToUnsubscribe}'>WYPISZ Z NEWSLETTERA</a></h5>
         </td>
     </tr>
     <tr>
