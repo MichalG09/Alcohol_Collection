@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>pl.kolekcjaalkoholi</groupId>
 	<artifactId>alcohols_collection</artifactId>
-	<version>1.0.3</version>
+	<version>1.1.0</version>
 	<name>alcohols_collection</name>
 	<description>Website about small bottles alcohols collection</description>
 	<packaging>war</packaging>
@@ -55,10 +55,16 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!--database for tests-->
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc8</artifactId>
 			<version>19.6.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<!--Security-->
 		<dependency>
@@ -84,7 +90,12 @@
 			<version>1.18.12</version>
 			<scope>provided</scope>
 		</dependency>
-
+		<!-- JUNIT -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -115,36 +126,16 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-<!--			<scope>provided</scope>-->
-		</dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-			<version>1.9.13</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.13</version>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>test</scope>
+			<scope>provided</scope>
 		</dependency>
 		<!-- jboos wildfly
         for test  comment all dependency
-        for prod no comment dependency
+        for prod no comment dependency-->
         <dependency>
             <groupId>org.jboss</groupId>
             <artifactId>jboss-common-core</artifactId>
             <version>2.5.0.Final</version>
-        </dependency>-->
+        </dependency>
 	</dependencies>
 
 	<build>

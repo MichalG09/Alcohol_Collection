@@ -61,7 +61,7 @@ public class Picture {
      * @return picture in String after format Base64
      */
     public String getPictureInBase64(){
-//        return org.jboss.util.Base64.encodeBytes(this.getFile());//Prod
-        return org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(this.getFile()); //Test in Tomcat
+        return org.jboss.util.Base64.encodeBytes(this.getFile());//Prod
+//        return org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(this.getFile()); //Test in Tomcat
     }
 }

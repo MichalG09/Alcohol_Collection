@@ -19,8 +19,6 @@ JS
 
 ## ToDo in project
 ```HTML
-Tests
 generating pdf for selected alcohol
-showing the picture in large size
 ```
 
