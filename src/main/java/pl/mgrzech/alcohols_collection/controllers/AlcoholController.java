@@ -29,7 +29,7 @@ public class AlcoholController {
     @GetMapping("/all")
     public String allAlcohols(Model model, HttpServletRequest request){
         model.addAttribute("alcohols", alcoholService.findAllAlcoholsForFirstPage());
-        prepareModelWithParametersToView(model, new AlcoholToSearch(), request, "", "");
+        prepareModelWithParametersToView(model, new AlcoholToSearch(), request, "", "", 1);
         return "alcohol/all_alcohols";
     }
 
@@ -68,8 +68,8 @@ public class AlcoholController {
                                 Model model,
                                 HttpServletRequest request){
         model.addAttribute("alcohols", alcoholService.getSearchingAlcohols(
-                alcoholToSearch, page, sortBy, Integer.parseInt(numberAlcoholInOnePage)));
-        prepareModelWithParametersToView(model, alcoholToSearch, request, sortBy, numberAlcoholInOnePage);
+                alcoholToSearch, page, sortBy, Integer.parseInt(numberAlcoholInOnePage.trim())));
+        prepareModelWithParametersToView(model, alcoholToSearch, request, sortBy, numberAlcoholInOnePage, page);
         return "alcohol/all_alcohols";
     }
 
@@ -114,10 +114,11 @@ public class AlcoholController {
      */
     private void prepareModelWithParametersToView(Model model, AlcoholToSearch alcoholToSearch,
                                                   HttpServletRequest request, String sortBy,
-                                                  String numberAlcoholInOnePage){
+                                                  String numberAlcoholInOnePage, int page){
         model.addAttribute("listAlcoholsToCompare", alcoholService.getListAlcoholsToCompare(request));
         model.addAttribute("alcoholToSearch", alcoholToSearch);
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("numberAlcoholInOnePage", numberAlcoholInOnePage);
+        model.addAttribute("page", page);
     }
 }
