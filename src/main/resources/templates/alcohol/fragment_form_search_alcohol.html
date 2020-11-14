@@ -1,4 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 <h3 class="mt-5">Wyszukiwanie</h3>
 <form id="searchAlcoholForm" action="#" th:action="@{/alcohol/search/}" method="post" class="p-3">
     <div class="form-group">
@@ -46,6 +47,6 @@
         <input type="text" th:field="${alcoholToSearch.manufacturer.nameCompany}" class="form-control" id="manufacturerName" placeholder="Nazwa producenta">
     </div>
 </form>
-<button class="form-control btn btn-info m-1" th:onclick="|submit('${1}')|">SZUKAJ</button>
-<button class="form-control btn btn-secondary m-1" th:onclick="|clearFormSearch()|"  role="button">WYCZYŚĆ</button>
+<button class="form-control btn btn-info m-1 visibleOnLoadPage" th:onclick="|submit('${1}')|">SZUKAJ</button>
+<button class="form-control btn btn-secondary m-1 visibleOnLoadPage" th:onclick="|clearFormSearch()|"  role="button">WYCZYŚĆ</button>
 <button th:id="searchFormMoreButton" th:if="${#request.isUserInRole('USER') or #request.isUserInRole('ADMIN')}" class="form-control btn btn-secondary m-1" th:onclick="|adminSearch()|" role="button">WIĘCEJ</button>
