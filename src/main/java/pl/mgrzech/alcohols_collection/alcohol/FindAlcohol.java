@@ -6,11 +6,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
-import pl.mgrzech.alcohols_collection.entities.Alcohol;
 import pl.mgrzech.alcohols_collection.alcohol.model.AlcoholToSearch;
-import pl.mgrzech.alcohols_collection.repositories.AlcoholRepository;
+import pl.mgrzech.alcohols_collection.entities.Alcohol;
 import pl.mgrzech.alcohols_collection.picture.SortPicture;
 import pl.mgrzech.alcohols_collection.property.FindProperty;
+import pl.mgrzech.alcohols_collection.repositories.AlcoholRepository;
 
 @Component
 @AllArgsConstructor
@@ -84,6 +84,14 @@ public class FindAlcohol {
         return resultSearchedAlcohols;
     }
 
+    /**
+     * Method creates a PageRequest for query with parameters from form
+     * @param page number page to show
+     * @param sortBy type sorting (ASC or DESC)
+     * @param numberAlcoholsInPage number alcohols in one page
+     * @param sortByValue sort by parameter
+     * @return PageRequest with parameters from form
+     */
     private PageRequest sortSearchedAlcoholsByManufacturer(int page, String sortBy,
                                                            int numberAlcoholsInPage,
                                                            String sortByValue){

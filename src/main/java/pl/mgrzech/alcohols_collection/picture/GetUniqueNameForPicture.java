@@ -1,16 +1,23 @@
 package pl.mgrzech.alcohols_collection.picture;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import pl.mgrzech.alcohols_collection.repositories.PicturesRepository;
+import pl.mgrzech.alcohols_collection.repositories.PictureRepository;
 
 import java.util.Random;
 
 @Component
-@AllArgsConstructor
-public class GetUniqueName {
+@RequiredArgsConstructor
+public class GetUniqueNameForPicture {
 
-    private final PicturesRepository picturesRepository;
+    private final PictureRepository pictureRepository;
+
+    @Value("${picture.random.scope}")
+    private int scopeToRandomNumber;
+
+    @Value("${picture.random.minValue}")
+    private int minRandValue;
 
     /**
      * Method returns unique picture name.
@@ -23,8 +30,8 @@ public class GetUniqueName {
         Random rand = new Random();
         String uniqueNumberToName;
         do{
-            uniqueNumberToName = String.valueOf(rand.nextInt(999998) + 1000001);
-        } while (picturesRepository.findByNameIsContaining(uniqueNumberToName).isPresent());
+            uniqueNumberToName = String.valueOf(rand.nextInt(scopeToRandomNumber) + minRandValue);
+        } while (!pictureRepository.findByNameIsContaining(uniqueNumberToName).isEmpty());
         return prefixName + "_" + uniqueNumberToName;
     }
 }

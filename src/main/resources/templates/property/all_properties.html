@@ -23,10 +23,10 @@
                 </tr>
                 <tr th:each="property: ${properties}">
                     <td colspan="2">
-                        <p th:text="${property.nameProperties}"></p>
+                        <p th:text="${property.nameProperty}"></p>
                     </td>
                     <td colspan="2">
-                        <p th:text="${property.valueProperties}"></p>
+                        <p th:text="${property.valueProperty}"></p>
                     </td>
                     <td colspan="2">
                         <a class="btn btn-secondary mr-1 mt-1" th:href="@{/admin/property/edit/} + ${property.id}" role="button">EDYTUJ</a>

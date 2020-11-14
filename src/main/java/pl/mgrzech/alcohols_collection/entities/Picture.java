@@ -1,5 +1,6 @@
 package pl.mgrzech.alcohols_collection.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,10 +18,11 @@ import java.util.Date;
 @NoArgsConstructor
 @Setter
 @Getter
+@AllArgsConstructor
 public class Picture {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     /**
@@ -59,7 +61,7 @@ public class Picture {
      * @return picture in String after format Base64
      */
     public String getPictureInBase64(){
-//        return org.jboss.util.Base64.encodeBytes(this.getFile());//Prod
-        return org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(this.getFile()); //Test in Tomcat
+        return org.jboss.util.Base64.encodeBytes(this.getFile());//Prod
+//        return org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(this.getFile()); //Test in Tomcat
     }
 }

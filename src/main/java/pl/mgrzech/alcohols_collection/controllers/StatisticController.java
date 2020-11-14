@@ -22,15 +22,19 @@ public class StatisticController {
 
     @GetMapping("/user/statistic")
     public String showAllStatistic(Model model){
-        statisticService.showAllStatistics(model);
+        model.addAttribute("statisticsForPlacesInStorage", statisticService.showAllStatistics());
         return "statistic/allStatistic";
     }
 
     @GetMapping("/user/statistic/InOnePlace/{place}")
-    public String showAllAlcoholsInOnePlaceStorage(Model model,
-                                                   @PathVariable("place") String placeInStorage,
+    public String showAllAlcoholsInOnePlaceStorage(@PathVariable("place") String placeInStorage,
+                                                   Model model,
                                                    HttpServletRequest request){
-        statisticService.showAllAlcoholsInOnePlaceStorage(model, placeInStorage, request);
+        model.addAttribute("listAlcoholsToCompare", alcoholService.getListAlcoholsToCompare(request));
+        model.addAttribute("alcoholToSearch", statisticService.generateAlcoholToSearchForPlaceInStorage(placeInStorage));
+        model.addAttribute("alcohols", statisticService.showAllAlcoholsInOnePlaceStorage(placeInStorage));
+        model.addAttribute("sortBy", "");
+        model.addAttribute("numberAlcoholInOnePage", "");
         return "alcohol/all_alcohols";
     }
 
@@ -42,7 +46,7 @@ public class StatisticController {
      */
     @ModelAttribute("acceptCookie")
     public boolean acceptedCookieInWebsite(HttpServletRequest request) {
-        return alcoholService.checkAcceptedCookieInWebsite(request);
+        return statisticService.checkAcceptedCookieInWebsite(request);
     }
 
     /**
@@ -52,7 +56,7 @@ public class StatisticController {
      */
     @ModelAttribute("typesOfSort")
     public Iterable<SortType> listAllTypesOfSort() {
-        return alcoholService.allTypesSort();
+        return statisticService.allTypesSort();
     }
 
     /**
@@ -62,6 +66,6 @@ public class StatisticController {
      */
     @ModelAttribute("numberAlcoholsInOnePageToSelect")
     public List<String> listNumbersAlcoholsInOnePage() {
-        return alcoholService.allNumbersAlcoholsInOnePage();
+        return statisticService.allNumbersAlcoholsInOnePage();
     }
 }

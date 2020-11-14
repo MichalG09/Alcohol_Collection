@@ -29,10 +29,10 @@ public class InitProperties {
      * @param valueProperty value property
      */
     private void initProperty(String nameProperty, String valueProperty){
-        if(!propertyRepository.findByNameProperties(nameProperty).isPresent()) {
+        if(!propertyRepository.findByNameProperty(nameProperty).isPresent()) {
             Property property = new Property();
-            property.setNameProperties(nameProperty);
-            property.setValueProperties(valueProperty);
+            property.setNameProperty(nameProperty);
+            property.setValueProperty(valueProperty);
             propertyRepository.save(property);
         }
     }

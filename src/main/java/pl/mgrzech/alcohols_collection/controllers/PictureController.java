@@ -2,6 +2,7 @@ package pl.mgrzech.alcohols_collection.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mgrzech.alcohols_collection.picture.PictureService;
@@ -40,5 +41,22 @@ public class PictureController {
                                                  RedirectAttributes redirectAttributes){
         pictureService.changeMainPictureForAlcohol(alcoholId, pictureId, redirectAttributes);
         return "redirect:/user/alcohol/edit/" + alcoholId;
+    }
+
+    /**
+     * Method return picture founded by id.
+     * Picture to show in big size.
+     * @param idAlcohol id Alcohol to back button
+     * @param idPicture picture id to find
+     * @param model model
+     * @return found picture
+     */
+    @GetMapping("/alcohol/picture/{idAlcohol}/{idPicture}")
+    public String showOnePictureForAlcohol(@PathVariable("idAlcohol") int idAlcohol,
+                                           @PathVariable("idPicture") int idPicture,
+                                           Model model){
+        model.addAttribute("picture", pictureService.findPicture(idPicture, idAlcohol));
+        model.addAttribute("idAlcohol", idAlcohol);
+        return "alcohol/alcohol_big_picture";
     }
 }

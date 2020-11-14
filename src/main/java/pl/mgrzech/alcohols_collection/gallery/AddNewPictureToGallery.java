@@ -1,27 +1,19 @@
 package pl.mgrzech.alcohols_collection.gallery;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.mgrzech.alcohols_collection.picture.GetUniqueName;
+import pl.mgrzech.alcohols_collection.picture.GetUniqueNameForPicture;
 import pl.mgrzech.alcohols_collection.picture.SavePicture;
 import pl.mgrzech.alcohols_collection.validations.file_validation.FilesValidated;
 
 import java.io.IOException;
 
 @Component
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class AddNewPictureToGallery {
 
     private final SavePicture savePicture;
-    private final GetUniqueName getUniqueName;
-
-    @Value("${message.correct.gallery.picture.add}")
-    private String messageCorrectAddPicture;
-
-    @Value("${message.fail.gallery.picture.add}")
-    private String messageFailAddPicture;
+    private final GetUniqueNameForPicture getUniqueNameForPicture;
 
     /**
      * Methods saves gallery picture in database.
@@ -31,21 +23,18 @@ public class AddNewPictureToGallery {
      * This parameter lets recognize picture to gallery from other
      * pictures in database (pictures for alcohols).
      * @param filesValidated picture from form
-     * @param redirectAttributes redirectAttributes
      */
-    public void savePicturesToGallery(FilesValidated filesValidated, RedirectAttributes redirectAttributes) {
+    public void savePicturesToGallery(FilesValidated filesValidated) {
         filesValidated.getMultipartFiles().forEach(
-                pic -> {
+                validatedPicture -> {
                     try {
                         savePicture.save(
-                                pic.getBytes(),
-                                getUniqueName.get("gallery"),
+                                validatedPicture.getBytes(),
+                                getUniqueNameForPicture.get("gallery"),
                                 false,
                                 true);
-                        redirectAttributes.addFlashAttribute("message", messageCorrectAddPicture);
                     } catch (IOException e) {
                         e.printStackTrace();
-                        redirectAttributes.addFlashAttribute("messageError", messageCorrectAddPicture);
                     }
                 });
     }

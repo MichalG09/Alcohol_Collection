@@ -15,7 +15,7 @@ import java.util.List;
 public class ConvertAdditionalPicturesFromFilesValidatedToPicture {
 
     private final SavePicture savePicture;
-    private final GetUniqueName getUniqueName;
+    private final GetUniqueNameForPicture getUniqueNameForPicture;
 
     /**
      * Method converts filesValidated (insert in form) to picture for alcohol.
@@ -31,7 +31,7 @@ public class ConvertAdditionalPicturesFromFilesValidatedToPicture {
                     try {
                         listPicturesForAlcohol.add(
                                 savePicture.save(pic.getBytes(),
-                                    getUniqueName.get(alcohol.getName()),
+                                    getUniqueNameForPicture.get(alcohol.getName()),
                                     false, false)
                         );
                     } catch (IOException e) {
