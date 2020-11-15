@@ -47,7 +47,7 @@ public class GalleryService {
     public void savePicturesToGallery(FilesValidated filesValidated, RedirectAttributes redirectAttributes) {
         try{
             addNewPictureToGallery.savePicturesToGallery(filesValidated);
-            redirectAttributes.addFlashAttribute("messageError", messageCorrectAddPicture);
+            redirectAttributes.addFlashAttribute("message", messageCorrectAddPicture);
         } catch (Exception e) {
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("messageError", messageFailAddPicture);

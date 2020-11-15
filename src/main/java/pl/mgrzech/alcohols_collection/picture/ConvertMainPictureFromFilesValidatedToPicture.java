@@ -26,7 +26,7 @@ public class ConvertMainPictureFromFilesValidatedToPicture {
      * @throws IOException IOException
      */
     public Picture convert(FilesValidated filesValidated, Alcohol alcohol) throws IOException {
-        if(alcohol.getId() != null){
+        if(alcohol.getId() != 0){
             pictureRepository.save(pictureRepository.findMainPictureForAlcohol(alcohol.getId()).map(picture -> {
                 picture.setMainPicture(false);
                 return picture;

@@ -89,8 +89,12 @@ public class AlcoholAdminController {
      */
     @GetMapping("/edit/{id}")
     public String editAlcoholMethodPost(@PathVariable("id") int id,
+                                        @ModelAttribute("manufacturer") Manufacturer manufacturer,
+                                        @ModelAttribute("file") FilesValidated filesValidated,
                                         Model model){
-        model.addAttribute("alcohol", alcoholService.findAlcoholById(id));
+        Alcohol alcohol = alcoholService.findAlcoholById(id);
+        model.addAttribute("alcohol", alcohol);
+        model.addAttribute("manufacturer", alcohol.getManufacturer());
         return "alcohol/add_alcohol";
     }
 

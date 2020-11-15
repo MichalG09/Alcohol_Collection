@@ -136,7 +136,7 @@ public class AlcoholService {
                                                     Manufacturer oldManufacturer,
                                                     FilesValidated filesValidated,
                                                     RedirectAttributes redirectAttributes) {
-        boolean isNew = alcohol.getId() == null;
+        boolean isNew = alcohol.getId() == 0;
         try{
             addAlcohol.editOrAddNewAlcoholWithManufacturer(alcohol, newManufacturer, oldManufacturer, filesValidated);
             redirectAttributes.addFlashAttribute("message", isNew ? messageCorrectAddAlcohol : messageCorrectEditAlcohol);
