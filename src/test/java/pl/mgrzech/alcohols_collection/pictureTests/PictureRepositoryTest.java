@@ -85,7 +85,7 @@ public class PictureRepositoryTest {
         List<Picture> listPictures = new ArrayList<>(Arrays.asList(additionalPicture1, pictureToGallery, mainPicture, additionalPicture2));
         Manufacturer manufacturer = new Manufacturer(null, "name", "", "", null, "", now, now);
         manufacturerRepository.save(manufacturer);
-        Alcohol alcohol = new Alcohol(null, "name1", "type1", 50, 40, now, now, "", manufacturer, "", "A1", listPictures);
+        Alcohol alcohol = new Alcohol(1, "name1", "type1", 50, 40, now, now, "", manufacturer, "", "A1", listPictures);
         alcoholRepository.save(alcohol);
 
         Optional<Picture> picture = pictureRepository.findMainPictureForAlcohol(alcohol.getId());

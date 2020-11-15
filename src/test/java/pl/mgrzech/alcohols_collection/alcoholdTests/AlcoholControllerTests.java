@@ -52,11 +52,11 @@ public class AlcoholControllerTests {
         Picture picture = new Picture();
         List<Picture> listPictures = new ArrayList<>(Collections.singletonList(picture));
         List<Alcohol> listAlcohols = new ArrayList<>();
-        listAlcohols.add(new Alcohol(null, "name1", "type1", 50, 40, nowDate, nowDate, "comment1", new Manufacturer(), "", "A1", listPictures));
-        listAlcohols.add(new Alcohol(null, "name2", "type2", 50, 40, nowDate, nowDate, "comment2", new Manufacturer(), "", "A2", listPictures));
+        listAlcohols.add(new Alcohol(1, "name1", "type1", 50, 40, nowDate, nowDate, "comment1", new Manufacturer(), "", "A1", listPictures));
+        listAlcohols.add(new Alcohol(2, "name2", "type2", 50, 40, nowDate, nowDate, "comment2", new Manufacturer(), "", "A2", listPictures));
 
         alcoholPage = new PageImpl<>(listAlcohols);
-        correctAlcohol = new Alcohol(null, "name", "type", 50, 40, nowDate, nowDate, "comment", new Manufacturer(), "", "A1", listPictures);
+        correctAlcohol = new Alcohol(3, "name", "type", 50, 40, nowDate, nowDate, "comment", new Manufacturer(), "", "A1", listPictures);
     }
 
     @Test

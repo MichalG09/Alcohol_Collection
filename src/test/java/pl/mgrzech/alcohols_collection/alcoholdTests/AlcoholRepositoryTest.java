@@ -71,6 +71,6 @@ public class AlcoholRepositoryTest {
         Manufacturer manufacturer = new Manufacturer(null, "name" + name, "", "", null, "", nowDate, nowDate);
         manufacturerRepository.save(manufacturer);
 
-        return new Alcohol(null, "name" + name, "type" + type, capacity, amountOfAlcohol, nowDate, nowDate, "", manufacturer, "", placeInStorage, listPictures);
+        return new Alcohol(1, "name" + name, "type" + type, capacity, amountOfAlcohol, nowDate, nowDate, "", manufacturer, "", placeInStorage, listPictures);
     }
 }

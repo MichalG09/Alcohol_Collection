@@ -36,7 +36,7 @@ public class AddAlcohol{
      */
     public void editOrAddNewAlcoholWithManufacturer(Alcohol alcohol, Manufacturer oldManufacturer,
                                                     Manufacturer newManufacturer, FilesValidated filesValidated) {
-        boolean isNew = alcohol.getId() == null;
+        boolean isNew = alcohol.getId() == 0;
         Date nowDate = new Date();
         if(isNew){
             alcohol.setCreatedDate(nowDate);
