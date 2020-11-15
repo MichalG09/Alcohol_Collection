@@ -213,7 +213,9 @@ left: 0;
 }
 
 .containerGallery{
-
   position: relative;
 }
 
+.visibleOnLoadPage{
+    display: none;
+}

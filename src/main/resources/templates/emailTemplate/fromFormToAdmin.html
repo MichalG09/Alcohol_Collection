@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <style type="text/css">
-         a {color: #062b67; text-decoration: none; font-weight: bold;}
-    </style>
+         a {
+         color: #062b67;
+         text-decoration: none;
+         font-weight: bold;
+         }
+      </style>
 </head>
 <body>
-<table width="100%" cellpadding="0" cellspacing="0" bgcolor="CC7C00">
+<table cellpadding="0" cellspacing="0" style="background-color: rgb(204, 204, 200);" width="100%">
     <tr>
-        <td height="50" align="center">
+        <td align="center" colspan="3" height="50">
             <p><a href="http://kolekcjaalkoholi.pl">kolekcjaalkoholi.pl</a></p>
         </td>
     </tr>
-    <tr bgcolor="F0B65E">
-        <td height="100" align="center">
+    <tr>
+        <td width="10%"><br></td>
+        <td align="center" height="100" style="background-color: rgb(255, 255, 255);">
             <h4>Witam</h4>
             <h4 th:text="${text}"></h4>
-            <br><br>
+            <br>
             <h4>Pozdrawiam</h4>
             <h4 th:text="${author}"></h4>
         </td>
+        <td width="10%"><br></td>
     </tr>
     <tr>
-        <td height="50" align="center">
+        <td align="center" colspan="3" height="50">
             <p><a href="http://kolekcjaalkoholi.pl">kolekcjaalkoholi.pl</a></p>
         </td>
     </tr>

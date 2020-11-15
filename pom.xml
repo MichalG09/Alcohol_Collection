@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>pl.kolekcjaalkoholi</groupId>
 	<artifactId>alcohols_collection</artifactId>
-	<version>1.1.0</version>
+	<version>1.1.1</version>
 	<name>alcohols_collection</name>
 	<description>Website about small bottles alcohols collection</description>
 	<packaging>war</packaging>
