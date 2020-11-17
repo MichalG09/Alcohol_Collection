@@ -20,7 +20,7 @@ public class StatisticService {
 
     private final AlcoholService alcoholService;
     private final FindProperty findProperty;
-    private final FindStatisticsAllAlcoholInOnePlaceInStorage findStatisticsAllAlcoholInOnePlaceInStorage;
+    private final AllAlcoholInOnePlaceInStorage allAlcoholInOnePlaceInStorage;
     private final PrepareAlcoholToSearchForStatisticInPlaceStorage prepareAlcoholToSearchForStatisticInPlaceStorage;
 
     /**
@@ -31,7 +31,7 @@ public class StatisticService {
         Map<String, Integer> resultMapWithStatisticPlaceInStorage = new TreeMap<>();
         findProperty.findByNameAndGetValuesInList("placeInStorage")
                 .forEach(place -> {
-                    resultMapWithStatisticPlaceInStorage.put(place, findStatisticsAllAlcoholInOnePlaceInStorage.find(place));
+                    resultMapWithStatisticPlaceInStorage.put(place, allAlcoholInOnePlaceInStorage.find(place));
                 });
         return resultMapWithStatisticPlaceInStorage;
     }

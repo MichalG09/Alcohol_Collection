@@ -22,7 +22,9 @@ public class StartPageService {
      */
     public void startPage(Model model){
         model.addAttribute("welcomeText", findProperty.findWelcomeTextFromProperty());
-        model.addAttribute("numberAllAlcohols", statisticAlcohol.getStatisticForNumbersAlcoholsInCollection());
-        model.addAttribute("numberAllManufacturers", statisticsManufacturer.getStatisticForNumbersManufacturersInCollection());
+        model.addAttribute("numberAllAlcohols", statisticAlcohol.getNumberAllAlcoholsInCollection());
+        model.addAttribute("numberAllManufacturers", statisticsManufacturer.getNumberAllManufacturersInCollection());
+        model.addAttribute("numberAllAlcoholTypes", statisticAlcohol.getNumberDistinctAlcoholType());
+        model.addAttribute("numberAllCapacity", statisticAlcohol.getSumCapacityAllAlcohols());
     }
 }
