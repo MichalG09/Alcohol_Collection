@@ -34,13 +34,18 @@ public class StatisticsAlcoholTest {
 
     @Before
     public void init(){
+        createOneAlcoholToH2Database(1, "A2");
+        createOneAlcoholToH2Database(2, "A2");
         createOneAlcoholToH2Database(3, "A2");
         createOneAlcoholToH2Database(4, "A2");
-        createOneAlcoholToH2Database(5, "A2");
-        createOneAlcoholToH2Database(6, "A2");
-        createOneAlcoholToH2Database(7, "A3");
-        createOneAlcoholToH2Database(8, "A5");
-        createOneAlcoholToH2Database(9, "A5");
+        createOneAlcoholToH2Database(5, "A3");
+        createOneAlcoholToH2Database(6, "A5");
+        createOneAlcoholToH2Database(7, "A5");
+    }
+
+    @Test
+    public void shouldReturnCorrectNumbersAlcohols(){
+        assertEquals(7, alcoholRepository.findAll().size());
     }
 
     @Test
@@ -63,6 +68,16 @@ public class StatisticsAlcoholTest {
         assertEquals(2, alcoholRepository.countByPlaceInStorage("A5"));
     }
 
+    @Test
+    public void shouldCorrectCalculationNumbersTypesAlcohols(){
+        assertEquals(7, alcoholRepository.countDistinctType());
+    }
+
+    @Test
+    public void shouldCorrectCalculationCapacitiesAlcohols(){
+        assertEquals(350, alcoholRepository.sumAllCapacity());
+    }
+
     private void createOneAlcoholToH2Database(int nextId, String placeInStorage){
         Date now = new Date();
         Manufacturer manufacturer = new Manufacturer(null, "name"+nextId, "", "", null, "", now, now);
@@ -71,6 +86,6 @@ public class StatisticsAlcoholTest {
         pictureRepository.save(picture);
         List<Picture> listPictures = new ArrayList<>();
         listPictures.add(picture);
-        alcoholRepository.save(new Alcohol(nextId, "name1"+nextId, "type1", 50, 40, now, now, "", manufacturer, "", placeInStorage, listPictures));
+        alcoholRepository.save(new Alcohol(0, "name1"+nextId, "type"+nextId, 50, 40, now, now, "", manufacturer, "", placeInStorage, listPictures));
     }
 }
