@@ -6,7 +6,7 @@ import pl.mgrzech.alcohols_collection.repositories.AlcoholRepository;
 
 @Component
 @AllArgsConstructor
-public class FindStatisticsAllAlcoholInOnePlaceInStorage {
+public class AllAlcoholInOnePlaceInStorage {
 
     private final AlcoholRepository alcoholRepository;
 

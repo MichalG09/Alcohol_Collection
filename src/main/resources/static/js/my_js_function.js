@@ -58,9 +58,9 @@ function submit(page) {
 
 function addToCompare(id, currentPage) {
 	var form = document.getElementById('searchAlcoholForm');
-	var numberAlcoholInPage = document.getElementById('sortTypeSelector').value;
-	var sortBy = document.getElementById('numberPositionsSelector').value;
-	form.action = form.action + currentPage++ + '/' + sortBy + '/' + numberAlcoholInPage + '/' + id;
+	var sortBy = document.getElementById('sortTypeSelector').value;
+	var numberPage = document.getElementById('numberPositionsInOnePageSelector').value;
+	form.action = form.action + currentPage++ + '/' + numberPage + '/' + sortBy + '/' + id;
 	form.action = form.action.replace('search', 'addToCompare');
 	form.submit();
 }
@@ -85,8 +85,8 @@ function clearFormSearch() {
 }
 
 function clearFormSearchManufacturer() {
-	var alcoholname = document.getElementById('manufacturerName');
-	alcoholname.value = '';
+	var alcoholName = document.getElementById('manufacturerName');
+	alcoholName.value = '';
 	var placeInStorage = document.getElementById('manufacturerTown');
 	placeInStorage.value = '';
 	var alcoholType = document.getElementById('manufacturerCountry');

@@ -28,7 +28,7 @@ public class Alcohol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
 
     /**
      * Name bottle
@@ -98,6 +98,17 @@ public class Alcohol {
     @NotNull
     @OneToMany(cascade = CascadeType.ALL)
     private List<Picture> pictures;
+
+    /**
+     * Type material og bottle (glass, plastic, ... )
+     */
+    @NotBlank(message = "{message.error.alcohol.typeBottle}")
+    private String typeBottle;
+
+    /**
+     * In collection is more this alcohol bottle than one
+     */
+    private boolean toExchange = false;
 
     /**
      * Method returns main picture of alcohol to show in a list all alcohols.

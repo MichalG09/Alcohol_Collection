@@ -1,23 +1,21 @@
 package pl.mgrzech.alcohols_collection.alcohol;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mgrzech.alcohols_collection.acceptedCookie.CheckAcceptedCookie;
 import pl.mgrzech.alcohols_collection.alcohol.model.AlcoholToSearch;
 import pl.mgrzech.alcohols_collection.compareAlcohols.GetListAlcoholsIdToCompare;
 import pl.mgrzech.alcohols_collection.entities.Alcohol;
 import pl.mgrzech.alcohols_collection.entities.Manufacturer;
-import pl.mgrzech.alcohols_collection.entities.Picture;
 import pl.mgrzech.alcohols_collection.entities.SortType;
 import pl.mgrzech.alcohols_collection.manufacturer.FindAllManufacturersInJSON;
-import pl.mgrzech.alcohols_collection.picture.FindPicture;
 import pl.mgrzech.alcohols_collection.property.FindProperty;
+import pl.mgrzech.alcohols_collection.property.FindTypesBottlesToAutoCompleted;
 import pl.mgrzech.alcohols_collection.sortType.FindSortType;
 import pl.mgrzech.alcohols_collection.validations.file_validation.FilesValidated;
 
@@ -37,6 +35,7 @@ public class AlcoholService {
     private final FindListTypesAlcoholToAutoCompleted findListTypesAlcoholToAutoCompleted;
     private final AddAlcohol addAlcohol;
     private final DeleteAlcoholById deleteAlcoholById;
+    private final FindTypesBottlesToAutoCompleted findTypesBottlesToAutoCompleted;
 
     @Value("${message.correct.alcohol.edit}")
     private String messageCorrectEditAlcohol;
@@ -136,7 +135,7 @@ public class AlcoholService {
                                                     Manufacturer oldManufacturer,
                                                     FilesValidated filesValidated,
                                                     RedirectAttributes redirectAttributes) {
-        boolean isNew = alcohol.getId() == null;
+        boolean isNew = alcohol.getId() == 0;
         try{
             addAlcohol.editOrAddNewAlcoholWithManufacturer(alcohol, newManufacturer, oldManufacturer, filesValidated);
             redirectAttributes.addFlashAttribute("message", isNew ? messageCorrectAddAlcohol : messageCorrectEditAlcohol);
@@ -186,6 +185,16 @@ public class AlcoholService {
         return findProperty.findByNameAndGetValuesInList("placeInStorage");
     }
 
+    /**
+     * Method returns a all places in storage.
+     * @return list all places in storage.
+     */
+    public JSONArray findTypesBottles() {
+        return findTypesBottlesToAutoCompleted.find();
+    }
 
+    public List<Alcohol> getAlcoholsToExchange() {
+        return findAlcohol.findAlcoholsToExchange();
+    }
 }
 

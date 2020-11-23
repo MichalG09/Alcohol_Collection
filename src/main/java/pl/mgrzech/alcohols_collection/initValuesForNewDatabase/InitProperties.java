@@ -20,6 +20,7 @@ public class InitProperties {
         initProperty("welcomeText", "<p>Witaj na Stronie kolekcjaAlkoholi.pl</p>");
         initProperty("valuesNumberAlcoholInOnePage", "5, 10, 15, 20");
         initProperty("startNumberAlcoholsInOnePage", "5");
+        initProperty("TypesBottles", "szkło,plastik,glina");
     }
 
     /**

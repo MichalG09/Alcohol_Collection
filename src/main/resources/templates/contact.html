@@ -39,7 +39,6 @@
                         <div class="form-group">
                             <label th:text="'Chcę dostać kopię na swojego maila'"></label>
                             <input type="checkbox" th:field="${emailMessage.copy}" class="form">
-                            <label class="text-danger" th:if="${#fields.hasErrors('emailMessage.copy')}" th:errors="*{emailMessage.copy}"></label>
                         </div>
                         <button class="form-control btn btn-info" type="submit">WYŚLIJ</button>
                     </form>

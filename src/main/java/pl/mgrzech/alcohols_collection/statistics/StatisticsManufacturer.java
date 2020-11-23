@@ -10,7 +10,13 @@ public class StatisticsManufacturer {
 
     private final ManufacturerRepository manufacturerRepository;
 
-    public long getStatisticForNumbersManufacturersInCollection(){
-        return manufacturerRepository.count();
+    /**
+     * Method returns numbers all company in collection.
+     * Manufacturer with name company "nn" is not calculated, because is used when
+     * manufacturer for alcohol is unknown.
+     * @return Number manufacturers in collection
+     */
+    public long getNumberAllManufacturersInCollection(){
+        return manufacturerRepository.countByNameCompanyNotLike("nn");
     }
 }

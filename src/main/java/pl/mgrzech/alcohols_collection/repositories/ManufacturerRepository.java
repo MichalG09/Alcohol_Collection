@@ -12,4 +12,5 @@ public interface ManufacturerRepository extends JpaRepository<Manufacturer, Inte
     Optional<Manufacturer> findByNameCompanyOrderByNameCompanyAsc(String nameCompany);
     List<Manufacturer> findByNameCompanyIsContainingAndTownIsContainingAndCountryIsContainingAndCommentsIsContainingOrderByNameCompanyAsc(
             String nameCompany, String town, String country, String comments);
+    long countByNameCompanyNotLike(String notContaining);
 }

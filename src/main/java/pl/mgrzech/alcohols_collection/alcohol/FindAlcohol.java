@@ -12,6 +12,8 @@ import pl.mgrzech.alcohols_collection.picture.SortPicture;
 import pl.mgrzech.alcohols_collection.property.FindProperty;
 import pl.mgrzech.alcohols_collection.repositories.AlcoholRepository;
 
+import java.util.List;
+
 @Component
 @AllArgsConstructor
 public class FindAlcohol {
@@ -83,6 +85,11 @@ public class FindAlcohol {
         }
         return resultSearchedAlcohols;
     }
+
+    public List<Alcohol> findAlcoholsToExchange(){
+        return alcoholRepository.findByToExchange(true);
+    }
+
 
     /**
      * Method creates a PageRequest for query with parameters from form

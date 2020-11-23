@@ -30,6 +30,7 @@ public class AlcoholValidationTest {
     private Alcohol alcoholWithoutManufacturer;
     private Alcohol alcoholWithoutPlaceInStorage;
     private Alcohol alcoholWithoutPictures;
+    private Alcohol alcoholWithoutTypeBottle;
     private Alcohol correctAlcohol;
 
     @BeforeAll
@@ -41,16 +42,17 @@ public class AlcoholValidationTest {
         List<Picture> listPictures = new ArrayList<>(Collections.singletonList(picture));
 
         emptyAlcohol = new Alcohol();
-        alcoholWithoutName = new Alcohol(null, null, "type", 50, 40, nowDate, nowDate, "comment", new Manufacturer(), "", "A1", listPictures);
-        alcoholWithoutType = new Alcohol(null, "name", null, 50, 40, nowDate, nowDate, "comment", new Manufacturer(), "", "A1", listPictures);
-        alcoholWithIncorrectCapacityMin = new Alcohol(null, "name", "type", 0, 40, nowDate, nowDate, "comment", new Manufacturer(), "A1", "", listPictures);
-        alcoholWithIncorrectCapacityMax = new Alcohol(null, "name", "type", 999, 40, nowDate, nowDate, "comment", new Manufacturer(), "A1", "", listPictures);
-        alcoholWithIncorrectAmountOfAlcoholMin = new Alcohol(null, "name", "type", 110, 40, nowDate, nowDate, "comment", new Manufacturer(), "A1", "", listPictures);
-        alcoholWithIncorrectAmountOfAlcoholMax = new Alcohol(null, "name", "type", 0, 40, nowDate, nowDate, "comment", new Manufacturer(), "A1", "", listPictures);
-        alcoholWithoutManufacturer = new Alcohol(null, "name", "type", 50, 40, nowDate, nowDate, "comment", null, "", "A1", listPictures);
-        alcoholWithoutPlaceInStorage = new Alcohol(null, "name", "type", 50, 40, nowDate, nowDate, "comment", new Manufacturer(), "", null, listPictures);
-        alcoholWithoutPictures = new Alcohol(null, "name", "type", 50, 40, nowDate, nowDate, "comment", new Manufacturer(), "", "A1", null);
-        correctAlcohol = new Alcohol(null, "name", "type", 50, 40, nowDate, nowDate, "comment", new Manufacturer(), "", "A1", listPictures);
+        alcoholWithoutName = new Alcohol(1, null, "type", 50, 40, nowDate, nowDate, "comment", new Manufacturer(), "", "A1", listPictures, "glass", false);
+        alcoholWithoutType = new Alcohol(2, "name", null, 50, 40, nowDate, nowDate, "comment", new Manufacturer(), "", "A1", listPictures, "glass", false);
+        alcoholWithIncorrectCapacityMin = new Alcohol(3, "name", "type", 0, 40, nowDate, nowDate, "comment", new Manufacturer(), "A1", "", listPictures, "glass", false);
+        alcoholWithIncorrectCapacityMax = new Alcohol(4, "name", "type", 999, 40, nowDate, nowDate, "comment", new Manufacturer(), "A1", "", listPictures, "glass", false);
+        alcoholWithIncorrectAmountOfAlcoholMin = new Alcohol(5, "name", "type", 110, 40, nowDate, nowDate, "comment", new Manufacturer(), "A1", "", listPictures, "glass", false);
+        alcoholWithIncorrectAmountOfAlcoholMax = new Alcohol(6, "name", "type", 0, 40, nowDate, nowDate, "comment", new Manufacturer(), "A1", "", listPictures, "glass", false);
+        alcoholWithoutManufacturer = new Alcohol(7, "name", "type", 50, 40, nowDate, nowDate, "comment", null, "", "A1", listPictures, "glass", false);
+        alcoholWithoutPlaceInStorage = new Alcohol(8, "name", "type", 50, 40, nowDate, nowDate, "comment", new Manufacturer(), "", null, listPictures, "glass", false);
+        alcoholWithoutPictures = new Alcohol(9, "name", "type", 50, 40, nowDate, nowDate, "comment", new Manufacturer(), "", "A1", null, "glass", false);
+        alcoholWithoutTypeBottle = new Alcohol(9, "name", "type", 50, 40, nowDate, nowDate, "comment", new Manufacturer(), "", "A1", null, "", false);
+        correctAlcohol = new Alcohol(10, "name", "type", 50, 40, nowDate, nowDate, "comment", new Manufacturer(), "", "A1", listPictures, "glass", false);
     }
 
     @Test
@@ -116,6 +118,12 @@ public class AlcoholValidationTest {
     @Test
     public void shouldReturnIncorrectValidationAlcoholWithoutPictures() {
         Set<ConstraintViolation<Alcohol>> violations = validator.validate(alcoholWithoutPictures);
+        assertFalse(violations.isEmpty());
+    }
+
+    @Test
+    public void shouldReturnIncorrectValidationAlcoholWithoutTypeBottle() {
+        Set<ConstraintViolation<Alcohol>> violations = validator.validate(alcoholWithoutTypeBottle);
         assertFalse(violations.isEmpty());
     }
 }

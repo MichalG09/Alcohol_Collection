@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mgrzech.alcohols_collection.picture.PictureService;
 
-@RequestMapping("/user/alcohol")
+import java.io.IOException;
+
 @Controller
 @AllArgsConstructor
 public class PictureController {
@@ -20,7 +21,7 @@ public class PictureController {
      * @param pictureName name picture to delete
      * @return redirect to edited alcohol after deleted picture
      */
-    @GetMapping("/deletePicture/{alcoholId}/{pictureName}")
+    @GetMapping("/user/alcohol/deletePicture/{alcoholId}/{pictureName}")
     public String deletePictureForAlcohol(@PathVariable("alcoholId") int alcoholId,
                                           @PathVariable("pictureName") String pictureName,
                                           RedirectAttributes redirectAttributes){
@@ -35,7 +36,7 @@ public class PictureController {
      * @param redirectAttributes to add message after save change main picture
      * @return redirect to edited alcohol after changed main picture
      */
-    @GetMapping("/changeMainPicture/{alcoholId}/{pictureId}")
+    @GetMapping("/user/alcohol/changeMainPicture/{alcoholId}/{pictureId}")
     public String getChangeMainPictureForAlcohol(@PathVariable("alcoholId") int alcoholId,
                                                  @PathVariable("pictureId") int pictureId,
                                                  RedirectAttributes redirectAttributes){
@@ -51,7 +52,7 @@ public class PictureController {
      * @param model model
      * @return found picture
      */
-    @GetMapping("/alcohol/picture/{idAlcohol}/{idPicture}")
+    @GetMapping("alcohol/picture/{idAlcohol}/{idPicture}")
     public String showOnePictureForAlcohol(@PathVariable("idAlcohol") int idAlcohol,
                                            @PathVariable("idPicture") int idPicture,
                                            Model model){

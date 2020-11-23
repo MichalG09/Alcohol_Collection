@@ -41,4 +41,12 @@ public interface AlcoholRepository extends JpaRepository<Alcohol, Integer> {
                                                     String nameCompany, String sortBy, String sortType, PageRequest pageRequest);
 
     int countByPlaceInStorage(String placeInStorage);
+
+    @Query("SELECT COUNT (DISTINCT a.type) FROM Alcohol a")
+    int countDistinctType();
+
+    @Query("SELECT SUM (a.capacity) FROM Alcohol a")
+    int sumAllCapacity();
+
+    List<Alcohol> findByToExchange(boolean toExchange);
 }

@@ -89,8 +89,12 @@ public class AlcoholAdminController {
      */
     @GetMapping("/edit/{id}")
     public String editAlcoholMethodPost(@PathVariable("id") int id,
+                                        @ModelAttribute("manufacturer") Manufacturer manufacturer,
+                                        @ModelAttribute("file") FilesValidated filesValidated,
                                         Model model){
-        model.addAttribute("alcohol", alcoholService.findAlcoholById(id));
+        Alcohol alcohol = alcoholService.findAlcoholById(id);
+        model.addAttribute("alcohol", alcohol);
+        model.addAttribute("manufacturer", alcohol.getManufacturer());
         return "alcohol/add_alcohol";
     }
 
@@ -116,12 +120,22 @@ public class AlcoholAdminController {
     }
 
     /**
-     * Method returns a all places in storage.
+     * Method returns all places in storage.
      * This values is use to autocomplete field place in storage for add or edit alcohol.
      * @return all places in storage.
      */
     @ModelAttribute("placeInStorage")
     public List<String> listPlaceInStorage() {
         return alcoholService.findPlacesInStorageInProperty();
+    }
+
+    /**
+     * Method returns all types of bottles.
+     * This values is use to autocomplete field type bottle for add or edit alcohol.
+     * @return types bottle.
+     */
+    @ModelAttribute("typesBottles")
+    public JSONArray listAllTypesBottle() {
+        return alcoholService.findTypesBottles();
     }
 }
