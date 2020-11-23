@@ -73,6 +73,12 @@ public class AlcoholController {
         return "alcohol/all_alcohols";
     }
 
+    @GetMapping("/toExchange")
+    public String showAlcoholsToExchange(HttpServletRequest request, Model model){
+        model.addAttribute("alcoholsToExchange", alcoholService.getAlcoholsToExchange());
+        return "alcohol/to_exchange";
+    }
+
     /**
      * Method returns all types of sort from properties.
      * All types of sort are show in selector.

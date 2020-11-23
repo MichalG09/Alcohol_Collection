@@ -47,4 +47,6 @@ public interface AlcoholRepository extends JpaRepository<Alcohol, Integer> {
 
     @Query("SELECT SUM (a.capacity) FROM Alcohol a")
     int sumAllCapacity();
+
+    List<Alcohol> findByToExchange(boolean toExchange);
 }

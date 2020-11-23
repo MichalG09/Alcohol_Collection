@@ -31,6 +31,7 @@
 </div>
 <script>
          var typesAlcohol = JSON.parse('[[${listTypesOfAlcoholToAutoComplete}]]'.replace(/&quot;/g, '"'));
+         var typesBottles = JSON.parse('[[${typesBottles}]]'.replace(/&quot;/g, '"'));
          var manufacturers = JSON.parse('[[${allManufacturers}]]'.replace(/&quot;/g, '"'));
       </script>
 <script th:src="@{/js/add_alcohol.js}"></script>
