@@ -86,6 +86,6 @@ public class StatisticsAlcoholTest {
         pictureRepository.save(picture);
         List<Picture> listPictures = new ArrayList<>();
         listPictures.add(picture);
-        alcoholRepository.save(new Alcohol(0, "name1"+nextId, "type"+nextId, 50, 40, now, now, "", manufacturer, "", placeInStorage, listPictures));
+        alcoholRepository.save(new Alcohol(0, "name1"+nextId, "type"+nextId, 50, 40, now, now, "", manufacturer, "", placeInStorage, listPictures, "", false));
     }
 }

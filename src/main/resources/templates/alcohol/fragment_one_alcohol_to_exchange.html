@@ -1,0 +1,62 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="fragmentOneAlcohol(alcohol)">
+    <div class="border border-light p-3 m-2" id="boxOneAlcohol">
+        <a th:href="@{/alcohol/detail/} + ${alcohol.id}"  style="text-decoration: none;">
+            <div th:id="'linkAlcohol' + ${alcohol.id}" class="row" id="rowOneAlcohol">
+                <div class="col-lg-12 col-xl-6">
+                    <img class="picture" th:src="|data:image/png;base64,${alcohol.getMainPicturesInBase64List()}|"/>
+                </div>
+                <div class="col-lg-12 col-xl-6">
+                    <div class="table-striped">
+                        <table class="table text-white">
+                            <tr>
+                                <td colspan="2">
+                                    <h1 th:text="${alcohol.name}"></h1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Rodzaj alkoholu</p>
+                                </td>
+                                <td>
+                                    <p th:text="${alcohol.type}"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Objętość butelki</p>
+                                </td>
+                                <td>
+                                    <p th:text="${alcohol.capacity} + ml"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Zawartość alkoholu</p>
+                                </td>
+                                <td>
+                                    <p th:text="${alcohol.amountOfAlcohol} + '%'"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Producent</p>
+                                </td>
+                                <td>
+                                    <p th:text="${alcohol.manufacturer.nameCompany}"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <div class="row p-1 m-1" >
+            <a th:if="${#request.isUserInRole('USER') or #request.isUserInRole('ADMIN')}" class="btn btn-secondary mr-1" th:href="@{/user/alcohol/edit/} + ${alcohol.id}" role="button">EDYTUJ</a>
+        </div>
+    </div>
+</div>
+</html>

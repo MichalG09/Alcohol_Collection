@@ -200,5 +200,11 @@ for (var i = 0; i < typesAlcohol.length; i++) {
     allTypesAlcohol[i] = typesAlcohol[i].name;
 }
 
+var allTypesBottles = new Array(typesBottles.length);
+for (var i = 0; i < typesBottles.length; i++) {
+    allTypesBottles[i] = typesBottles[i].name;
+}
+
 autocomplete(document.getElementById("insertManufacturerName"), manufacturerWithNameAndId, 1);
 autocomplete(document.getElementById("insertAlcoholType"), allTypesAlcohol, 0);
+autocomplete(document.getElementById("insertBottleType"), allTypesBottles, 0);

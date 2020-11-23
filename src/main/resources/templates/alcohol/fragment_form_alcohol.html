@@ -43,11 +43,20 @@
         <small class="form-text">Konkretne położenie na półce</small>
         <label class="text-danger" th:if="${#fields.hasErrors('alcohol.placeInStorage')}" th:errors="*{alcohol.placeInStorage}"></label>
     </div>
+    <div class="autocomplete form-group">
+        <label for="insertBottleType">Rodzaj butelki*</label>
+        <input th:field="${alcohol.typeBottle}" class="form-control" id="insertBottleType" placeholder="Rodzaj butelki">
+        <label class="text-danger" th:if="${#fields.hasErrors('alcohol.typeBottle')}" th:errors="*{alcohol.typeBottle}"></label>
+    </div>
     <div class="form-group">
         <label for="insertComment">Komentarz</label>
         <textarea rows="2" type="text" th:field="${alcohol.comment}" class="form-control" id="insertComment" placeholder="Komentarz"></textarea>
         <small class="form-text">Dowolny dodatkowy komentarz</small>
         <label class="text-danger" th:if="${#fields.hasErrors('alcohol.comment')}" th:errors="*{alcohol.comment}"></label>
+    </div>
+    <div class="form-group">
+        <label th:text="'Do wymiany'"></label>
+        <input type="checkbox" th:field="${alcohol.toExchange}" class="form">
     </div>
     <input type="hidden" th:field="*{alcohol.id}">
     <input type="hidden" th:field="${alcohol.createdDate}">

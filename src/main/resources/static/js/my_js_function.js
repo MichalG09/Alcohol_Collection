@@ -85,8 +85,8 @@ function clearFormSearch() {
 }
 
 function clearFormSearchManufacturer() {
-	var alcoholname = document.getElementById('manufacturerName');
-	alcoholname.value = '';
+	var alcoholName = document.getElementById('manufacturerName');
+	alcoholName.value = '';
 	var placeInStorage = document.getElementById('manufacturerTown');
 	placeInStorage.value = '';
 	var alcoholType = document.getElementById('manufacturerCountry');
